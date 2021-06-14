@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -644,19 +644,19 @@
                                 <rect key="frame" x="0.0" y="98" width="414" height="764"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please add your new Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="omT-T2-QRm">
-                                        <rect key="frame" x="10" y="20" width="394" height="26"/>
+                                        <rect key="frame" x="10" y="20" width="394" height="25.5"/>
                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="18"/>
                                         <color key="textColor" red="0.1529411765" green="0.1960784314" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkP-9o-76V">
-                                        <rect key="frame" x="35" y="76" width="30.5" height="21"/>
+                                        <rect key="frame" x="35" y="75.5" width="30.5" height="21"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NnM-pt-HAo">
-                                        <rect key="frame" x="20" y="107" width="374" height="50"/>
+                                        <rect key="frame" x="20" y="106.5" width="374" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter category title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Dp-Kp-iNI">
                                                 <rect key="frame" x="20" y="5" width="349" height="40"/>
@@ -682,14 +682,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwK-hU-Mfh">
-                                        <rect key="frame" x="0.0" y="177" width="414" height="587"/>
+                                        <rect key="frame" x="0.0" y="176.5" width="414" height="587.5"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fFn-Of-XNw">
-                                                <rect key="frame" x="0.0" y="0.0" width="399" height="587"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="399" height="587.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryListTableViewCell" rowHeight="125" id="8UI-bD-Ce5" customClass="CategoryListTableViewCell" customModule="CheckList_Admin" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="399" height="125"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="399" height="125"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8UI-bD-Ce5" id="7zR-TJ-XWD">
                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="125"/>
@@ -834,13 +834,13 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RZJ-Zj-hHz">
-                                                <rect key="frame" x="354" y="527" width="40" height="40"/>
+                                                <rect key="frame" x="354" y="527.5" width="40" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="eKd-Tx-OFd"/>
                                                     <constraint firstAttribute="width" constant="40" id="egc-bP-Mfr"/>
                                                 </constraints>
-                                                <state key="normal" title="+" image="AddButton">
+                                                <state key="normal" image="AddButton">
                                                     <color key="titleColor" red="0.98028594260000002" green="0.9804533124" blue="0.98027533290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
@@ -913,7 +913,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TechnicianListTableViewCell" rowHeight="149" id="YEd-1i-RNc" customClass="TechnicianListTableViewCell" customModule="CheckList_Admin" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="399" height="149"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="399" height="149"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YEd-1i-RNc" id="PHJ-FL-9ac">
                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="149"/>
@@ -1470,7 +1470,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StoreListTableViewCell" rowHeight="170" id="3eV-sL-YYz" customClass="StoreListTableViewCell" customModule="CheckList_Admin" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="399" height="170"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="399" height="170"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3eV-sL-YYz" id="4va-Jh-nIO">
                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="170"/>
@@ -1712,7 +1712,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AdminListTableViewCell" rowHeight="149" id="lXb-CN-wpS" customClass="AdminListTableViewCell" customModule="CheckList_Admin" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="399" height="149"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="399" height="149"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lXb-CN-wpS" id="cKk-2l-44r">
                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="149"/>

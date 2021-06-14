@@ -56,6 +56,28 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.technicianObject.adminList.count
     }
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+   
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
+                print("more button tapped")
+            }
+            more.backgroundColor = .lightGray
+
+            let favorite = UITableViewRowAction(style: .normal, title: "Favorite") { action, index in
+                print("favorite button tapped")
+            }
+            favorite.backgroundColor = .orange
+
+            let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
+                print("share button tapped")
+            }
+            share.backgroundColor = .blue
+
+            return [share, favorite, more]
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TechnicianListTableViewCell) as! TechnicianListTableViewCell

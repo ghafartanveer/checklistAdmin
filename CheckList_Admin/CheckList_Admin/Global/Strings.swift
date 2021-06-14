@@ -17,10 +17,10 @@ struct SideMenu {
                            ["title":"Setting","image":"settings"]]
 }
 struct HomeMenu {
-    static let MENU_LIST = [["title":"Admin","image":"Admin-icon", "subTitle": "Number of Admin"],
-                            ["title":"Technician","image":"Technician-icon", "subTitle": "Number of Technician"],
-                            ["title":"Completed Task","image":"Group18", "subTitle": "Number of Task"],
-                            ["title":"Active Task","image":"Group22", "subTitle": "Number of Task"]]
+    static let MENU_LIST = [["title":"Admins","image":"Admin-icon", "subTitle": "Number of Admins"],
+                            ["title":"Technicians","image":"Technician-icon", "subTitle": "Number of Technicians"],
+                            ["title":"All Check List","image":"Group18", "subTitle": "Number of Task's"],
+                            ["title":"History","image":"Group22", "subTitle": "All Details"]]
 }
 
 

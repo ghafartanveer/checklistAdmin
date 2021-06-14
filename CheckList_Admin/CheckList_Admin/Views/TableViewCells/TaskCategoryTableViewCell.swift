@@ -31,7 +31,7 @@ extension TaskCategoryTableViewCell: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.HomeCollectionViewCell, for: indexPath) as! HomeCollectionViewCell
-        cell.configureMenu(data: HomeMenu.MENU_LIST[indexPath.row])
+        cell.configureMenu(data: HomeMenu.MENU_LIST[indexPath.row], index: indexPath.row)
         return cell
     }
     

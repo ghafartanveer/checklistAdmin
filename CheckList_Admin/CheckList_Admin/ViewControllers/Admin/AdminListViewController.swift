@@ -53,6 +53,8 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
         return self.adminObject.adminList.count
     }
     
+   
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.AdminListTableViewCell) as! AdminListTableViewCell
         cell.delegate = self

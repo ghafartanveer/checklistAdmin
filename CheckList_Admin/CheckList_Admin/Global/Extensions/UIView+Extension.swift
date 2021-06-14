@@ -164,6 +164,7 @@ extension UIView {
         layer.shadowOpacity = opacity!
         layer.shadowOffset = CGSize(width: 0, height: radius!)
         layer.shadowRadius = radius!
+        layer.cornerRadius = 10
     }
     
     // OUTPUT 2

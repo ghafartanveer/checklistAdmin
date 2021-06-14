@@ -28,6 +28,7 @@ struct AppColors {
     static let DarkBlue         = UIColor.init(hexFromString: "0x093485")
 }
 
+
 struct DictKeys {
     static let hasImages = "has_images"
     static let email = "email"
@@ -49,6 +50,9 @@ struct DictKeys {
     static let Current_Password = "current_password"
     static let New_Password = "new_password"
     static let Pin_Code = "pin_code"
+    static let fcm_token = "fcm_token"
+    
+    
 }
 
 struct EndPoints {
