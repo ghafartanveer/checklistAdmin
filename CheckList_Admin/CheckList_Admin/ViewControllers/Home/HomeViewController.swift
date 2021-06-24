@@ -16,6 +16,9 @@ class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.btnPlusShadow.dropShadow(radius: 3, opacity: 0.2)
+        
+        self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
+        self.tabelView.register(UINib(nibName: CellIdentifier.BarChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.BarChartTableViewCell)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,10 +60,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             cell.viewCollection.reloadData()
             return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
-            cell.ConfigureTypes(index: indexPath.row)
+            if(indexPath.row == 0){
+                //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
+                //            cell.ConfigureTypes(index: indexPath.row)
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
+                
+                cell.configureView()
+                return cell
+            }else{
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
+                
+//                cell.configureView()
+                return cell
+            }
             
-            return cell
         }
     }
     
@@ -78,7 +92,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             return 420
             
         }else{
-            return 80
+            if(indexPath.row == 0){
+                return 160
+            }
+            return 270
+            
         }
     }
     

@@ -26,6 +26,9 @@ struct AppColors {
     static let LightBlue        = UIColor.init(hexFromString: "0x093485", alpha: 0.61)
     static let Gray             = UIColor.init(hexFromString: "0x969696")
     static let DarkBlue         = UIColor.init(hexFromString: "0x093485")
+    static let Green         = UIColor.init(hexFromString: "0x185D62")
+    static let Purple         = UIColor.systemPurple
+    static let Pink         = UIColor.systemPink
 }
 
 

@@ -1,0 +1,61 @@
+//
+//  BarChartCollectionViewCell.swift
+//  GirlsChase
+//
+//  Created by Rapidzz Macbook on 08/04/2019.
+//  Copyright © 2019 Rapidzz. All rights reserved.
+//
+
+import UIKit
+
+class BarChartCollectionViewCell: UICollectionViewCell {
+ 
+    @IBOutlet weak var youBarViewWidth: NSLayoutConstraint?
+    @IBOutlet weak var youBarViewHeight: NSLayoutConstraint?
+    @IBOutlet weak var globalBarViewHeight: NSLayoutConstraint?
+    
+    @IBOutlet weak var viewYouBar: UIView?
+    @IBOutlet weak var viewGlobalBar: UIView?
+    @IBOutlet weak var lblAge: UILabel?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.viewYouBar?.layer.cornerRadius = 3
+        self.viewGlobalBar?.layer.cornerRadius = 3
+        self.youBarViewHeight?.constant = 170
+        self.globalBarViewHeight?.constant = 170
+    }
+    
+//    func configureView(index:Int,chart:ChartViewModel)  {
+//        //self.youBarViewWidth?.constant = 11
+//        if(index == 0){
+//            self.lblAge?.text = chart.age
+//            self.youBarViewHeight?.constant = CGFloat(chart.you)
+//            self.globalBarViewHeight?.constant = CGFloat(chart.global)
+//        }else if(index == 1){
+//            self.lblAge?.text = chart.age
+//            self.youBarViewHeight?.constant = CGFloat(chart.you)
+//            self.globalBarViewHeight?.constant = CGFloat(chart.global)
+//        }else if(index == 2){
+//            self.lblAge?.text = chart.age
+//            self.youBarViewWidth?.constant = 0
+//            self.youBarViewHeight?.constant = 0
+//            self.globalBarViewHeight?.constant = CGFloat(chart.global)
+//        }else if(index == 3){
+//            self.lblAge?.text = chart.age
+//            self.youBarViewWidth?.constant = 0
+//            self.youBarViewHeight?.constant = 0
+//            self.globalBarViewHeight?.constant = CGFloat(chart.global)
+//        }else if(index == 4){
+//            self.lblAge?.text = chart.age
+//            self.youBarViewWidth?.constant = 0
+//            self.youBarViewHeight?.constant = 0
+//            self.globalBarViewHeight?.constant = CGFloat(chart.global)
+//        }
+//        UIView.animate(withDuration: 1) {
+//            self.layoutIfNeeded()
+//        }
+//        
+//    }
+}

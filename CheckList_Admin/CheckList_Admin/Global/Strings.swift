@@ -157,6 +157,9 @@ struct CellIdentifier {
     static let StoreListTableViewCell = "StoreListTableViewCell"
     static let CategoryDropDownTableViewCell = "CategoryDropDownTableViewCell"
     static let CreateSubCategoryTableViewCell = "CreateSubCategoryTableViewCell"
+    static let PieChartTableViewCell = "PieChartTableViewCell"
+    static let BarChartCollectionViewCell = "BarChartCollectionViewCell"
+    static let BarChartTableViewCell = "BarChartTableViewCell"
 }
 
 

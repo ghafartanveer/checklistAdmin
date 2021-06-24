@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D1C70E2677523D008720CB /* PieChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1C70D2677523D008720CB /* PieChartTableViewCell.xib */; };
+		04D1C71026775267008720CB /* PieChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C70F26775267008720CB /* PieChartTableViewCell.swift */; };
+		04D1C71526775A99008720CB /* CompatibilityShims.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C71226775A99008720CB /* CompatibilityShims.swift */; };
+		04D1C71626775A99008720CB /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C71326775A99008720CB /* PieChartView.swift */; };
+		04D1C71726775A99008720CB /* SimplePieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C71426775A99008720CB /* SimplePieChartView.swift */; };
+		04D1C71A2677663D008720CB /* BarChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C7182677663D008720CB /* BarChartTableViewCell.swift */; };
+		04D1C71B2677663D008720CB /* BarChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1C7192677663D008720CB /* BarChartTableViewCell.xib */; };
+		04D1C71D26777A1C008720CB /* BarChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C71C26777A1C008720CB /* BarChartCollectionViewCell.swift */; };
+		04D8CE3B26779F3800441C53 /* BarChartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8CE3A26779F3800441C53 /* BarChartCollectionViewCell.xib */; };
 		2CA2BC3CCC293D2F4B433869 /* Pods_CheckList_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FF64A558166E36C3EEFAC9 /* Pods_CheckList_Admin.framework */; };
 		35453D8E2643DE610080521B /* TechnicianListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35453D8D2643DE610080521B /* TechnicianListViewController.swift */; };
 		35453D932643E0CA0080521B /* TechnicianListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35453D922643E0CA0080521B /* TechnicianListTableViewCell.swift */; };
@@ -175,6 +184,15 @@
 
 /* Begin PBXFileReference section */
 		02FF64A558166E36C3EEFAC9 /* Pods_CheckList_Admin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CheckList_Admin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		04D1C70D2677523D008720CB /* PieChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PieChartTableViewCell.xib; sourceTree = "<group>"; };
+		04D1C70F26775267008720CB /* PieChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartTableViewCell.swift; sourceTree = "<group>"; };
+		04D1C71226775A99008720CB /* CompatibilityShims.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompatibilityShims.swift; sourceTree = "<group>"; };
+		04D1C71326775A99008720CB /* PieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		04D1C71426775A99008720CB /* SimplePieChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePieChartView.swift; sourceTree = "<group>"; };
+		04D1C7182677663D008720CB /* BarChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartTableViewCell.swift; sourceTree = "<group>"; };
+		04D1C7192677663D008720CB /* BarChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarChartTableViewCell.xib; sourceTree = "<group>"; };
+		04D1C71C26777A1C008720CB /* BarChartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewCell.swift; sourceTree = "<group>"; };
+		04D8CE3A26779F3800441C53 /* BarChartCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarChartCollectionViewCell.xib; sourceTree = "<group>"; };
 		18F8960F94D3DEDA930DB7C3 /* Pods-CheckList_Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList_Admin.release.xcconfig"; path = "Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin.release.xcconfig"; sourceTree = "<group>"; };
 		35453D8D2643DE610080521B /* TechnicianListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianListViewController.swift; sourceTree = "<group>"; };
 		35453D922643E0CA0080521B /* TechnicianListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianListTableViewCell.swift; sourceTree = "<group>"; };
@@ -369,6 +387,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D1C70C2677520F008720CB /* NibViews */ = {
+			isa = PBXGroup;
+			children = (
+				04D1C70D2677523D008720CB /* PieChartTableViewCell.xib */,
+				04D1C7192677663D008720CB /* BarChartTableViewCell.xib */,
+				04D8CE3A26779F3800441C53 /* BarChartCollectionViewCell.xib */,
+			);
+			path = NibViews;
+			sourceTree = "<group>";
+		};
+		04D1C71126775A83008720CB /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				04D1C71226775A99008720CB /* CompatibilityShims.swift */,
+				04D1C71326775A99008720CB /* PieChartView.swift */,
+				04D1C71426775A99008720CB /* SimplePieChartView.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
 		0AC7C7DD9A1FC5E098F37BDE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,6 +518,7 @@
 		3593C8D226382122007B6660 /* Third Party Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				04D1C71126775A83008720CB /* Charts */,
 				3593C8D326382122007B6660 /* TPKeyboardAvoiding */,
 				3593C8DC26382122007B6660 /* YPDrawSignatureView */,
 				3593C8DE26382122007B6660 /* IQDropdownTextfield */,
@@ -784,8 +823,8 @@
 		3593C94026382123007B6660 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04D1C70C2677520F008720CB /* NibViews */,
 				3593C94326382123007B6660 /* Views */,
-				3593C94626382123007B6660 /* NibViews */,
 				3593C94126382123007B6660 /* CollectionViewCell */,
 				3593C94226382123007B6660 /* TableViewCells */,
 			);
@@ -795,6 +834,7 @@
 		3593C94126382123007B6660 /* CollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				04D1C71C26777A1C008720CB /* BarChartCollectionViewCell.swift */,
 				3593C9E22638285E007B6660 /* HomeCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
@@ -814,6 +854,8 @@
 				35875C362660E52E0049F707 /* SubCategoryListTableViewCell.swift */,
 				35875C402660FFF80049F707 /* CategoryDropDownTableViewCell.swift */,
 				35875C45266108C60049F707 /* CreateSubCategoryTableViewCell.swift */,
+				04D1C70F26775267008720CB /* PieChartTableViewCell.swift */,
+				04D1C7182677663D008720CB /* BarChartTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -825,13 +867,6 @@
 				3593C94526382123007B6660 /* NoDataView.xib */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		3593C94626382123007B6660 /* NibViews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = NibViews;
 			sourceTree = "<group>";
 		};
 		3593C94726382123007B6660 /* View Models */ = {
@@ -1080,6 +1115,7 @@
 				3593CA0B26382FFA007B6660 /* Poppins-SemiBoldItalic.ttf in Resources */,
 				3593C96026382123007B6660 /* SF-Compact-Display-Bold.otf in Resources */,
 				3593CA1226382FFA007B6660 /* Poppins-Bold.ttf in Resources */,
+				04D1C70E2677523D008720CB /* PieChartTableViewCell.xib in Resources */,
 				3593CA0A26382FFA007B6660 /* Poppins-Medium.ttf in Resources */,
 				3593CA0826382FFA007B6660 /* Poppins-BoldItalic.ttf in Resources */,
 				3593C99226382123007B6660 /* NoDataView.xib in Resources */,
@@ -1093,6 +1129,7 @@
 				3593CA1326382FFA007B6660 /* Poppins-Black.ttf in Resources */,
 				3593C8A626382067007B6660 /* Assets.xcassets in Resources */,
 				3593CA1026382FFA007B6660 /* Poppins-Regular.ttf in Resources */,
+				04D1C71B2677663D008720CB /* BarChartTableViewCell.xib in Resources */,
 				3593CA0626382FFA007B6660 /* Poppins-ThinItalic.ttf in Resources */,
 				3593CA1726382FFA007B6660 /* Poppins-MediumItalic.ttf in Resources */,
 				3593C95826382123007B6660 /* README.md in Resources */,
@@ -1106,6 +1143,7 @@
 				3593CA0926382FFA007B6660 /* Poppins-Light.ttf in Resources */,
 				3593CA1426382FFA007B6660 /* Poppins-Thin.ttf in Resources */,
 				3593C9B926382546007B6660 /* Home.storyboard in Resources */,
+				04D8CE3B26779F3800441C53 /* BarChartCollectionViewCell.xib in Resources */,
 				3593CA0D26382FFA007B6660 /* Poppins-ExtraBold.ttf in Resources */,
 				3593C96126382123007B6660 /* SF-Compact-Display-Regular.otf in Resources */,
 				3593CA1526382FFA007B6660 /* Poppins-SemiBold.ttf in Resources */,
@@ -1234,6 +1272,7 @@
 				3593C9CC263825D8007B6660 /* HomeViewController.swift in Sources */,
 				3593C9E8263828CA007B6660 /* TaskCategoryTableViewCell.swift in Sources */,
 				3593C95626382123007B6660 /* MKConfig.swift in Sources */,
+				04D1C71A2677663D008720CB /* BarChartTableViewCell.swift in Sources */,
 				35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */,
 				35875C1A2660D2EA0049F707 /* ImagesViewModel.swift in Sources */,
 				35453D9B2643E7170080521B /* StoreListViewController.swift in Sources */,
@@ -1247,17 +1286,22 @@
 				3593C98526382123007B6660 /* Strings.swift in Sources */,
 				3593C99126382123007B6660 /* NoDataView.swift in Sources */,
 				3593C97826382123007B6660 /* BaseTableViewCell.swift in Sources */,
+				04D1C71726775A99008720CB /* SimplePieChartView.swift in Sources */,
 				3593C96C26382123007B6660 /* KMPlaceholderTextView.swift in Sources */,
 				3593C96B26382123007B6660 /* CustomIOSAlertView.m in Sources */,
+				04D1C71526775A99008720CB /* CompatibilityShims.swift in Sources */,
 				3593C96E26382123007B6660 /* RegexParser.swift in Sources */,
 				3593C97526382123007B6660 /* BaseCollectionViewController.swift in Sources */,
+				04D1C71026775267008720CB /* PieChartTableViewCell.swift in Sources */,
 				3593C94F26382123007B6660 /* IQDropDownTextField.m in Sources */,
 				3593CA3126394023007B6660 /* AdminListViewController.swift in Sources */,
+				04D1C71D26777A1C008720CB /* BarChartCollectionViewCell.swift in Sources */,
 				3593C89A26382067007B6660 /* AppDelegate.swift in Sources */,
 				3593C95026382123007B6660 /* MKActivityIndicatorView.swift in Sources */,
 				3593C8A426382067007B6660 /* CheckList_Admin.xcdatamodeld in Sources */,
 				3593C9C2263825A3007B6660 /* SideMenuTableViewCell.swift in Sources */,
 				3593C99026382123007B6660 /* AppConstants.swift in Sources */,
+				04D1C71626775A99008720CB /* PieChartView.swift in Sources */,
 				35453D8E2643DE610080521B /* TechnicianListViewController.swift in Sources */,
 				3593C97E26382123007B6660 /* ResponseHandler.swift in Sources */,
 				3593C95126382123007B6660 /* MKProgress.swift in Sources */,

@@ -3,6 +3,7 @@ PODS:
   - iOSDropDown (0.3.4)
   - IQKeyboardManagerSwift (6.5.6)
   - MBProgressHUD (1.2.0)
+  - PieCharts (0.0.7)
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - iOSDropDown
   - IQKeyboardManagerSwift
   - MBProgressHUD
+  - PieCharts
   - SDWebImage
   - SwiftyJSON
 
@@ -22,6 +24,7 @@ SPEC REPOS:
     - iOSDropDown
     - IQKeyboardManagerSwift
     - MBProgressHUD
+    - PieCharts
     - SDWebImage
     - SwiftyJSON
 
@@ -30,9 +33,10 @@ SPEC CHECKSUMS:
   iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  PieCharts: 30e50dfa7dc19e5b84e9878d32089673ef5d0453
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 07c15ed7ec4b27c6cd1cd0cd23ec8f34c4dcacdb
+PODFILE CHECKSUM: a2905832ce90ed8551254ef45973e8a758e473a4
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

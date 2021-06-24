@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SEGOEUIB.TTF">
+            <string>SegoeUI-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BarChartCollectionViewCell" id="JZz-DT-oId" customClass="BarChartCollectionViewCell" customModule="CheckList_Admin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="93" height="190"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="93" height="190"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VWK-dd-ZAf">
+                        <rect key="frame" x="0.0" y="0.0" width="93" height="190"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-fZ-2Xz">
+                                <rect key="frame" x="42" y="-1.5" width="11" height="160"/>
+                                <color key="backgroundColor" red="1" green="0.37254901959999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="E9H-r7-Lmg"/>
+                                    <constraint firstAttribute="width" constant="11" id="YXy-2x-qO9"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idN-iU-IiX">
+                                <rect key="frame" x="37" y="170.5" width="19" height="10.5"/>
+                                <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="9"/>
+                                <color key="textColor" red="0.29411764709999999" green="0.36862745099999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="idN-iU-IiX" firstAttribute="top" secondItem="9g3-fZ-2Xz" secondAttribute="bottom" constant="12" id="SQk-SF-PzF"/>
+                            <constraint firstItem="idN-iU-IiX" firstAttribute="centerX" secondItem="VWK-dd-ZAf" secondAttribute="centerX" id="l6g-17-Nhx"/>
+                            <constraint firstItem="9g3-fZ-2Xz" firstAttribute="centerX" secondItem="VWK-dd-ZAf" secondAttribute="centerX" constant="1" id="ljR-BW-VVK"/>
+                            <constraint firstAttribute="bottom" secondItem="idN-iU-IiX" secondAttribute="bottom" constant="9" id="qSy-MB-V9D"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="VWK-dd-ZAf" secondAttribute="bottom" id="0NV-uc-Klz"/>
+                <constraint firstAttribute="trailing" secondItem="VWK-dd-ZAf" secondAttribute="trailing" id="6m8-cg-Ex0"/>
+                <constraint firstItem="VWK-dd-ZAf" firstAttribute="leading" secondItem="JZz-DT-oId" secondAttribute="leading" id="OPY-4l-FyP"/>
+                <constraint firstItem="VWK-dd-ZAf" firstAttribute="top" secondItem="JZz-DT-oId" secondAttribute="top" id="Zn0-k1-bLy"/>
+            </constraints>
+            <size key="customSize" width="93" height="190"/>
+            <connections>
+                <outlet property="lblAge" destination="idN-iU-IiX" id="BEa-nt-Ibm"/>
+                <outlet property="viewYouBar" destination="9g3-fZ-2Xz" id="rUz-Z6-zWv"/>
+                <outlet property="youBarViewHeight" destination="E9H-r7-Lmg" id="RGM-iT-25A"/>
+                <outlet property="youBarViewWidth" destination="YXy-2x-qO9" id="1Qd-dy-Bsx"/>
+            </connections>
+            <point key="canvasLocation" x="-749" y="66"/>
+        </collectionViewCell>
+    </objects>
+</document>

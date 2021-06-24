@@ -11,5 +11,6 @@ target 'CheckList_Admin' do
   pod 'IQKeyboardManagerSwift'
   pod 'Alamofire', '~> 4.9.0'
   pod 'iOSDropDown'
+  pod 'PieCharts'
 
  end
