@@ -23,6 +23,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var viewImgShadow: UIView!
     
     @IBOutlet weak var txtSearchList: DropDown!
+    
     @IBOutlet weak var txtFirstName: UITextField!
     @IBOutlet weak var txtLastName: UITextField!
     @IBOutlet weak var txtStoreName: UITextField!
@@ -34,6 +35,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var viewAddStoreHeight: NSLayoutConstraint!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imgimage: UIImageView!
+    
+    
     
     //MARK: - OBJECT AND VERIABLES
     var isFromTechnician: Bool = false
@@ -73,6 +76,11 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     
     
     //MARK: - IBACTION METHODS
+   
+    @IBAction func addStoreAction(_ sender: Any) {
+        navigateToAddStoreVC()
+    }
+    
     @IBAction func actionSaveChanges(_ sender: UIButton){
         
         if self.checkValidation(){
@@ -99,8 +107,6 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             }else{
                 self.addAdminAndTechnicianApi(params: params, imageData: imageData)
             }
-            
-            
         }
     }
     
@@ -125,7 +131,9 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.emailShadow.dropShadow(radius: 4, opacity: 0.3)
         self.passwordShadow.dropShadow(radius: 4, opacity: 0.3)
         self.ConfirmPasswordShadow.dropShadow(radius: 4, opacity: 0.3)
-        self.viewImgShadow.dropShadow(radius: 4, opacity: 0.3)
+        self.viewImgShadow.dropShadow(radius: 4, opacity: 0.5)
+        self.viewImgShadow.cornerRadius = viewImgShadow.frame.height/2
+        self.viewImgShadow.clipsToBounds = true
     }
     
     func configureStoreList(idStore: Int){
@@ -199,7 +207,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         }
         return isValid
     }
-    
+    func navigateToAddStoreVC() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
     override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
@@ -274,5 +285,7 @@ extension CreateAdminAndTechViewController{
             }
         }
     }
+    
+    
 }
 

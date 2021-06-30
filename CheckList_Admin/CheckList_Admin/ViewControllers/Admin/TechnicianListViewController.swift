@@ -27,6 +27,7 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
         if let container = self.mainContainer{
             container.delegate = self
             container.setMenuButton(true, title: TitleNames.Technician)
+            
         }
         self.getTechnicianListApi()
     }
@@ -52,7 +53,7 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSource, TechnicianListTableViewCellDelegate{
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.technicianObject.adminList.count
     }
@@ -60,24 +61,67 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
         return true
     }
    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
-                print("more button tapped")
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//
+//        let more = UITableViewRowAction(style: .normal, title: "More") { action, index in
+//                print("more button tapped")
+//            }
+//            more.backgroundColor = .lightGray
+//
+//
+//            let favorite = UITableViewRowAction(style: .normal, title: "Favorite") { action, index in
+//                print("favorite button tapped")
+//            }
+//            favorite.backgroundColor = .orange
+//
+//            let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
+//                print("share button tapped")
+//            }
+//            share.backgroundColor = .blue
+//
+//            return [share, favorite, more]
+//    }
+    
+//    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCell.EditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+//            // handle delete (by removing the data from your array and updating the tableview)
+//        }
+//    
+//        
+//    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //delete Action here
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Technician, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                
+                let techID = self.technicianObject.adminList[indexPath.row].id
+                self.deleteTechnicianApi(param: [DictKeys.User_Id: techID])
+                
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
             }
-            more.backgroundColor = .lightGray
+            //tableView.deleteRows(at: [indexPath], with: .automatic)
+        })
+        
+        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.backgroundColor = .red
+       
+        
+        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //Adit Action here
+            let techID = self.technicianObject.adminList[indexPath.row].id
+            let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
+            self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+        })
+        
+        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
 
-            let favorite = UITableViewRowAction(style: .normal, title: "Favorite") { action, index in
-                print("favorite button tapped")
-            }
-            favorite.backgroundColor = .orange
-
-            let share = UITableViewRowAction(style: .normal, title: "Share") { action, index in
-                print("share button tapped")
-            }
-            share.backgroundColor = .blue
-
-            return [share, favorite, more]
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TechnicianListTableViewCell) as! TechnicianListTableViewCell
@@ -103,27 +147,22 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
     
     //MARK: - TechnicianListTableViewCell DELEGATE METHODS
     func callBackActionDeleteTechnician(index: Int) {
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Technician, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            
-            let techID = self.technicianObject.adminList[index].id
-            self.deleteTechnicianApi(param: [DictKeys.User_Id: techID])
-            
-        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-            
-        }
+        //removed
     }
     
     func callBackActionEditTechnician(index: Int) {
-        let techID = self.technicianObject.adminList[index].id
-        let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
-        self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+        //removed
     }
+    
     func callBackActionBlockUnBlockTechnician(index: Int) {
         let techID = self.technicianObject.adminList[index].id
         self.blockIndex = index
         self.blockUnblockTechnicianApi(param: [DictKeys.User_Id: techID])
     }
     
+    func callBackActionSeeDetailsTechnician(index: Int) {
+        print("Tech Details button click at : ", index)
+    }
     
 }
 //MARK: - EXTENSION API CALLS

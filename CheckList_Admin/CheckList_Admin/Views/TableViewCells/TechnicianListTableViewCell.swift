@@ -11,6 +11,7 @@ protocol TechnicianListTableViewCellDelegate: NSObjectProtocol {
     func callBackActionEditTechnician(index: Int)
     func callBackActionDeleteTechnician(index: Int)
     func callBackActionBlockUnBlockTechnician(index: Int)
+    func callBackActionSeeDetailsTechnician(index: Int)
 }
 
 class TechnicianListTableViewCell: BaseTableViewCell {
@@ -22,7 +23,8 @@ class TechnicianListTableViewCell: BaseTableViewCell {
     @IBOutlet weak var btnBlock: UIButton!
     @IBOutlet weak var viewDelete: UIView!
     @IBOutlet weak var viewEdit: UIView!
-    
+    @IBOutlet weak var seeDetailsbtn: UIView!
+
     
     //MARK: - OBJECT AND VERIBALES
     weak var delegate: TechnicianListTableViewCellDelegate?
@@ -62,6 +64,10 @@ class TechnicianListTableViewCell: BaseTableViewCell {
     
     @IBAction func actionDelete(_ sender: UIButton){
         delegate?.callBackActionDeleteTechnician(index: self.index)
+    }
+    
+    @IBAction func actionDetails(_ sender: UIButton){
+        delegate?.callBackActionSeeDetailsTechnician(index: self.index)
     }
     
     @IBAction func actionBlockUnBloack(_ sender: UIButton){

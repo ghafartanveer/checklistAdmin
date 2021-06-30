@@ -23,8 +23,12 @@ class LoginViewController: BaseViewController {
         self.viewEmail.dropShadow(radius: 5, opacity: 0.4)
         self.viewPassword.dropShadow(radius: 5, opacity: 0.4)
         #if DEBUG
-        self.txtEmail.text = "newton@yopmail.com"
-        self.txtPassword.text = "123456"
+        //self.txtEmail.text = "newton@yopmail.com"
+        //self.txtPassword.text = "123456"
+        
+        self.txtEmail.text = "muaaz@mailinator.com"
+        self.txtEmail.text = "superadminchecklist@yopmail.com"
+        self.txtPassword.text = "12345678"
         #endif
        
     }
@@ -32,11 +36,15 @@ class LoginViewController: BaseViewController {
     //MARK: - IBACTION METHODS
     @IBAction func actionLogin(_ sender: UIButton){
         if self.checkValidations(){
+            var loginType = LoginType.Admin
+            if txtEmail.text == SuperAdminEmail.super_admin_emailId {
+                loginType = LoginType.super_admin
+            }
             self.doLoginApi(params: [
                                 
                                 DictKeys.email: self.txtEmail.text!,
                                 DictKeys.password: self.txtPassword.text!,
-                                DictKeys.login_type: LoginType.Admin,
+                                DictKeys.login_type: loginType,
                                 DictKeys.fcm_token: "test"])
         }
     }

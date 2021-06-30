@@ -70,6 +70,10 @@ struct AssetNames {
     
 }
 
+struct SuperAdminEmail {
+    static let super_admin_emailId = "superadminchecklist@yopmail.com"
+}
+
 struct LoginType {
     static let Admin = "admin"
     static let super_admin = "super_admin"
