@@ -82,6 +82,10 @@ class MainContainerViewController: BaseViewController{
         self.titleLabel.text = title
     }
     
+    func setTopBarColor(color: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {
+        self.viewTopColour.backgroundColor = color
+    }
+    
     func showHomeController()  {
         let storyBoard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
         var controller = BaseNavigationController()

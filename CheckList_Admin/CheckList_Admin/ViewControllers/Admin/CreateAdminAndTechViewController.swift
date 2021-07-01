@@ -63,17 +63,23 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         if let container = self.mainContainer{
             container.delegate = self
             
+            txtStoreName.isUserInteractionEnabled = false
+            txtStoreAddress.isUserInteractionEnabled = false
+            
             if isFromTechnician{
-                container.setMenuButton(true, title: TitleNames.Add_Technician)
+                if isForEdit {
+                    container.setMenuButton(true, title: TitleNames.Update_Technician)
+                } else {
+                    container.setMenuButton(true, title: TitleNames.Create_Technician)
+                }
                 self.viewAddStoreHeight.constant = 0
                 self.typeLogin = LoginType.Technician
-            }else{
+            }else{ //else from admin
                 container.setMenuButton(true, title: TitleNames.Create_Admin)
                 self.viewAddStoreHeight.constant = 70
             }
         }
     }
-    
     
     //MARK: - IBACTION METHODS
    
@@ -109,6 +115,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             }
         }
     }
+
+    @IBAction func openDropDown(_ sender: Any) {
+        txtSearchList.showList()
+    }
     
     @IBAction func actionAddPhoto(_ sender: UIButton){
         self.fetchProfileImage()
@@ -116,8 +126,11 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - FUNCTIONS
     func configureDropDown(){
+        self.txtSearchList.selectedIndex = 0
+
         self.txtSearchList.didSelect { (selectedText, index, id) in
             self.configureStoreList(idStore: self.storeObj.storeList[index].id)
+            
         }
     }
     
@@ -137,11 +150,18 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     }
     
     func configureStoreList(idStore: Int){
-        let obj = self.storeObj.getStoreDetailAganistID(storeID: idStore)
-        self.txtStoreName.text = obj.name
-        self.txtStoreAddress.text = obj.address
-        if self.isForEdit{
-            self.storeId = obj.id
+        if UserDefaultsManager.shared.userInfo.loginType == LoginType.super_admin {
+            let storeInfo = storeObj.getStoreDetailAganistID(storeID: idStore)
+            self.txtStoreName.text = storeInfo.name
+            self.txtStoreAddress.text = storeInfo.address
+            self.storeId = idStore
+        } else {
+        let id = UserDefaultsManager.shared.userInfo?.storeID
+        let storeInfo = storeObj.getStoreDetailAganistID(storeID: id!)
+        self.txtStoreName.text = storeInfo.name
+        self.txtStoreAddress.text = storeInfo.address
+        self.storeId = id ?? 0
+       
         }
     }
     
@@ -168,7 +188,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         var message = ""
         var isValid: Bool = true
         let isValidEmail = Validations.emailValidation(self.txtEmail.text!)
-        let isValidPassword = Validations.confirmPasswordValidation(self.txtPassword.text!, repeat: self.txtConfirmPassword.text!)
+        let isValidPassword = Validations.passwordValidation(self.txtPassword.text!)
+        let isValidRePassword = Validations.confirmPasswordValidation(self.txtPassword.text!, repeat: self.txtConfirmPassword.text!)
         
         if self.txtFirstName.text!.isEmpty{
             message = ValidationMessages.Empty_First_Name
@@ -195,18 +216,22 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             isValid = false
         }
         
-        if !isForEdit{
-            if !isValidPassword.isValid{
+        //if isForEdit{
+           else if !isValidPassword.isValid{
                 message = isValidPassword.message
                 isValid = false
-            }
-        }
+           } else if !isValidRePassword.isValid {
+            message = isValidRePassword.message
+            isValid = false
+           }
+        //}
         
         if !isValid{
             self.showAlertView(message: message)
         }
         return isValid
     }
+    
     func navigateToAddStoreVC() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
         self.navigationController?.pushViewController(vc, animated: true)
@@ -276,7 +301,10 @@ extension CreateAdminAndTechViewController{
                         if let infoList = storeInfo{
                             self.storeObj = infoList
                             self.txtSearchList.optionArray = infoList.storeList.map({$0.name})
+                            self.txtSearchList.selectedIndex = 0
                             self.configureStoreList(idStore: self.storeId)
+                            self.configureDropDown()
+
                         }
                     }else{
                         self.showAlertView(message: message)

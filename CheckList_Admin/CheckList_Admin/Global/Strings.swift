@@ -49,11 +49,15 @@ struct TitleNames {
     static let Admin_List = "Admin List"
     static let Create_Admin = "Create Admin"
     static let Technician = "Technician"
-    static let Add_Technician = "Add Technician"
+    static let Create_Technician = "Create Technician"
+    static let Update_Technician = "Update Technician"
     static let Store_List = "Store List"
     static let Add_Store = "Add Store"
     static let Setting = "Setting"
     static let CheckList = "CheckList"
+    static let TechnicianDetails = "Technician Details"
+    static let AdminDetails = "Admin Details"
+    
 }
 
 struct NotificationName {
@@ -111,6 +115,7 @@ struct ControllerIdentifier {
     static let ForgotPasswordViewController = "ForgotPasswordViewController"
     static let UpdatePasswordViewController = "UpdatePasswordViewController"
     static let TechnicianListViewController = "TechnicianListViewController"
+    static let UserDetailsViewController = "UserDetailsViewController"
 }
 
 struct ValidationMessages {
@@ -164,6 +169,8 @@ struct CellIdentifier {
     static let PieChartTableViewCell = "PieChartTableViewCell"
     static let BarChartCollectionViewCell = "BarChartCollectionViewCell"
     static let BarChartTableViewCell = "BarChartTableViewCell"
+    static let TechnicianDetailTableViewCell = "TechnicianDetailTableViewCell"
+    
 }
 
 

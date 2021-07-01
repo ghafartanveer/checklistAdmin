@@ -16,7 +16,6 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
     //MARK: - OBJECT AND VERIBALES
     var technicianObject = AdminListViewModel()
     var blockIndex: Int = -1
-    
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,15 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
         vc.isFromTechnician = true
         vc.isForEdit = isForEdit
         vc.adminObjc = techObj
+        
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func aditTechAction(index: Int) {
+        let techID = self.technicianObject.adminList[index].id
+        let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
+        self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+
     }
     //MARK: - IBACTION METHODS
     @IBAction func actionAddTechnician(_ sender: UIButton){
@@ -110,9 +117,7 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
         
         let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
             //Adit Action here
-            let techID = self.technicianObject.adminList[indexPath.row].id
-            let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
-            self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+            self.aditTechAction(index: indexPath.row)
         })
         
         aditAction.image = UIImage(named: "edit-icon.png")
@@ -161,6 +166,11 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func callBackActionSeeDetailsTechnician(index: Int) {
+        let techObj = self.technicianObject.getAdminDetailAganistID(AdminID: self.technicianObject.adminList[index].id)
+        
+        let techID = self.technicianObject.adminList[index].id
+    
+        self.moveToAdminAndTechnicianDetailsVC(adminObject: techObj, isFromTechnician: true)
         print("Tech Details button click at : ", index)
     }
     

@@ -415,6 +415,13 @@ extension BaseViewController{
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func moveToAdminAndTechnicianDetailsVC(adminObject: AdminViewModel?, isFromTechnician: Bool){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.UserDetailsViewController) as! UserDetailsViewController
+        vc.isFromTechnician = isFromTechnician
+        vc.adminObjc = adminObject
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func saveUserInfo(_ userInfo:UserViewModel) {
         Global.shared.user = userInfo
         Global.shared.isLogedIn = true

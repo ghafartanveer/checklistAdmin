@@ -14,9 +14,8 @@ class AdminListViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - OBJECT AND VERIBALES
     var adminObject = AdminListViewModel()
+    var techViewmodel = AdminListViewModel()
     var adminIndex: Int = -1
-    
-    
     
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
@@ -49,6 +48,7 @@ class AdminListViewController: BaseViewController, TopBarDelegate {
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, AdminListTableViewCellDelegate{
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.adminObject.adminList.count
     }
@@ -60,6 +60,8 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
         cell.delegate = self
         cell.configureAdmin(info: self.adminObject.adminList[indexPath.row], indexPath: indexPath.row)
         cell.viewShadow.dropShadow(radius: 5, opacity: 0.4)
+        
+        //AdminViewModel
         return cell
     }
     
@@ -76,27 +78,67 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
         return 150
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //delete Action here
+           
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Admin, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                
+                let userID = self.adminObject.adminList[indexPath.row].id
+                self.deleteAdminApi(param: [DictKeys.User_Id: userID])
+                
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
+            }
+           
+        })
+        
+        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.backgroundColor = .red
+        
+        
+        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //Adit Action here
+           
+            let adminObj = self.adminObject.getAdminDetailAganistID(AdminID: self.adminObject.adminList[indexPath.row].id)
+            self.moveToCreateAdminAndTechnicianVC(isForEdit: true, adminObject: adminObj)
+            
+        })
+        
+        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
+        
+    }
+    
     //MARK: - AdminListTableViewCell DELEGATE METHODS
     func callBackActionDeleteAdmin(index: Int) {
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Admin, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            
-            let userID = self.adminObject.adminList[index].id
-            self.deleteAdminApi(param: [DictKeys.User_Id: userID])
-            
-        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-            
-        }
+        //removed
     }
     
     func callBackActionEditAdmin(index: Int) {
-       let adminObj = self.adminObject.getAdminDetailAganistID(AdminID: self.adminObject.adminList[index].id)
-        self.moveToCreateAdminAndTechnicianVC(isForEdit: true, adminObject: adminObj)
+       //removed
     }
     
     func callBackActionBlockUnBlockAdmin(index: Int) {
         let adminID = self.adminObject.adminList[index].id
         self.adminIndex = index
         self.blockUnblockTechnicianApi(param: [DictKeys.User_Id: adminID])
+    }
+    
+    func callBackSeeAdminDetails(index: Int) {
+        
+        let adminObj = self.adminObject.getAdminDetailAganistID(AdminID: self.adminObject.adminList[index].id)
+        
+        //print(adminObj.firstName)
+        
+        self.moveToAdminAndTechnicianDetailsVC(adminObject: adminObj, isFromTechnician: false)
+        print("see admin details here")
     }
     
 }

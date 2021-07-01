@@ -11,6 +11,7 @@ protocol AdminListTableViewCellDelegate: NSObjectProtocol {
     func callBackActionEditAdmin(index: Int)
     func callBackActionDeleteAdmin(index: Int)
     func callBackActionBlockUnBlockAdmin(index: Int)
+    func callBackSeeAdminDetails(index: Int)
 }
 
 class AdminListTableViewCell: BaseTableViewCell {
@@ -22,6 +23,7 @@ class AdminListTableViewCell: BaseTableViewCell {
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var btnBlock: UIButton!
+   
     @IBOutlet weak var btnBlockWidth: NSLayoutConstraint!
     @IBOutlet weak var viewDelete: UIView!
     @IBOutlet weak var viewEdit: UIView!
@@ -68,6 +70,9 @@ class AdminListTableViewCell: BaseTableViewCell {
     
     @IBAction func actionDelete(_ sender: UIButton){
         delegate?.callBackActionDeleteAdmin(index: self.index)
+    }
+    @IBAction func actionSeeDetails(_ sender: Any) {
+        delegate?.callBackSeeAdminDetails(index: self.index)
     }
     
     @IBAction func actionBlockUnBloack(_ sender: UIButton){

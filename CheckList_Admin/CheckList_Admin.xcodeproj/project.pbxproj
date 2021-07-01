@@ -163,6 +163,8 @@
 		35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */; };
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
+		DE0B27FD268DE0FF00E327CC /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */; };
+		DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -358,6 +360,8 @@
 		35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTechnicianService.swift; sourceTree = "<group>"; };
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
+		DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EF77FB08C71EEB154D9E49B9 /* Pods-CheckList_Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList_Admin.debug.xcconfig"; path = "Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -856,6 +860,7 @@
 				35875C45266108C60049F707 /* CreateSubCategoryTableViewCell.swift */,
 				04D1C70F26775267008720CB /* PieChartTableViewCell.swift */,
 				04D1C7182677663D008720CB /* BarChartTableViewCell.swift */,
+				DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -969,6 +974,7 @@
 				3593CA3F26395090007B6660 /* CreateAdminAndTechViewController.swift */,
 				35453D8D2643DE610080521B /* TechnicianListViewController.swift */,
 				3593CA3026394023007B6660 /* AdminListViewController.swift */,
+				DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */,
 			);
 			path = Admin;
 			sourceTree = "<group>";
@@ -1246,6 +1252,7 @@
 				3593C97926382123007B6660 /* BaseTableViewController.swift in Sources */,
 				35453DA02643E72A0080521B /* AddStoreViewController.swift in Sources */,
 				35A864DC264A762A005184BA /* UpdatePasswordViewController.swift in Sources */,
+				DE0B27FD268DE0FF00E327CC /* UserDetailsViewController.swift in Sources */,
 				35A864D7264A7002005184BA /* ForgotPasswordViewController.swift in Sources */,
 				3593C96A26382123007B6660 /* RIATextfield.swift in Sources */,
 				3593C98F26382123007B6660 /* Protocols.swift in Sources */,
@@ -1280,6 +1287,7 @@
 				3593C94E26382123007B6660 /* YPDrawSignatureView.swift in Sources */,
 				3593C95D26382123007B6660 /* KYEmbedMainControllerSegue.swift in Sources */,
 				3593C99426382123007B6660 /* RegisterListViewModel.swift in Sources */,
+				DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */,
 				3593C98726382123007B6660 /* Utilities.swift in Sources */,
 				3593C97026382123007B6660 /* ActiveBuilder.swift in Sources */,
 				3593C94D26382123007B6660 /* TPKeyboardAvoidingCollectionView.m in Sources */,
