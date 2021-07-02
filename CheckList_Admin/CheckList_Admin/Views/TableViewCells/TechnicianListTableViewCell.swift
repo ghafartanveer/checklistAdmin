@@ -74,5 +74,9 @@ class TechnicianListTableViewCell: BaseTableViewCell {
         delegate?.callBackActionBlockUnBlockTechnician(index: self.index)
     }
     
+    @IBAction func actionSeedetails(_ sender: Any) {
+        delegate?.callBackActionSeeDetailsTechnician(index: self.index)
+    }
+    
     
 }

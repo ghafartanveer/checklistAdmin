@@ -18,6 +18,10 @@ class SubCategoryListTableViewCell: UITableViewCell {
     @IBOutlet weak var btnNotAvailable: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
     
+    @IBOutlet weak var dscriptionLbl: UILabel!
+    
+    @IBOutlet weak var descriptionLblContainer: UIView!
+    
     //MARK: - OBJECT AND VERIBALES
     weak var delegate: SubCategoryListTableViewCellDelegate?
     var index: Int = -1
@@ -30,9 +34,32 @@ class SubCategoryListTableViewCell: UITableViewCell {
     }
     
     //MARK: - FUNCTIONS
+    
+    
+//    func configureSubCategory(info: CheckListQuestionViewModel){
+//        self.lblTitle.text = info.sub_category_name
+//
+//        if info.sub_category_description.isEmpty || info.sub_category_description == "null" {
+//            dscriptionLbl.text = ""
+//        } else {
+//            dscriptionLbl.text = info.sub_category_description
+//        }
+//        if info.is_priority == 1{
+//            self.btnPriority.isSelected = true
+//        }
+//        if info.not_applicable == 1{
+//            self.btnNotAvailable.isSelected = true
+//        }
+//    }
+    
     func configureSubCategory(info: SubCategoryViewModel){
         self.lblTitle.text = info.subcategoryName
-        
+
+        if info.subcategoryDescription.isEmpty || info.subcategoryDescription == "null" {
+            dscriptionLbl.text = ""
+        } else {
+            dscriptionLbl.text = info.subcategoryDescription
+        }
         if info.isPriority == 1{
             self.btnPriority.isSelected = true
         }
@@ -49,7 +76,7 @@ class SubCategoryListTableViewCell: UITableViewCell {
         }else{
             self.btnPriority.isSelected = true
         }
-        delegate?.callBackActionMarkPriority(index: self.index)
+       // delegate?.callBackActionMarkPriority(index: self.index)
     }
     
     @IBAction func actionNotAvailable(_ sender: UIButton){
@@ -58,6 +85,6 @@ class SubCategoryListTableViewCell: UITableViewCell {
         }else{
             self.btnNotAvailable.isSelected = true
         }
-        delegate?.callBackActionNotAvailable(index: self.index)
+        //delegate?.callBackActionNotAvailable(index: self.index)
     }
 }

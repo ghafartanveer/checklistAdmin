@@ -64,9 +64,7 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.technicianObject.adminList.count
     }
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+    
    
 //    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 //
@@ -96,6 +94,10 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
 //    
 //        
 //    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
@@ -133,6 +135,7 @@ extension TechnicianListViewController: UITableViewDelegate, UITableViewDataSour
         cell.delegate = self
         cell.configureTechnician(info: self.technicianObject.adminList[indexPath.row], indexP: indexPath.row)
         cell.viewShadow.dropShadow(radius: 5, opacity: 0.4)
+        
         return cell
     }
     

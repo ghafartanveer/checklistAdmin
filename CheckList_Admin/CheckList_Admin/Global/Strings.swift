@@ -57,6 +57,7 @@ struct TitleNames {
     static let CheckList = "CheckList"
     static let TechnicianDetails = "Technician Details"
     static let AdminDetails = "Admin Details"
+    static let CreateCheckList = "Create checklist"
     
 }
 
@@ -116,6 +117,7 @@ struct ControllerIdentifier {
     static let UpdatePasswordViewController = "UpdatePasswordViewController"
     static let TechnicianListViewController = "TechnicianListViewController"
     static let UserDetailsViewController = "UserDetailsViewController"
+    static let CreateNewTaskViewController = "CreateNewTaskViewController"
 }
 
 struct ValidationMessages {
@@ -152,6 +154,7 @@ struct ValidationMessages {
     static let commentsMissing              = "Comment field cannot empty"
     static let noLocationAdded              = "Location info is must in order to become a supplier"
     static let fillAllFields              = "Please fill all fields"
+    static let taskName = "Please enter task name"
 }
 struct CellIdentifier {
     static let TaskCategoryTableViewCell = "TaskCategoryTableViewCell"
@@ -190,6 +193,7 @@ struct PopupMessages {
     static let Session_Expired    = "Session expired, please login again"
     static let cameraPermissionNeeded       = "Camera permission needed to scan QR Code. Goto settings to enable camera permission"
     static let SomethingWentWrong           = "Something went wrong, please check your internet connection or try again later!"
+    static let ChecklistCreated = "Checklist added succesfully"
 }
 
 

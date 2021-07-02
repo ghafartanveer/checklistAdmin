@@ -20,7 +20,7 @@ class SubCategoryViewModel {
     var updatedAt: String
     var subcategoryName: String
     var createdAt: String
-    
+    var subcategoryDescription: String
     
     init() {
         self.id = 0
@@ -33,6 +33,7 @@ class SubCategoryViewModel {
         self.updatedAt = ""
         self.subcategoryName = ""
         self.createdAt = ""
+        self.subcategoryDescription = ""
     }
     
     init(obj: JSON) {
@@ -47,8 +48,7 @@ class SubCategoryViewModel {
         self.updatedAt = obj["updated_at"].string ?? ""
         self.subcategoryName = obj["subcategory_name"].string ?? ""
         self.createdAt = obj["created_at"].string ?? ""
+        self.subcategoryDescription = obj["subcategory_description"].string ?? ""
     }
-    
-    
 }
           

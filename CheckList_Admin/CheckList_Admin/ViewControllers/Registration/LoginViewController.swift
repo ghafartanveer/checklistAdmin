@@ -27,7 +27,7 @@ class LoginViewController: BaseViewController {
         //self.txtPassword.text = "123456"
         
         self.txtEmail.text = "muaaz@mailinator.com"
-        self.txtEmail.text = "superadminchecklist@yopmail.com"
+        //self.txtEmail.text = "superadminchecklist@yopmail.com"
         self.txtPassword.text = "12345678"
         #endif
        

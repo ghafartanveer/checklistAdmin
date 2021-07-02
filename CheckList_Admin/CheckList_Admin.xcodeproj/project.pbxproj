@@ -164,6 +164,9 @@
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
 		DE0B27FD268DE0FF00E327CC /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */; };
+		DE51BBAF268F17C300923FFA /* CreateNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBAE268F17C300923FFA /* CreateNewTaskViewController.swift */; };
+		DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBB3268F1B8400923FFA /* CheckListService.swift */; };
+		DE51BBC4268F2CA300923FFA /* AddSubCatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */; };
 		DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -361,6 +364,9 @@
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
 		DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
+		DE51BBAE268F17C300923FFA /* CreateNewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskViewController.swift; sourceTree = "<group>"; };
+		DE51BBB3268F1B8400923FFA /* CheckListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListService.swift; sourceTree = "<group>"; };
+		DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubCatViewModel.swift; sourceTree = "<group>"; };
 		DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EF77FB08C71EEB154D9E49B9 /* Pods-CheckList_Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList_Admin.debug.xcconfig"; path = "Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -435,6 +441,7 @@
 				356D7B632643C300008257A1 /* CategoryViewModel.swift */,
 				35875C192660D2EA0049F707 /* ImagesViewModel.swift */,
 				35875C1E2660D3140049F707 /* SubCategoryViewModel.swift */,
+				DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */,
 			);
 			path = CategoryList;
 			sourceTree = "<group>";
@@ -793,6 +800,7 @@
 				3593C93126382123007B6660 /* LoginService.swift */,
 				35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */,
 				356D7B592643C265008257A1 /* StoreCategoryService.swift */,
+				DE51BBB3268F1B8400923FFA /* CheckListService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -964,6 +972,7 @@
 				356D7B732643D86E008257A1 /* AddCategoryViewController.swift */,
 				35875C3B2660ECC90049F707 /* CreateCategoryViewController.swift */,
 				35875C4A26610BE40049F707 /* CreateSubCategoryViewController.swift */,
+				DE51BBAE268F17C300923FFA /* CreateNewTaskViewController.swift */,
 			);
 			path = CheckList;
 			sourceTree = "<group>";
@@ -1238,6 +1247,7 @@
 				3593C94C26382123007B6660 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				3593C89E26382067007B6660 /* ViewController.swift in Sources */,
 				3593C9ED26382EAF007B6660 /* SubCategoryListViewController.swift in Sources */,
+				DE51BBC4268F2CA300923FFA /* AddSubCatViewModel.swift in Sources */,
 				3593C97726382123007B6660 /* BaseViewController.swift in Sources */,
 				3593C95326382123007B6660 /* MKProgressBaseView.swift in Sources */,
 				3593C98C26382123007B6660 /* Extensions.swift in Sources */,
@@ -1307,6 +1317,7 @@
 				3593C89A26382067007B6660 /* AppDelegate.swift in Sources */,
 				3593C95026382123007B6660 /* MKActivityIndicatorView.swift in Sources */,
 				3593C8A426382067007B6660 /* CheckList_Admin.xcdatamodeld in Sources */,
+				DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */,
 				3593C9C2263825A3007B6660 /* SideMenuTableViewCell.swift in Sources */,
 				3593C99026382123007B6660 /* AppConstants.swift in Sources */,
 				04D1C71626775A99008720CB /* PieChartView.swift in Sources */,
@@ -1322,6 +1333,7 @@
 				35453DD82643F1980080521B /* StoreViewModel.swift in Sources */,
 				35875C4B26610BE40049F707 /* CreateSubCategoryViewController.swift in Sources */,
 				3593C98226382123007B6660 /* RequestMessages.swift in Sources */,
+				DE51BBAF268F17C300923FFA /* CreateNewTaskViewController.swift in Sources */,
 				3593C98926382123007B6660 /* UserDefaultsManager.swift in Sources */,
 				3593C89C26382067007B6660 /* SceneDelegate.swift in Sources */,
 				3593C94A26382123007B6660 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,

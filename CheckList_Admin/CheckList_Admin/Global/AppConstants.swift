@@ -54,6 +54,9 @@ struct DictKeys {
     static let New_Password = "new_password"
     static let Pin_Code = "pin_code"
     static let fcm_token = "fcm_token"
+    static let sub_category_name = "sub_category_name"
+    static let not_applicable = "not_applicable"
+    static let is_priority = "is_priority"
     
     
 }
@@ -80,6 +83,7 @@ struct EndPoints {
     static let Update_Password = "update_password"
     static let Logout_User = "logout_user"
     static let Block_User = "block_user"
+    static let Create_Task = "create_task"
 }
 
 //Default values for data types

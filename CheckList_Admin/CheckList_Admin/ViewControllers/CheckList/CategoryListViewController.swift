@@ -15,7 +15,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - OBJECT AND VERIBAELS
     var categoryObject = CategoryListViewModel()
     
-    
+    var checkListQuestionObjData : [CheckListQuestionViewModel] = []
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,14 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
         //self.navigationController?.popViewController(animated: true)
     }
     
+    func saveTaskList(obj: CategoryViewModel) {
+        
+        checkListQuestionObjData.removeAll()
+        for subCat in obj.subCategoryList {
+            
+            checkListQuestionObjData.append(CheckListQuestionViewModel(id: subCat.id, sub_category_name: subCat.subcategoryName, not_applicable: subCat.notApplicable, sub_category_description: subCat.subcategoryDescription, is_priority: subCat.isPriority))
+        }
+    }
     
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
@@ -73,28 +81,58 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
         vc.subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
+        vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
+        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
+        vc.checkListQuestionObjData = self.checkListQuestionObjData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
         
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //delete Action here
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Category, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                
+                let catID = self.categoryObject.categoryList[indexPath.row].id
+                self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
+                
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
+            }
+            
+        })
+        
+        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.backgroundColor = .red
+        
+        
+        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //Adit Action here
+            let catID = self.categoryObject.categoryList[indexPath.row].id
+            let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
+            self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
+        })
+        
+        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
+        
+    }
     //MARK: - CategoryListTableViewCell DELEGATE METHODS
     func callBackActionDeleteCategory(index: Int) {
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Category, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            
-            let catID = self.categoryObject.categoryList[index].id
-            self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
-            
-        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-            
-        }
+        //removed
     }
     
     func callBackActionEditCategory(index: Int) {
-        let catID = self.categoryObject.categoryList[index].id
-        let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
-        self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
+        //removed
     }
     
 }

@@ -62,12 +62,13 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
                 contntViewHeight.constant = 625
 
                 container.setMenuButton(true, title: TitleNames.TechnicianDetails)
-                
+                typeLogin = LoginType.Technician
             } else {
                 tableViewContainerHeight.constant = 300
                 technicianListContainerView.isHidden = false
-                contntViewHeight.constant = 925
+                contntViewHeight.constant = 950
                 container.setMenuButton(true, title: TitleNames.AdminDetails)
+                typeLogin = LoginType.Admin
             }
             
         }
@@ -89,6 +90,27 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
         self.togleEditable(isAditAble: true)
     }
     
+    @IBAction func actionSaveChanges(_ sender: UIButton){
+        
+        if self.checkValidation(){
+            var imageData: [String: Data]?
+            
+            
+            if self.isImageSelected{
+                imageData = [DictKeys.image: self.profileImageView.image!.jpegData(compressionQuality: 0.50)!]
+            }
+            let params: ParamsAny = [DictKeys.first_name: self.firstNameTF.text!,
+                                     DictKeys.last_name: self.lastNameTF.text!,
+                                     DictKeys.email: self.emailTF.text!,
+                                     DictKeys.phone_number: self.phoneTF.text!,
+                                     DictKeys.login_type: typeLogin,
+                                     DictKeys.Store_Id: self.adminObjc?.storeID ?? 0,
+                                     DictKeys.User_Id: self.self.adminObjc?.id ?? 0]
+          
+//                let updateImg = [DictKeys.image: self.profileImageView.image!.jpegData(compressionQuality: 0.50)!]
+                self.updateAdminProfileApi(params: params, imageData: imageData)
+        }
+    }
     
     // Functions
     func configureDropShadow(){
@@ -133,6 +155,34 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     
     func actionBack() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func checkValidation() -> Bool{
+        var message = ""
+        var isValid: Bool = true
+        let isValidEmail = Validations.emailValidation(self.emailTF.text!)
+        
+        if self.firstNameTF.text!.isEmpty{
+            message = ValidationMessages.Empty_First_Name
+            isValid = false
+            
+        }else if self.lastNameTF.text!.isEmpty{
+            message = ValidationMessages.Empty_Last_Name
+            isValid = false
+            
+        }else if self.phoneTF.text!.isEmpty{
+            message = ValidationMessages.emptyPhonNumber
+            isValid = false
+            
+        }else if !isValidEmail.isValid{
+            message = isValidEmail.message
+            isValid = false
+        }
+        
+        if !isValid{
+            self.showAlertView(message: message)
+        }
+        return isValid
     }
 
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
@@ -190,10 +240,30 @@ extension UserDetailsViewController {
                             self.technicianObject = admin
                             
                             if let obj = self.adminObjc{
-                                self.techList = self.technicianObject.adminList.filter({$0.id == obj.id})
+                                self.techList = self.technicianObject.adminList.filter({$0.storeID == obj.storeID})
                             }
                             
                             self.techListTV.reloadData()
+                        }
+                        
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateAdminProfileApi(params: ParamsAny, imageData: [String: Data]?){
+        self.startActivity()
+        GCD.async(.Background) {
+            AdminTechnicianService.shared().updateAdminAndTechnicianApi(params: params, dict: imageData) { (message, success) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    
+                    if success{
+                        self.showAlertView(message: message, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
+                            self.navigationController?.popViewController(animated: true)
                         }
                         
                     }else{
