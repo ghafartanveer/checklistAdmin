@@ -36,7 +36,11 @@ class HomeViewController: BaseViewController {
     }
     
     //MARK: - FUNCTIONS
-    
+    func moveToTaskListHistiryVC() {
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CheckListHistoryViewController) as! CheckListHistoryViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCategoryTableViewCellDelegate{
@@ -115,9 +119,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.TechnicianListViewController) as! TechnicianListViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
-            let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
-            self.navigationController?.pushViewController(vc, animated: true)
+//            let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
+    //self.navigationController?.pushViewController(vc, animated: true)
+            moveToTaskListHistiryVC()
         }
     }
     

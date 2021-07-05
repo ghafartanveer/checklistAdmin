@@ -34,6 +34,22 @@ class StoreCategoryService: BaseService{
         }
     }
     
+    //MARK:- CREATE Subcategory Api
+    func submitSubcategoryApi(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool)->Void){
+        
+        let completeURL = EndPoints.BASE_URL + EndPoints.Create_Cubcategories
+        self.makePostAPICall(with: completeURL, params: params, headers: self.getHeaders()) { (message, success, json, responseType) in
+            if success{
+              
+                completion(message,success)
+            }else{
+                completion(message,success)
+            }
+            
+        }
+    }
+    
+    
     //MARK:- ADD CATEGORY API
     func addCategoryApi(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool)->Void){
         

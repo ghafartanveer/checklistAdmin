@@ -7,6 +7,8 @@
 
 import UIKit
 
+var subCategoryList = [SubCategoryViewModel]()
+
 class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTLETS
     
@@ -14,11 +16,8 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var subCatTV: UITableView!
     
     //MARK: - OBJECT AND VERIBALES
-    var subCategoryList = [SubCategoryViewModel]()
     var categoryDetailObject = CategoryViewModel()
-    
-    var checkListQuestionObjData : [CheckListQuestionViewModel] = []
-    
+    var indexToAdit = -1
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,43 +42,35 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-//    func getTaskList() {
-//        var checkListQuestionObjData : [CheckListQuestionViewModel] = []
-//
-//
-//        for subCat in obj.subCategoryList {
-//
-//            checkListQuestionObjData.append(CheckListQuestionViewModel(id: subCat.id, sub_category_name: subCat.subcategoryName, not_applicable: subCat.notApplicable, sub_category_description: subCat.subcategoryDescription, is_priority: subCat.isPriority))
-//        }
-//    }
-    
+    func moveToAddTaskVC() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateNewTaskViewController) as! CreateNewTaskViewController
+        vc.indexToAdit = indexToAdit
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     //MARK: - IBAtion
     
     @IBAction func addTaskAction(_ sender: Any) {
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateNewTaskViewController) as! CreateNewTaskViewController
-        vc.categoryDetailObject = self.categoryDetailObject
-        vc.checkListQuestionObjData = self.checkListQuestionObjData
-        self.navigationController?.pushViewController(vc, animated: true)
-      //  add task, go to new vc
+        moveToAddTaskVC()
     }
     
+    @IBAction func submitCategoryAction(_ sender: Any) {
+        let catViewModel = CategoryViewModel()
+        catViewModel.subCategoryList = subCategoryList
+        categoryDetailObject.subCategoryList = subCategoryList
+        print("Category ID: ",categoryDetailObject.id)
+        
+        let paramsDic = categoryDetailObject.getParams()  //catViewModel.getParams()
+        print(paramsDic)
+        submitCategoryApi(params: paramsDic)
+    }
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSource, SubCategoryListTableViewCellDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        //        if checkListQuestionObjData.count > 0 {
-            //            return checkListQuestionObjData.count
-            //        } else {
-            //            self.showAlertView(message: "No subcategory list found")
-            //            return 0
-            //        }
             
-        if self.subCategoryList.count > 0{
-            return self.subCategoryList.count
+        if subCategoryList.count > 0{
+            return subCategoryList.count
         }else{
             self.showAlertView(message: "No subcategory list found")
             return 0
@@ -89,24 +80,52 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.SubCategoryListTableViewCell) as! SubCategoryListTableViewCell
         
-        //cell.configureSubCategory(info: checkListQuestionObjData[indexPath.row])
-        cell.configureSubCategory(info: self.subCategoryList[indexPath.row])
+        cell.configureSubCategory(info: subCategoryList[indexPath.row])
         cell.delegate = self
         cell.viewShadow.dropShadow(radius: 5, opacity: 0.4)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        //                let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.WorkListViewController) as! WorkListViewController
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        }
         
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //delete Action here
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Task, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                
+                subCategoryList.remove(at: indexPath.row)
+                tableView.reloadData()
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
+            }
+        })
+        
+        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.backgroundColor = .red
+        
+        
+        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //Adit Action here
+            self.indexToAdit = indexPath.row
+            self.moveToAddTaskVC()
+            
+        })
+        
+        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
         
     }
     
@@ -116,5 +135,31 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
     }
     func callBackActionNotAvailable(index: Int) {
         print(index)
+    }
+}
+
+//MARK: - Server calls
+extension SubCategoryListViewController {
+    func submitCategoryApi(params:ParamsAny){
+        self.startActivity()
+        GCD.async(.Background) {
+            StoreCategoryService.shared().submitSubcategoryApi(params: params) { (message, success) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    if success{
+//                        if let category = catInfo{
+//                            self.categoryObject = category
+//                            self.viewTabel.reloadData()
+                        
+                        //}
+                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
     }
 }

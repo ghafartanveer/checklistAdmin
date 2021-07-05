@@ -22,17 +22,17 @@ class CategoryTaskViewModel {
         self.imagesRequired = []
     }
     
-    func getParams() -> ParamsAny {
-        var categoryParam = [ParamsAny]()
-        
-        for question in checkListQuestions {
-            let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.sub_category_name,"not_applicable": question.not_applicable,"sub_category_description" :question.sub_category_description, "is_priority" : question.is_priority ]
-            
-            categoryParam.append(questionParams)
-        }
-        let param: ParamsAny = ["id" : id, "name" : name, "hasImages" : hasImages ,  "checkListQuestions" : categoryParam , "imagesRequired": imagesRequired]
-        return param
-    }
+//    func getParams() -> ParamsAny {
+//        var categoryParam = [ParamsAny]()
+//        
+//        for question in checkListQuestions {
+//            let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.sub_category_name,"not_applicable": question.not_applicable,"sub_category_description" :question.sub_category_description, "is_priority" : question.is_priority ]
+//            
+//            categoryParam.append(questionParams)
+//        }
+//        let param: ParamsAny = ["id" : id, "name" : name, "hasImages" : hasImages ,  "checkListQuestions" : categoryParam , "imagesRequired": imagesRequired]
+//        return param
+//    }
 }
 
 struct CheckListQuestionViewModel {

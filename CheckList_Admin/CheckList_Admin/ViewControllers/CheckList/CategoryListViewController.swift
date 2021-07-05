@@ -15,7 +15,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - OBJECT AND VERIBAELS
     var categoryObject = CategoryListViewModel()
     
-    var checkListQuestionObjData : [CheckListQuestionViewModel] = []
+    //var checkListQuestionObjData : [CheckListQuestionViewModel] = []
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,16 +53,8 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
         //self.navigationController?.popViewController(animated: true)
     }
     
-    func saveTaskList(obj: CategoryViewModel) {
-        
-        checkListQuestionObjData.removeAll()
-        for subCat in obj.subCategoryList {
-            
-            checkListQuestionObjData.append(CheckListQuestionViewModel(id: subCat.id, sub_category_name: subCat.subcategoryName, not_applicable: subCat.notApplicable, sub_category_description: subCat.subcategoryDescription, is_priority: subCat.isPriority))
-        }
-    }
-    
 }
+
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource, CategoryListTableViewCellDelegate{
     
@@ -80,10 +72,10 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
-        vc.subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
+        subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
         vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
-        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
-        vc.checkListQuestionObjData = self.checkListQuestionObjData
+//        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
+//        vc.checkListQuestionObjData = self.checkListQuestionObjData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -84,6 +84,10 @@ struct EndPoints {
     static let Logout_User = "logout_user"
     static let Block_User = "block_user"
     static let Create_Task = "create_task"
+    static let Create_Cubcategories = "create_subcategories"
+    static let History = "history"
+    static let Search = "search"
+
 }
 
 //Default values for data types

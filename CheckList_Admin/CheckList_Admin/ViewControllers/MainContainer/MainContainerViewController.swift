@@ -20,6 +20,8 @@ class MainContainerViewController: BaseViewController{
     @IBOutlet weak var viewTopColour: UIView!
     @IBOutlet weak var imgUser: UIImageView!
     
+    @IBOutlet weak var rightBtn: UIButton!
+    
     //MARK: - OBJECT AND VERIABLES
     weak var delegate:TopBarDelegate?
     var baseNavigationController: BaseNavigationController?
@@ -27,6 +29,7 @@ class MainContainerViewController: BaseViewController{
     //MARK: - OVERRID METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if revealViewController() != nil{
             revealViewController()?.panGestureRecognizer()
             revealViewController()?.tapGestureRecognizer()
@@ -36,9 +39,7 @@ class MainContainerViewController: BaseViewController{
         }
          self.showHomeController()
     }
-    
-
-    
+        
     //MARK: - IBACTION METHODS
     @IBAction func actionSideMenu(_ sender: UIButton) {
         if revealViewController() != nil{
@@ -54,6 +55,11 @@ class MainContainerViewController: BaseViewController{
     @IBAction func actionBack(_ sender: Any) {
         delegate?.actionBack()
     }
+    
+    @IBAction func rightBtnAction(_ sender: Any) {
+        delegate?.rightButtonAction()
+    }
+    
     
     //MARK:- FUNCTIONS
     func setMenuButton(_ isBack: Bool = false, title: String)  {
@@ -80,6 +86,12 @@ class MainContainerViewController: BaseViewController{
 ////            self.btnMenu.tintColor = .black
 //        }
         self.titleLabel.text = title
+    }
+    
+    func setRightBtn( isRightHidden: Bool = true, image: UIImage) {
+        rightBtn.isHidden = isRightHidden
+        rightBtn.setImage(image, for: .normal)
+        self.rightBtn.addTarget(self, action: #selector(MainContainerViewController.rightBtnAction(_:)), for: .touchUpInside)
     }
     
     func setTopBarColor(color: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)) {

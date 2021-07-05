@@ -55,13 +55,21 @@ class CategoryViewModel {
     
     func getParams() -> ParamsAny {
         var categoryParam = [ParamsAny]()
-        
+        var imageStrArray:[String] = []
         for question in subCategoryList {
             let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.subcategoryName,"not_applicable": question.notApplicable,"sub_category_description" :question.subcategoryDescription, "is_priority" : question.isPriority ]
             
             categoryParam.append(questionParams)
         }
-        let param: ParamsAny = ["id" : id, "name" : name, "hasImages" : hasImages ,  "checkListQuestions" : categoryParam , "imagesRequired": imagesList.description]
+        
+        for imgDesc in 0..<imagesList.count {
+            let desc = self.imagesList[imgDesc].typeName
+            if !desc.isEmpty {
+            imageStrArray.append(desc)
+            }
+        }
+        
+        let param: ParamsAny = ["id" : self.id, "name" : self.name, "hasImages" : self.hasImages ,  "checkListQuestions" : categoryParam , "imagesRequired": imageStrArray]
         return param
     }
 }

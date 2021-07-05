@@ -58,6 +58,9 @@ struct TitleNames {
     static let TechnicianDetails = "Technician Details"
     static let AdminDetails = "Admin Details"
     static let CreateCheckList = "Create checklist"
+    static let UpdateTask = "Update Task"
+    static let History = "History"
+    
     
 }
 
@@ -72,6 +75,7 @@ struct AssetNames {
     static let Box_Red = "BoxRed"
     static let Delete_Icon = "deleteIcon"
     static let Edit_Icon = "editIcon"
+    static let PdfIcon = "icon-pdf"
     
 }
 
@@ -118,6 +122,10 @@ struct ControllerIdentifier {
     static let TechnicianListViewController = "TechnicianListViewController"
     static let UserDetailsViewController = "UserDetailsViewController"
     static let CreateNewTaskViewController = "CreateNewTaskViewController"
+    static let FilterSelctionPopUpViewController = "FilterSelctionPopUpViewController"
+    static let HistoryDetailsViewController = "HistoryDetailsViewController"
+    static let CheckListHistoryViewController = "CheckListHistoryViewController"
+    static let HistoryPdfGeneratorViewController = "HistoryPdfGeneratorViewController"
 }
 
 struct ValidationMessages {
@@ -173,6 +181,8 @@ struct CellIdentifier {
     static let BarChartCollectionViewCell = "BarChartCollectionViewCell"
     static let BarChartTableViewCell = "BarChartTableViewCell"
     static let TechnicianDetailTableViewCell = "TechnicianDetailTableViewCell"
+    static let HistoryDetailsTaskListTableViewCell = "HistoryDetailsTaskListTableViewCell"
+    static let TaskHistoryTableViewCell = "TaskHistoryTableViewCell"
     
 }
 
@@ -194,6 +204,9 @@ struct PopupMessages {
     static let cameraPermissionNeeded       = "Camera permission needed to scan QR Code. Goto settings to enable camera permission"
     static let SomethingWentWrong           = "Something went wrong, please check your internet connection or try again later!"
     static let ChecklistCreated = "Checklist added succesfully"
+    static let ChecklistUpdated = "Checklist updated succesfully"
+    static let Sure_To_Delete_Task = "Are you sure to delete Task"
+
 }
 
 

@@ -365,7 +365,7 @@ class Utilities {
         formatter.timeZone = TimeZone.current
         let timeStemp = formatter.string(from: temp!)
         // let newDate = formatter.date(from: timeStemp)
-        print(timeStemp)
+       // print(timeStemp)
         
         return timeStemp
     }
@@ -379,10 +379,10 @@ class Utilities {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = formatter.date(from: strDate) ?? Date()
         
-        formatter.dateFormat = "dd/MM/yy"
+        formatter.dateFormat = "dd-MM-yy"
         let strdate = formatter.string(from: date)
         // let newDate = formatter.date(from: timeStemp)
-        print(strdate)
+      //  print(strdate)
         
         return strdate
     }
@@ -397,7 +397,7 @@ class Utilities {
         
         formatter.dateFormat = "HH:mm"
         let timeStemp = formatter.string(from: date)
-        print(timeStemp)
+        //print(timeStemp)
         
         return timeStemp
     }

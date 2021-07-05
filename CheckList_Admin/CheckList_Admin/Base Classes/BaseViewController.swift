@@ -486,3 +486,49 @@ extension BaseViewController: ChangePasswordPopUpViewControllerDelegate {
     
     
 }
+
+extension BaseViewController: FilterSelctionPopUpViewControllerDelegte {
+    
+    func showHistorySlectionPopup(){
+        self.alertView = CustomIOSAlertView()
+        self.alertView?.buttonTitles = nil
+        self.alertView?.useMotionEffects = true
+        self.alertView?.touchesEnabled = true
+        var demoView:UIView!
+        demoView = UIView()
+        
+        let storyBoard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+        if let vc = storyBoard.instantiateViewController(withIdentifier: ControllerIdentifier.FilterSelctionPopUpViewController) as? FilterSelctionPopUpViewController
+        {
+            
+            vc.delegate = self
+            
+            self.objAlertVC = vc
+            demoView.frame = CGRect(x:0, y:0, width: ScreenSize.SCREEN_WIDTH - 40, height: 320)
+            vc.view.frame = CGRect(x:0, y:0, width: ScreenSize.SCREEN_WIDTH - 40, height: 320)
+            
+            demoView.addSubview(vc.view)
+            
+            self.alertView?.containerView = demoView
+        }
+        
+    }
+    
+    @objc func callBackYesterdayPressed() {
+        
+    }
+    
+    @objc func callBackLastWeekPressed() {
+        
+    }
+    
+    @objc func callBackLastMonthPressed() {
+        
+    }
+    
+    @objc func callBackAllListPressed() {
+        
+    }
+    
+    
+}

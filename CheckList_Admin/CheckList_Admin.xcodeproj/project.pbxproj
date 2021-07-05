@@ -168,6 +168,15 @@
 		DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBB3268F1B8400923FFA /* CheckListService.swift */; };
 		DE51BBC4268F2CA300923FFA /* AddSubCatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */; };
 		DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */; };
+		DEC3208C26930FAE0051B46C /* CheckListHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3208A26930FAE0051B46C /* CheckListHistoryViewController.swift */; };
+		DEC3208D26930FAE0051B46C /* HistoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3208B26930FAE0051B46C /* HistoryDetailsViewController.swift */; };
+		DEC32093269310800051B46C /* HistoryTaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC32092269310800051B46C /* HistoryTaskViewModel.swift */; };
+		DEC32098269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC32097269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift */; };
+		DEC3209E269312ED0051B46C /* FilterSelctionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC3209D269312ED0051B46C /* FilterSelctionPopUpViewController.swift */; };
+		DEC320A3269314EF0051B46C /* TaskHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC320A2269314EF0051B46C /* TaskHistoryTableViewCell.swift */; };
+		DEC320A9269315F70051B46C /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC320A8269315F70051B46C /* HistoryService.swift */; };
+		DEC320B126931E760051B46C /* HostoryPdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC320B026931E760051B46C /* HostoryPdfViewController.swift */; };
+		DEC320B626934A8A0051B46C /* HistoryPdfGeneratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC320B526934A8A0051B46C /* HistoryPdfGeneratorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,6 +377,15 @@
 		DE51BBB3268F1B8400923FFA /* CheckListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListService.swift; sourceTree = "<group>"; };
 		DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubCatViewModel.swift; sourceTree = "<group>"; };
 		DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianDetailTableViewCell.swift; sourceTree = "<group>"; };
+		DEC3208A26930FAE0051B46C /* CheckListHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckListHistoryViewController.swift; sourceTree = "<group>"; };
+		DEC3208B26930FAE0051B46C /* HistoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDetailsViewController.swift; sourceTree = "<group>"; };
+		DEC32092269310800051B46C /* HistoryTaskViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryTaskViewModel.swift; sourceTree = "<group>"; };
+		DEC32097269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryDetailsTaskListTableViewCell.swift; sourceTree = "<group>"; };
+		DEC3209D269312ED0051B46C /* FilterSelctionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterSelctionPopUpViewController.swift; sourceTree = "<group>"; };
+		DEC320A2269314EF0051B46C /* TaskHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		DEC320A8269315F70051B46C /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
+		DEC320B026931E760051B46C /* HostoryPdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostoryPdfViewController.swift; sourceTree = "<group>"; };
+		DEC320B526934A8A0051B46C /* HistoryPdfGeneratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPdfGeneratorViewController.swift; sourceTree = "<group>"; };
 		EF77FB08C71EEB154D9E49B9 /* Pods-CheckList_Admin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList_Admin.debug.xcconfig"; path = "Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -492,6 +510,7 @@
 				3593C89926382067007B6660 /* AppDelegate.swift */,
 				3593C89B26382067007B6660 /* SceneDelegate.swift */,
 				3593C91A26382123007B6660 /* Base Classes */,
+				DEC3209C2693129F0051B46C /* Popups */,
 				3593C93226382123007B6660 /* Global */,
 				3593C92526382123007B6660 /* Library */,
 				3593C8D226382122007B6660 /* Third Party Vendors */,
@@ -796,11 +815,13 @@
 		3593C92F26382123007B6660 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				DEC320A7269315D00051B46C /* HistoryService */,
 				3593C93026382123007B6660 /* BaseService.swift */,
 				3593C93126382123007B6660 /* LoginService.swift */,
 				35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */,
 				356D7B592643C265008257A1 /* StoreCategoryService.swift */,
 				DE51BBB3268F1B8400923FFA /* CheckListService.swift */,
+				DEC320A8269315F70051B46C /* HistoryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -855,6 +876,7 @@
 		3593C94226382123007B6660 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				DEC32097269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift */,
 				3593C9C1263825A3007B6660 /* SideMenuTableViewCell.swift */,
 				3593C9DD26382850007B6660 /* TaskTypesTableViewCell.swift */,
 				3593C9E7263828CA007B6660 /* TaskCategoryTableViewCell.swift */,
@@ -869,6 +891,7 @@
 				04D1C70F26775267008720CB /* PieChartTableViewCell.swift */,
 				04D1C7182677663D008720CB /* BarChartTableViewCell.swift */,
 				DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */,
+				DEC320A2269314EF0051B46C /* TaskHistoryTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -889,6 +912,7 @@
 				3593C94926382123007B6660 /* RegisterListViewModel.swift */,
 				35453DCB2643F1510080521B /* AdminList */,
 				35453DC12643F13E0080521B /* CategoryList */,
+				DEC320912693101F0051B46C /* HistoryViewModel */,
 				35453DDC2643F19D0080521B /* StoreList */,
 			);
 			path = "View Models";
@@ -918,6 +942,7 @@
 				35A73339263BE0CA00EA481B /* Admin */,
 				35C691B62643F6ED0094B02B /* Store */,
 				35C691BA2643F7130094B02B /* Settings */,
+				DEC3208926930F6F0051B46C /* History */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1014,6 +1039,40 @@
 				35453DA42643EB200080521B /* ProfileSettingViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DEC3208926930F6F0051B46C /* History */ = {
+			isa = PBXGroup;
+			children = (
+				DEC3208A26930FAE0051B46C /* CheckListHistoryViewController.swift */,
+				DEC3208B26930FAE0051B46C /* HistoryDetailsViewController.swift */,
+				DEC320B026931E760051B46C /* HostoryPdfViewController.swift */,
+				DEC320B526934A8A0051B46C /* HistoryPdfGeneratorViewController.swift */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		DEC320912693101F0051B46C /* HistoryViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEC32092269310800051B46C /* HistoryTaskViewModel.swift */,
+			);
+			path = HistoryViewModel;
+			sourceTree = "<group>";
+		};
+		DEC3209C2693129F0051B46C /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				DEC3209D269312ED0051B46C /* FilterSelctionPopUpViewController.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
+		DEC320A7269315D00051B46C /* HistoryService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HistoryService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1255,7 +1314,9 @@
 				35453DBD2643F0010080521B /* StoreListTableViewCell.swift in Sources */,
 				3593C95226382123007B6660 /* MKRotationView.swift in Sources */,
 				35875C3C2660ECC90049F707 /* CreateCategoryViewController.swift in Sources */,
+				DEC32093269310800051B46C /* HistoryTaskViewModel.swift in Sources */,
 				3593C98326382123007B6660 /* BaseService.swift in Sources */,
+				DEC320B126931E760051B46C /* HostoryPdfViewController.swift in Sources */,
 				3593C98A26382123007B6660 /* Validations.swift in Sources */,
 				3593C97B26382123007B6660 /* BaseNavigationController.swift in Sources */,
 				35875C46266108C60049F707 /* CreateSubCategoryTableViewCell.swift in Sources */,
@@ -1271,6 +1332,7 @@
 				3593C95526382123007B6660 /* MKProgressViewController.swift in Sources */,
 				3593C97A26382123007B6660 /* BaseCollectionViewCell.swift in Sources */,
 				35A73323263A875600EA481B /* LoginViewController.swift in Sources */,
+				DEC3209E269312ED0051B46C /* FilterSelctionPopUpViewController.swift in Sources */,
 				356D7B642643C300008257A1 /* CategoryViewModel.swift in Sources */,
 				3593CA3B26394046007B6660 /* AdminListTableViewCell.swift in Sources */,
 				3593C97D26382123007B6660 /* MainContainerViewController.swift in Sources */,
@@ -1288,6 +1350,7 @@
 				3593C98026382123007B6660 /* ServiceRequestMessage.swift in Sources */,
 				3593C9CC263825D8007B6660 /* HomeViewController.swift in Sources */,
 				3593C9E8263828CA007B6660 /* TaskCategoryTableViewCell.swift in Sources */,
+				DEC320A9269315F70051B46C /* HistoryService.swift in Sources */,
 				3593C95626382123007B6660 /* MKConfig.swift in Sources */,
 				04D1C71A2677663D008720CB /* BarChartTableViewCell.swift in Sources */,
 				35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */,
@@ -1295,6 +1358,7 @@
 				35453D9B2643E7170080521B /* StoreListViewController.swift in Sources */,
 				3593C98426382123007B6660 /* LoginService.swift in Sources */,
 				3593C94E26382123007B6660 /* YPDrawSignatureView.swift in Sources */,
+				DEC320B626934A8A0051B46C /* HistoryPdfGeneratorViewController.swift in Sources */,
 				3593C95D26382123007B6660 /* KYEmbedMainControllerSegue.swift in Sources */,
 				3593C99426382123007B6660 /* RegisterListViewModel.swift in Sources */,
 				DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */,
@@ -1310,10 +1374,12 @@
 				04D1C71526775A99008720CB /* CompatibilityShims.swift in Sources */,
 				3593C96E26382123007B6660 /* RegexParser.swift in Sources */,
 				3593C97526382123007B6660 /* BaseCollectionViewController.swift in Sources */,
+				DEC320A3269314EF0051B46C /* TaskHistoryTableViewCell.swift in Sources */,
 				04D1C71026775267008720CB /* PieChartTableViewCell.swift in Sources */,
 				3593C94F26382123007B6660 /* IQDropDownTextField.m in Sources */,
 				3593CA3126394023007B6660 /* AdminListViewController.swift in Sources */,
 				04D1C71D26777A1C008720CB /* BarChartCollectionViewCell.swift in Sources */,
+				DEC3208C26930FAE0051B46C /* CheckListHistoryViewController.swift in Sources */,
 				3593C89A26382067007B6660 /* AppDelegate.swift in Sources */,
 				3593C95026382123007B6660 /* MKActivityIndicatorView.swift in Sources */,
 				3593C8A426382067007B6660 /* CheckList_Admin.xcdatamodeld in Sources */,
@@ -1333,11 +1399,13 @@
 				35453DD82643F1980080521B /* StoreViewModel.swift in Sources */,
 				35875C4B26610BE40049F707 /* CreateSubCategoryViewController.swift in Sources */,
 				3593C98226382123007B6660 /* RequestMessages.swift in Sources */,
+				DEC32098269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift in Sources */,
 				DE51BBAF268F17C300923FFA /* CreateNewTaskViewController.swift in Sources */,
 				3593C98926382123007B6660 /* UserDefaultsManager.swift in Sources */,
 				3593C89C26382067007B6660 /* SceneDelegate.swift in Sources */,
 				3593C94A26382123007B6660 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */,
+				DEC3208D26930FAE0051B46C /* HistoryDetailsViewController.swift in Sources */,
 				3593C98D26382123007B6660 /* String+Extension.swift in Sources */,
 				3593CA2626393BD2007B6660 /* CategoryListViewController.swift in Sources */,
 				356D7B742643D86E008257A1 /* AddCategoryViewController.swift in Sources */,
