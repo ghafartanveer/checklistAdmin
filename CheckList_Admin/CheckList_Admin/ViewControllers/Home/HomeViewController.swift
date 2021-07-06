@@ -12,6 +12,10 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var btnPlusShadow: UIButton!
     @IBOutlet weak var tabelView: UITableView!
     
+    //MARK: - Vars, Objects
+    
+    var graphviewModel = GraphStatesListViewModel()
+    
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,8 @@ class HomeViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getGraphStatesServerCall()
+
         if let container = self.mainContainer{
             container.setMenuButton(false, title: TitleNames.Home)
             self.setImageWithUrl(imageView: container.imgUser, url: Global.shared.user.image, placeholderImage: AssetNames.Box_Blue)
@@ -68,14 +74,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
                 //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
                 //            cell.ConfigureTypes(index: indexPath.row)
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
-                
+
                 cell.configureView()
                 return cell
             }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
                 
-//                cell.configureView()
+                cell.configureCell(info: self.graphviewModel)
+        
                 return cell
             }
             
@@ -83,6 +90,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         
         //                let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.WorkListViewController) as! WorkListViewController
         //                self.navigationController?.pushViewController(vc, animated: true)
@@ -112,20 +120,40 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
                 let storyboard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.AdminListViewController) as! AdminListViewController
                 self.navigationController?.pushViewController(vc, animated: true)
-            }
+            } 
             
         }else if index == 1{
             let storyboard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.TechnicianListViewController) as! TechnicianListViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
-//            let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
-//            let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
-    //self.navigationController?.pushViewController(vc, animated: true)
+//
             moveToTaskListHistiryVC()
         }
     }
-    
-    
+}
+
+
+extension HomeViewController {
+    func getGraphStatesServerCall() {
+        self.startActivity()
+        GCD.async(.Background) {
+            AdminTechnicianService.shared().getGraphStatesAPI(params: [:]) { (message, success, graphInfo) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    if success{
+                        if let graphData = graphInfo{
+                            self.graphviewModel = graphData
+                            
+                            self.tabelView.reloadData()
+                        }
+                        
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
+    }
     
 }

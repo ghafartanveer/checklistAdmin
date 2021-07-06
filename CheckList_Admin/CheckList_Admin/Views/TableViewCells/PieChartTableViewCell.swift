@@ -13,6 +13,7 @@ class PieChartTableViewCell: UITableViewCell {
     @IBOutlet weak var chartView: SimplePieChartView!
     @IBOutlet weak var viewBackgroung: UIView!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

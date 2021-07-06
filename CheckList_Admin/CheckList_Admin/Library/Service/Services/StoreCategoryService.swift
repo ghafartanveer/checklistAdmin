@@ -18,7 +18,6 @@ class StoreCategoryService: BaseService{
         return StoreCategoryService()
     }
     
-    
     //MARK:- CATEGORY LIST API
     func categoryListApi(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool, _ admin: CategoryListViewModel?)->Void){
         

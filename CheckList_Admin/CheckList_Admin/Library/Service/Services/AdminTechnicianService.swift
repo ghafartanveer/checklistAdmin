@@ -88,6 +88,22 @@ class AdminTechnicianService: BaseService{
            
         }
     }
+    //MARK: - GetGraphStatesAPI
+    
+    func getGraphStatesAPI(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool, _ graphData: GraphStatesListViewModel?)->Void){
+        
+        let completeURL = EndPoints.BASE_URL + EndPoints.Stats
+        self.makeGetAPICall(with: completeURL, params: params, headers: self.getHeaders()) { (message, success, json, responseType) in
+            if success{
+                let info = GraphStatesListViewModel(obj: json![KEY_RESPONSE_DATA])
+                
+                completion(message,success, info)
+            }else{
+                completion(message,success, nil)
+            }
+            
+        }
+    }
     
    
 }

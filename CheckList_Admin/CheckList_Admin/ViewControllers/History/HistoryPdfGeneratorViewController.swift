@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate {
+class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKNavigationDelegate {
     
     //MARK: - IBOUTLETS
     
@@ -20,6 +20,7 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.navigationDelegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -40,12 +41,10 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate {
     }
     
     func createPDF() {
-        var html = "<b>Hello <i>World!</i></b> <p>Generate PDF file from HTML in Swift</p> "
-        for record in pdfRecordsList {
-            html =  html + "<b>" + (record.technician?.lastName ?? "") + "<br>"
-        }
         
-        //let html = "<b>Hello <i>World!</i></b> <p>Generate PDF file from HTML in Swift</p>"
+        let text = getHistoryDetails()
+        
+        let html = "<p>\(text)</p> <hr>"
         let fmt = UIMarkupTextPrintFormatter(markupText: html)
 
         // 2. Assign print formatter to UIPrintPageRenderer
@@ -78,8 +77,11 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate {
 
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
 
+        guard let outputURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("ChecklistReport").appendingPathExtension("pdf")
+        else { fatalError("Destination URL not created") }
+        
         pdfData.write(toFile: "\(documentsPath)/ChecklistReport.pdf", atomically: true)
-        loadPDF(filename: "ChecklistReport")
+        loadPDF(filename: "ChecklistReport.pdf")
     }
     
     func loadPDF(filename: String) {
@@ -89,7 +91,41 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate {
         webView.load(urlRequest)
     }
     
+    func getHistoryDetails() -> String {
+        //let image = #imageLiteral(resourceName: "splash_logo")
+        //<img src=\"\(image)\" width=\"50\" height=\"50\">
+        var text = "<h1>Technician Completed Task </h1>  <hr> <br> </br> Tech name &emsp; CheckList Name &emsp; Check In &emsp; Check out "
+        for record in pdfRecordsList {
+            
+            let  name = (record.technician?.firstName ?? "") + " " + (record.technician?.lastName ?? "")
+            //name = name
+            
+            let catName = record.categoryName ?? ""
+            
+            let checkIn = record.activity?.checkIn ?? ""
+            
+            var checkOut = record.activity?.checkOut ?? ""
+            if checkOut.isEmpty {
+                checkOut = "N/A"
+            }
+            text =  text + "<p>" + name + "&emsp;" + catName + "&emsp;" + checkIn + "&emsp;" + checkOut + "&emsp;" + "</p>"
+        }
+        
+        return text
+    }
     
+//    func generateString() -> String? {
+//        var resultString: String?
+//
+//        let firstString = "<DOCTYPE HTML> \r <html lang=\"en\" \r <head> \r <meta charset = \"utf-8\"> \r </head> \r <body>"
+//        let endString = "</body> \r </html>";
+//        resultString = firstString + self.receivedContent! + endString;
+//
+//        return resultString
+//    }
+
+    
+    // not in use
     func createPDFFileAndReturnPath()  {
         
         let fileName = "ChecklistReport"

@@ -27,6 +27,16 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         self.globalBarViewHeight?.constant = 170
     }
     
+    func configureCllHeight(info:GraphStatesViewModel, maxAdminCount:Double, collectIonHeight: Double ) {
+        let h = Double(collectIonHeight)
+        let height = CGFloat(Double(info.admin) / maxAdminCount * (h))
+        //print(maxAdminCount,height,info.admin,Double(.admin ) / maxAdminCount)
+        self.youBarViewHeight?.constant = height
+
+        self.lblAge?.text = info.dayName
+
+    }
+    
 //    func configureView(index:Int,chart:ChartViewModel)  {
 //        //self.youBarViewWidth?.constant = 11
 //        if(index == 0){
