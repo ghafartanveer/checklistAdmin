@@ -159,6 +159,7 @@ class Utilities {
         }
         return yearList
     }
+    
     static func getDayOfWeek(_ today:String) -> String {
         let formatter  = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy hh:mm a"
@@ -180,6 +181,28 @@ class Utilities {
         case 6:
             return "FRI"
         case 7:
+            return "SAT"
+        default:
+            return ""
+        }
+    }
+    
+    static func getShortDayname(_ day:String) -> String {
+        
+        switch day {
+        case "Sunday":
+            return "SUN"
+        case "Monday":
+            return "MON"
+        case "Tuesday":
+            return "TUE"
+        case "Wednesday":
+            return "WED"
+        case "Thursday":
+            return "THU"
+        case "Friday":
+            return "FRI"
+        case "Saturday":
             return "SAT"
         default:
             return ""

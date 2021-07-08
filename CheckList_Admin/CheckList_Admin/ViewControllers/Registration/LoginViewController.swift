@@ -26,9 +26,9 @@ class LoginViewController: BaseViewController {
         //self.txtEmail.text = "newton@yopmail.com"
         //self.txtPassword.text = "123456"
         
-        self.txtEmail.text = "muaaz@mailinator.com"
+       // self.txtEmail.text = "muaaz@mailinator.com"
         //self.txtEmail.text = "superadminchecklist@yopmail.com"
-        self.txtPassword.text = "12345678"
+       // self.txtPassword.text = "12345678"
         #endif
        
     }
@@ -45,7 +45,7 @@ class LoginViewController: BaseViewController {
                                 DictKeys.email: self.txtEmail.text!,
                                 DictKeys.password: self.txtPassword.text!,
                                 DictKeys.login_type: loginType,
-                                DictKeys.fcm_token: "test"])
+                                DictKeys.fcm_token: Global.shared.fcmToken])
         }
     }
     

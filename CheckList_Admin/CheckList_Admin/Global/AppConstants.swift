@@ -87,7 +87,9 @@ struct EndPoints {
     static let Create_Cubcategories = "create_subcategories"
     static let History = "history"
     static let Search = "search"
-    static let Stats = "stats"
+    static let GraphStats = "stats"
+    static let States = "statistics"
+    
 
 }
 

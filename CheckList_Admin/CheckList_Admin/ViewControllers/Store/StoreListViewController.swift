@@ -75,28 +75,60 @@ extension StoreListViewController: UITableViewDelegate, UITableViewDataSource, S
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 80
         
     }
     
     //MARK: - AdminListTableViewCell DELEGATE METHODS
     func callBackActionDeleteStore(index: Int) {
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Store, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            
-            let delStoreId = self.storeObject.storeList[index].id
-            self.deleteStoreApi(param: [DictKeys.Store_Id: delStoreId])
-            
-        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-            
-        }
+        //removed
     }
     
     func callBackActionEditStore(index: Int) {
-        let ID = self.storeObject.storeList[index].id
-        let object = self.storeObject.getStoreDetailAganistID(storeID: ID)
-        self.moveToAddStoreVC(isFromEdit: true, storeInfo: object)
+        //removed
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //delete Action here
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Technician, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                
+                self.showAlertView(message: PopupMessages.Sure_To_Delete_Store, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                    
+                    let delStoreId = self.storeObject.storeList[indexPath.row].id
+                    self.deleteStoreApi(param: [DictKeys.Store_Id: delStoreId])
+                    
+                }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                    
+                }
+                
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
+            }
+        })
+        
+        deleteAction.image = UIImage(named: AssetNames.swipeDelete)
+        deleteAction.backgroundColor = .red
+        
+        
+        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
+            //Adit Action here
+            let ID = self.storeObject.storeList[indexPath.row].id
+            let object = self.storeObject.getStoreDetailAganistID(storeID: ID)
+            self.moveToAddStoreVC(isFromEdit: true, storeInfo: object)
+        })
+        
+        aditAction.image = UIImage(named: AssetNames.swipeAdit)
+        aditAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
+        
+    }
+
 }
 
 //MARK: - EXTENSION API CALLS

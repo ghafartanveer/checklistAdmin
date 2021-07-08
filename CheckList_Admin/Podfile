@@ -12,5 +12,7 @@ target 'CheckList_Admin' do
   pod 'Alamofire', '~> 4.9.0'
   pod 'iOSDropDown'
   pod 'PieCharts'
-
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Messaging'
  end

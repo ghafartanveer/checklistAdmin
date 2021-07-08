@@ -111,7 +111,7 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
             }
         })
         
-        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.image = UIImage(named: AssetNames.swipeDelete)
         deleteAction.backgroundColor = .red
         
         
@@ -122,7 +122,7 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
             
         })
         
-        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.image = UIImage(named: AssetNames.swipeAdit)
         aditAction.backgroundColor = .white
         
         return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])

@@ -13,8 +13,22 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var imgImage: UIImageView!
     @IBOutlet weak var lblSubTitle: UILabel!
     @IBOutlet weak var imgBox: UIImageView!
+    @IBOutlet weak var lblCount: UILabel!
     
-    func configureMenu(data: [String: String], index: Int){
+    func configureMenu(data: [String: String], index: Int,countTxt: Int){
+        
+        if (Global.shared.user.loginType == LoginType.Admin) && index == 0{
+            viewShadow.alpha = 0.7
+            viewShadow.backgroundColor = .lightGray
+            lblCount.isHidden = true
+        } else {
+            viewShadow.alpha = 1.0
+            viewShadow.backgroundColor = .white
+            lblCount.isHidden = false
+            
+        }
+        
+        lblCount.text = String(countTxt)
         self.lblTitle.text = data["title"] ?? ""
         self.lblSubTitle.text = data["subTitle"] ?? ""
         self.imgImage.image = UIImage(named: data["image"]!)

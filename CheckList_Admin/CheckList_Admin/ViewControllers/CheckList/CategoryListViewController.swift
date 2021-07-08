@@ -101,7 +101,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
             
         })
         
-        deleteAction.image = UIImage(named: "delete_icon_white.png")
+        deleteAction.image = UIImage(named: AssetNames.swipeDelete)
         deleteAction.backgroundColor = .red
         
         
@@ -112,7 +112,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
             self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
         })
         
-        aditAction.image = UIImage(named: "edit-icon.png")
+        aditAction.image = UIImage(named: AssetNames.swipeAdit)
         aditAction.backgroundColor = .white
         
         return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])

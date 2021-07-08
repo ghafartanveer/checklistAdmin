@@ -30,10 +30,10 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     func configureCllHeight(info:GraphStatesViewModel, maxAdminCount:Double, collectIonHeight: Double ) {
         let h = Double(collectIonHeight)
         let height = CGFloat(Double(info.admin) / maxAdminCount * (h))
-        //print(maxAdminCount,height,info.admin,Double(.admin ) / maxAdminCount)
+       
         self.youBarViewHeight?.constant = height
-
-        self.lblAge?.text = info.dayName
+        let name = Utilities.getShortDayname(info.dayName)
+        self.lblAge?.text = name
 
     }
     

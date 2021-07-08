@@ -13,6 +13,7 @@ protocol TaskCategoryTableViewCellDelegate: NSObjectProtocol {
 class TaskCategoryTableViewCell: BaseTableViewCell {
     @IBOutlet weak var viewCollection: UICollectionView!
     
+    var statesViewModel = StatesViewModel()
     
     weak var delegate: TaskCategoryTableViewCellDelegate?
     override func awakeFromNib() {
@@ -31,7 +32,19 @@ extension TaskCategoryTableViewCell: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.HomeCollectionViewCell, for: indexPath) as! HomeCollectionViewCell
-        cell.configureMenu(data: HomeMenu.MENU_LIST[indexPath.row], index: indexPath.row)
+        var recordCount = 0
+        if indexPath.row == 0 {
+            
+            recordCount = statesViewModel.admins
+        } else if indexPath.row == 1 {
+            recordCount = statesViewModel.technicians
+        } else if indexPath.row == 2 {
+            recordCount = statesViewModel.checklists
+        } else {
+            recordCount = statesViewModel.completedTask
+        }
+
+        cell.configureMenu(data: HomeMenu.MENU_LIST[indexPath.row], index: indexPath.row, countTxt: recordCount)
         return cell
     }
     

@@ -75,7 +75,9 @@ struct AssetNames {
     static let Box_Red = "BoxRed"
     static let Delete_Icon = "deleteIcon"
     static let Edit_Icon = "editIcon"
-    static let PdfIcon = "icon-pdf"
+    static let PdfIcon = "pdf-Icon"
+    static let swipeAdit = "edit-Swipeicon"
+    static let swipeDelete = "DeleteSwipeIcon"
     
 }
 
@@ -206,6 +208,7 @@ struct PopupMessages {
     static let ChecklistCreated = "Checklist added succesfully"
     static let ChecklistUpdated = "Checklist updated succesfully"
     static let Sure_To_Delete_Task = "Are you sure to delete Task"
+    static let youDontHavePermitonForTheFeature = "You do not have permissionto access this feature"
 
 }
 

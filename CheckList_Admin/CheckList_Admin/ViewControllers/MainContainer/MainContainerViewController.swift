@@ -62,7 +62,7 @@ class MainContainerViewController: BaseViewController{
     
     
     //MARK:- FUNCTIONS
-    func setMenuButton(_ isBack: Bool = false, title: String)  {
+    func setMenuButton(_ isBack: Bool = false, title: String, isTopBarWhite : Bool? = true)  {
         if(isBack){
             self.imgUser.isHidden = true
             self.btnMenu.removeTarget(nil, action: nil, for: .allEvents)
@@ -73,18 +73,19 @@ class MainContainerViewController: BaseViewController{
             self.btnMenu.setImage(UIImage(named: AssetNames.sideLogo)!, for: .normal)
             self.btnMenu.addTarget(self, action: #selector(actionSideMenu(_:)), for: .touchUpInside)
         }
-//        if isWhiteBtnBack{
-//            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FA1100")
-//            self.titleLabel.textColor = .white
-//            self.btnMenu.tintColor = .white
-//        }else{
-//            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FA1100")
-//            self.titleLabel.textColor = .white
-//            self.btnMenu.tintColor = .white
-////            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FAFAFA")
-////            self.titleLabel.textColor = .black
-////            self.btnMenu.tintColor = .black
-//        }
+        
+        
+        if isTopBarWhite!{
+            self.viewTopColour.backgroundColor = .clear
+            self.titleLabel.textColor = .black
+            self.btnMenu.tintColor = .black
+           // self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FF2D55")
+            
+        }else{
+            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FF2D55")
+            self.titleLabel.textColor = .white
+            self.btnMenu.tintColor = .white
+        }
         self.titleLabel.text = title
     }
     

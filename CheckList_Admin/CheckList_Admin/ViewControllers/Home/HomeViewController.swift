@@ -15,7 +15,7 @@ class HomeViewController: BaseViewController {
     //MARK: - Vars, Objects
     
     var graphviewModel = GraphStatesListViewModel()
-    
+    var statesViewModel = StatesViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,10 @@ class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getGraphStatesServerCall()
-
+        self.getStatesServerCall()
+        
         if let container = self.mainContainer{
-            container.setMenuButton(false, title: TitleNames.Home)
+            container.setMenuButton(false, title: TitleNames.Home,isTopBarWhite: false)
             self.setImageWithUrl(imageView: container.imgUser, url: Global.shared.user.image, placeholderImage: AssetNames.Box_Blue)
         }
     }
@@ -67,6 +68,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskCategoryTableViewCell) as! TaskCategoryTableViewCell
             cell.delegate = self
+            cell.statesViewModel = self.statesViewModel
+            
             cell.viewCollection.reloadData()
             return cell
         }else{
@@ -114,22 +117,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
     
     //MARK: - DELEGATE METHODS
     func callBackMoveOnContoller(index: Int) {
-        
+        print(index)
         if index == 0{
             if Global.shared.user.loginType == LoginType.super_admin{
                 let storyboard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.AdminListViewController) as! AdminListViewController
                 self.navigationController?.pushViewController(vc, animated: true)
-            } 
+            } else {
+                self.showAlertView(message: PopupMessages.youDontHavePermitonForTheFeature)
+            }
             
         }else if index == 1{
             let storyboard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.TechnicianListViewController) as! TechnicianListViewController
             self.navigationController?.pushViewController(vc, animated: true)
-        }else{
-//
-            moveToTaskListHistiryVC()
-        }
+        }else if index == 2 {
+                            let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+                            let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                moveToTaskListHistiryVC()
+            }
     }
 }
 
@@ -156,4 +164,24 @@ extension HomeViewController {
         }
     }
     
+    
+    func getStatesServerCall() {
+        self.startActivity()
+        GCD.async(.Background) {
+            AdminTechnicianService.shared().getStatesAPI(params: [:]) { (message, success, stateInfo) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    if success{
+                        if let stateData = stateInfo{
+                            self.statesViewModel = stateData
+                            self.tabelView.reloadData()
+                        }
+                        
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
+    }
 }

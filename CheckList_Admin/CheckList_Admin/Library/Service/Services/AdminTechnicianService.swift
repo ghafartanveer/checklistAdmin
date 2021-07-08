@@ -92,10 +92,25 @@ class AdminTechnicianService: BaseService{
     
     func getGraphStatesAPI(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool, _ graphData: GraphStatesListViewModel?)->Void){
         
-        let completeURL = EndPoints.BASE_URL + EndPoints.Stats
+        let completeURL = EndPoints.BASE_URL + EndPoints.GraphStats
         self.makeGetAPICall(with: completeURL, params: params, headers: self.getHeaders()) { (message, success, json, responseType) in
             if success{
                 let info = GraphStatesListViewModel(obj: json![KEY_RESPONSE_DATA])
+                
+                completion(message,success, info)
+            }else{
+                completion(message,success, nil)
+            }
+            
+        }
+    }
+    //MARK: - GET States
+    func getStatesAPI(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool, _ graphData: StatesViewModel?)->Void){
+        
+        let completeURL = EndPoints.BASE_URL + EndPoints.States
+        self.makeGetAPICall(with: completeURL, params: params, headers: self.getHeaders()) { (message, success, json, responseType) in
+            if success{
+                let info = StatesViewModel(obj: json![KEY_RESPONSE_DATA])
                 
                 completion(message,success, info)
             }else{

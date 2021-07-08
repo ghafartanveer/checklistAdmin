@@ -40,10 +40,13 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        generatePdfReport.isHidden = true
+
         if let container = self.mainContainer{
             container.delegate = self
             
             container.setMenuButton(true, title: TitleNames.History)
+            container.rightBtn.tintColor = .systemPink
             container.setRightBtn(isRightHidden: false, image: UIImage(named: AssetNames.PdfIcon)!)
         
         }
@@ -138,7 +141,7 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
             
         } else {
             isPdf = true
-            
+            generatePdfReport.isHidden = false
         }
         historyTableView.reloadData()
     }
