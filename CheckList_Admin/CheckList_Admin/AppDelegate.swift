@@ -10,6 +10,8 @@ import CoreData
 import Firebase
 import SwiftyJSON
 import FirebaseMessaging
+import IQKeyboardManagerSwift
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var gcmMessageIDKey = "gcm message 1234"
@@ -18,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.setupInitialController()
-        
+        IQKeyboardManager.shared.enable = true
         FirebaseApp.configure()
         // Messaging.messaging().isAutoInitEnabled = true
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
