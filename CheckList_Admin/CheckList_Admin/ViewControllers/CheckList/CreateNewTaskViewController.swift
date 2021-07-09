@@ -109,9 +109,10 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 newTask.notApplicable = notApplicable
                 newTask.subcategoryDescription = descriptionTexView.text!
                 newTask.isPriority = isPriority
-                subCategoryList.append(newTask)
-                //self.categoryDetailObject.subCategoryList.append(newTask)
+                //subCategoryList.append(newTask)
                 
+                subCategoryList.insert(newTask, at: 0)
+                Global.shared.isSubCategoryListEdited = true
                 self.showAlertView(message: PopupMessages.ChecklistCreated, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -132,29 +133,30 @@ extension CreateNewTaskViewController {
     //            self.createTaskServerCall(param: [DictKeys.Category_Id:categoryDetailObject.id, DictKeys.sub_category_name: taskTileTF.text!, DictKeys.not_applicable :  notApplicable, DictKeys.is_priority : isPriority  ])
 
     //MARK: - Create Task API
-    func createTaskServerCall(param: ParamsAny){
-        self.startActivity()
-        GCD.async(.Background) {
-            CheckListService.shared().CreateNewTaskApi(params: param) { (message, success, info) in
-                GCD.async(.Main) {
-                    self.stopActivity()
-                    
-                    if success{
-                        
-                        if let subCategory = info{
-                            subCategoryList.append(subCategory)
-                            //self.categoryDetailObject.subCategoryList.append(subCategory)
-                        }
-                        
-                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    }else{
-                        self.showAlertView(message: message)
-                    }
-                }
-            }
-        }
-    }
+   
+//    func createTaskServerCall(param: ParamsAny){
+//        self.startActivity()
+//        GCD.async(.Background) {
+//            CheckListService.shared().CreateNewTaskApi(params: param) { (message, success, info) in
+//                GCD.async(.Main) {
+//                    self.stopActivity()
+//                    
+//                    if success{
+//                        
+//                        if let subCategory = info{
+//                            subCategoryList.append(subCategory)
+//                            //self.categoryDetailObject.subCategoryList.append(subCategory)
+//                        }
+//                        
+//                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+//                            self.navigationController?.popViewController(animated: true)
+//                        }
+//                    }else{
+//                        self.showAlertView(message: message)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
 }

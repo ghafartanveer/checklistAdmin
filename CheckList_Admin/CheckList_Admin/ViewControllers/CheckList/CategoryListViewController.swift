@@ -24,6 +24,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Global.shared.isSubCategoryListEdited = false
         if let container = self.mainContainer{
             container.delegate = self
             container.setMenuButton(true, title: TitleNames.CheckList)
@@ -53,6 +54,23 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
         //self.navigationController?.popViewController(animated: true)
     }
     
+    func deleteCategry(index: Int) {
+        self.showAlertView(message: PopupMessages.Sure_To_Delete_Category, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+            
+                            let catID = self.categoryObject.categoryList[index].id
+                            self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
+            
+                        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+            
+                        }
+            
+                    }
+    
+    func editCategory(index: Int) {
+                    let catID = self.categoryObject.categoryList[index].id
+                    let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
+                    self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
+                }
 }
 
 //MARK: - EXTENSION TABEL VIEW METHODS
@@ -87,37 +105,56 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         return true
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
-            //delete Action here
-            self.showAlertView(message: PopupMessages.Sure_To_Delete_Category, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-                
-                let catID = self.categoryObject.categoryList[indexPath.row].id
-                self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
-                
-            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-                
-            }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let size = tableView.cellForRow(at: indexPath)!.frame.size.height
+        let backView = UIView(frame: CGRect(x: 2, y: 0, width: 62, height: size))
+        backView.dropShadow()
+        let myImage = UIImageView(frame: CGRect(x: 5, y: 5, width: 60, height: size))
+        myImage.contentMode = .scaleAspectFit
+        myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
+        //myImage.tintColor = .red
+        myImage.backgroundColor = .white
+        backView.addSubview(myImage)
+       
+        let imgSize: CGSize = tableView.frame.size
+        UIGraphicsBeginImageContextWithOptions(imgSize, false, UIScreen.main.scale)
+        let context = UIGraphicsGetCurrentContext()
+        backView.layer.render(in: context!)
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        let delete = UITableViewRowAction(style: .normal, title: "") { (action, indexPath) in
+            print("“Delete”")
             
-        })
+            self.deleteCategry(index: indexPath.row)
         
-        deleteAction.image = UIImage(named: AssetNames.swipeDelete)
-        deleteAction.backgroundColor = .red
+        }
+        delete.backgroundColor = UIColor(patternImage: newImage)
         
-        
-        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
-            //Adit Action here
-            let catID = self.categoryObject.categoryList[indexPath.row].id
-            let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
-            self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
-        })
-        
-        aditAction.image = UIImage(named: AssetNames.swipeAdit)
-        aditAction.backgroundColor = .white
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
-        
+        let backView1 = UIView(frame: CGRect(x: 2, y: 0, width: 62, height: size-10))
+        backView1.dropShadow()
+        let myImage1 = UIImageView(frame: CGRect(x: 20, y: 20, width: 40, height: size-20))
+        myImage1.image = #imageLiteral(resourceName: "edit_icon") //UIImage(named: AssetNames.Edit_Icon)
+        myImage1.contentMode = .scaleAspectFit
+        myImage1.tintColor = .white
+        backView1.addSubview(myImage1)
+        myImage1.translatesAutoresizingMaskIntoConstraints = false
+        myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
+        myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true
+        let imgSize1: CGSize = tableView.frame.size
+        UIGraphicsBeginImageContextWithOptions(imgSize1, false, UIScreen.main.scale)
+        let context1 = UIGraphicsGetCurrentContext()
+        backView1.layer.render(in: context1!)
+        let newImage1: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        let Edit = UITableViewRowAction(style: .destructive, title: "") { (action, indexPath) in
+            
+            self.editCategory(index: indexPath.row)
+           print("Edit here")
+        }
+        Edit.backgroundColor = UIColor(patternImage: newImage1)
+        return [delete,Edit]
     }
+    
     //MARK: - CategoryListTableViewCell DELEGATE METHODS
     func callBackActionDeleteCategory(index: Int) {
         //removed

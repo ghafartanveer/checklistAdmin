@@ -93,9 +93,10 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKN
     }
     
     func getHistoryDetails() -> String {
-        //let image = #imageLiteral(resourceName: "splash_logo")
-        //<img src=\"\(image)\" width=\"50\" height=\"50\">
-        var text = "<h1>Technician Completed Task </h1>  <hr> <br> </br> Tech name &emsp; CheckList Name &emsp; Check In &emsp; Check out <hr> "
+        let image = #imageLiteral(resourceName: "splash_logo")
+        let imgData = image.jpegData(compressionQuality: 0.5)
+
+        var text = "<h1>Technician Completed Task </h1> <p><img src=\"\(imgData)\" alt=\"\" width=\"60\" height=\"72\" /></p> <hr> <br> </br> Tech name &emsp; CheckList Name &emsp; Check In &emsp; Check out <hr> "
         for record in pdfRecordsList {
             
             let  name = (record.technician?.firstName ?? "") + " " + (record.technician?.lastName ?? "")

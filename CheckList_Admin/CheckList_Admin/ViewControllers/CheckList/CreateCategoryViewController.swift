@@ -22,6 +22,7 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.viewTxtShadow.dropShadow(radius: 4, opacity: 0.3)
         self.viewTabelHeight.constant = 0
     }
@@ -29,15 +30,23 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.txtTitle.text = self.categoryObj.categoryList[0].name
+        self.subCategoryList = self.categoryObj.categoryList[0].subCategoryList
         if let container = self.mainContainer{
             container.delegate = self
             container.setMenuButton(true, title: TitleNames.Create_Check_List)
         }
     }
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.viewTabelHeight.constant = 0
+    }
+
     //MARK: - IBACTION METHODS
     
+    @IBAction func hideList(_ sender: Any) {
+        self.viewTabelHeight.constant = 0
+    }
     
     @IBAction func actionAddCategory(_ sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddCategoryViewController) as! AddCategoryViewController
@@ -51,7 +60,7 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     @IBAction func actionOpenCategoryList(_ sender: UIButton){
-        self.viewTabelHeight.constant = 140
+        self.viewTabelHeight.constant = 200
     }
     
     @IBAction func actionSubmit(_ sender: UIButton){
@@ -96,16 +105,16 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView == viewTabelList {
         self.txtTitle.text = self.categoryObj.categoryList[indexPath.row].name
-        self.viewTabelHeight.constant = 0
+        
         
         self.subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
         self.viewTabel.reloadData()
-        //                let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.WorkListViewController) as! WorkListViewController
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        }
-        
+        }
+        self.viewTabelHeight.constant = 0
+               
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

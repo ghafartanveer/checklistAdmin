@@ -62,6 +62,10 @@ class MainContainerViewController: BaseViewController{
     
     
     //MARK:- FUNCTIONS
+    func isSideMenuSwipeEnabled(isEnable: Bool) {
+
+
+    }
     func setMenuButton(_ isBack: Bool = false, title: String, isTopBarWhite : Bool? = true)  {
         if(isBack){
             self.imgUser.isHidden = true

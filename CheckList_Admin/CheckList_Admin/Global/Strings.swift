@@ -209,6 +209,7 @@ struct PopupMessages {
     static let ChecklistUpdated = "Checklist updated succesfully"
     static let Sure_To_Delete_Task = "Are you sure to delete Task"
     static let youDontHavePermitonForTheFeature = "You do not have permissionto access this feature"
+    static let sureToGoBackWithOutSaving = "New added tasks will be lost if you go back. Are you sure you want to go back?"
 
 }
 
