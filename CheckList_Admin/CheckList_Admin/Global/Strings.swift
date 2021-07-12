@@ -58,6 +58,7 @@ struct TitleNames {
     static let TechnicianDetails = "Technician Details"
     static let AdminDetails = "Admin Details"
     static let CreateCheckList = "Create checklist"
+    static let createTask = "Create Task"
     static let UpdateTask = "Update Task"
     static let History = "History"
     
@@ -76,7 +77,7 @@ struct AssetNames {
     static let Delete_Icon = "deleteIcon"
     static let Edit_Icon = "editIcon"
     static let PdfIcon = "pdf-Icon"
-    static let swipeAdit = "edit-Swipeicon"
+    static let swipeAdit = "edit_icon" // "edit-Swipeicon"
     static let swipeDelete = "DeleteSwipeIcon"
     
 }
@@ -199,7 +200,7 @@ struct PopupMessages {
     static let LocationNotFound             = "Location Not found"
     static let cantSendMessage              = "Cant Send Message Now Please Try Agian Later"
     static let warning                      = "Warning"
-    static let sureToLogout                 = "Are you sure to logout"
+    static let sureToLogout                 = "Are you sure you want to logout?"
     static let nothingToUpdate              = "Nothing to update"
     static let orderMarkedCompleted         = "Order marked completed successfullly"
     static let Session_Expired    = "Session expired, please login again"
@@ -208,12 +209,12 @@ struct PopupMessages {
     static let ChecklistCreated = "Checklist added succesfully"
     static let ChecklistUpdated = "Checklist updated succesfully"
     static let Sure_To_Delete_Task = "Are you sure to delete Task"
-    static let youDontHavePermitonForTheFeature = "You do not have permissionto access this feature"
+    static let Sure_To_Delete_Check_List = "Are you sure you want to delete this Check List?"
+    static let youDontHavePermitonForTheFeature = "You do not have permission to access this feature!"
     static let sureToGoBackWithOutSaving = "New added tasks will be lost if you go back. Are you sure you want to go back?"
+    static let TaskUpdatedSuccessfully = "Task Updated Successfully!"
 
 }
-
-
 
 struct LocalStrings {
     static let Warning = "Warning!"
@@ -241,6 +242,7 @@ struct LocalStrings {
     static let disableProduct       = "Please Select Product To Disable"
     static let EmptySubject        = "Please Enter Subject"
     static let EmptyMessage        = "Please Enter Message"
+    static let Save = "Save"
 }
 
 

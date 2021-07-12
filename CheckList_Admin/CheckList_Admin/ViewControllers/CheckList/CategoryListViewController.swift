@@ -14,8 +14,9 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - OBJECT AND VERIBAELS
     var categoryObject = CategoryListViewModel()
-    
     //var checkListQuestionObjData : [CheckListQuestionViewModel] = []
+    //
+    var selectedCatieModel = CategoryViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     @IBAction func actionCreateCategory(_ sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateCategoryViewController) as! CreateCategoryViewController
         vc.categoryObj = self.categoryObject
+        
+        //vc.indexToAdit = indexToAdit
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -55,7 +58,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     }
     
     func deleteCategry(index: Int) {
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Category, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+        self.showAlertView(message: PopupMessages.Sure_To_Delete_Check_List, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
             
                             let catID = self.categoryObject.categoryList[index].id
                             self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
@@ -87,15 +90,23 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         cell.delegate = self
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func aditList(index: Int) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
-        subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
-        vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
-//        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
-//        vc.checkListQuestionObjData = self.checkListQuestionObjData
+        vc.categoryDetailObject = self.categoryObject.categoryList[index]
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        aditList(index: indexPath.row)
+//        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
+//        subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
+//        vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
+////        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
+////        vc.checkListQuestionObjData = self.checkListQuestionObjData
+//        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
         

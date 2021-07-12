@@ -32,8 +32,10 @@ class AddCategoryViewController: BaseViewController, TopBarDelegate{
         if let container = self.mainContainer{
             container.delegate = self
             if self.isForUpdate{
+                btnSave.setTitle(LocalStrings.update, for: .normal)
                 container.setMenuButton(true, title: TitleNames.Update_Category)
             }else{
+                btnSave.setTitle(LocalStrings.Save, for: .normal)
                 container.setMenuButton(true, title: TitleNames.Add_Category)
             }
             

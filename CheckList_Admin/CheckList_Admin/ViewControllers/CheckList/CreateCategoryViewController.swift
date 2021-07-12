@@ -18,11 +18,13 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - OBJECT AND VERIBALES
     var categoryObj = CategoryListViewModel()
     var subCategoryList = [SubCategoryViewModel]()
-    
+    var indexToAdit = -1
+    //
+    var selectedCatieModel = CategoryViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.viewTxtShadow.dropShadow(radius: 4, opacity: 0.3)
         self.viewTabelHeight.constant = 0
     }
@@ -30,7 +32,11 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        //
+        self.selectedCatieModel = self.categoryObj.categoryList[0]
+        
         self.txtTitle.text = self.categoryObj.categoryList[0].name
+        indexToAdit = 0
         self.subCategoryList = self.categoryObj.categoryList[0].subCategoryList
         if let container = self.mainContainer{
             container.delegate = self
@@ -54,9 +60,12 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     @IBAction func actionAddSubCategory(_ sender: UIButton){
-        let storyboard = UIStoryboard(name: StoryboardNames.Category, bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CreateSubCategoryViewController) as! CreateSubCategoryViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        self.moveToAddTaskVC()
+        
+//        let storyboard = UIStoryboard(name: StoryboardNames.Category, bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CreateSubCategoryViewController) as! CreateSubCategoryViewController
+//  self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func actionOpenCategoryList(_ sender: UIButton){
@@ -68,6 +77,14 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     //MARK: - FUNCTIONS
+    
+    func moveToAddTaskVC() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateNewTaskViewController) as! CreateNewTaskViewController
+        vc.indexToAdit = indexToAdit
+        vc.categoryObj = self.categoryObj.categoryList[indexToAdit]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func actionBack() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -108,7 +125,7 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
         
         if tableView == viewTabelList {
         self.txtTitle.text = self.categoryObj.categoryList[indexPath.row].name
-        
+            self.indexToAdit = indexPath.row
         
         self.subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
         self.viewTabel.reloadData()
@@ -121,7 +138,7 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
         if tableView == self.viewTabelList{
             return 30
         }else{
-            return 120
+            return 200
         }
         
     }

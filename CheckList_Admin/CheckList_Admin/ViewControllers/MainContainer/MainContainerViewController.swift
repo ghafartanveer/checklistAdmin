@@ -80,13 +80,15 @@ class MainContainerViewController: BaseViewController{
         
         
         if isTopBarWhite!{
+            self.view.backgroundColor = .white
             self.viewTopColour.backgroundColor = .clear
             self.titleLabel.textColor = .black
             self.btnMenu.tintColor = .black
            // self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FF2D55")
             
         }else{
-            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FF2D55")
+            self.view.backgroundColor = UIColor.init(hexFromString: "#FA5865")
+            self.viewTopColour.backgroundColor = UIColor.init(hexFromString: "#FA5865")
             self.titleLabel.textColor = .white
             self.btnMenu.tintColor = .white
         }

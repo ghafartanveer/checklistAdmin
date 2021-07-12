@@ -18,34 +18,51 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     
     @IBOutlet weak var descriptionTexView: KMPlaceholderTextView!
     
+    @IBOutlet weak var descriptionTxtVContainer: UIView!
+    
+    @IBOutlet weak var saveBtn: UIButton!
+    
+    
+    
     //MARK: - Vars/ objects
     // var categoryDetailObject = CategoryViewModel()
+    var categoryObj = CategoryViewModel()
+
     var notApplicable = 0
     var isPriority = 0
     
     var indexToAdit = -1
     
+    var forAdit = false
     //MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        print(self.categoryObj.name)
+        print(subCategoryList.count)
         // Do any additional setup after loading the view
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if categoryObj.hasImages == 0 {
+            descriptionTxtVContainer.isHidden = true
+        } else {
+            descriptionTxtVContainer.isHidden = false
+        }
+        
         //saveTaskList()
         if let container = self.mainContainer{
             container.delegate = self
             if indexToAdit >= 0 {
                 //update Task
+                saveBtn.setTitle(LocalStrings.update, for: .normal)
                 container.setMenuButton(true, title: TitleNames.UpdateTask)
                 configureTaskData()
             } else {
-                //Add nw task
+                //Add new task
+                saveBtn.setTitle(LocalStrings.Save, for: .normal)
                 container.setMenuButton(true, title: TitleNames.CreateCheckList)
             }
             
@@ -113,7 +130,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 
                 subCategoryList.insert(newTask, at: 0)
                 Global.shared.isSubCategoryListEdited = true
-                self.showAlertView(message: PopupMessages.ChecklistCreated, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+                self.showAlertView(message: PopupMessages.TaskUpdatedSuccessfully, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {

@@ -59,6 +59,7 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     
     func moveToAddTaskVC() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateNewTaskViewController) as! CreateNewTaskViewController
+        vc.categoryObj = categoryDetailObject
         vc.indexToAdit = indexToAdit
         self.navigationController?.pushViewController(vc, animated: true)
     }

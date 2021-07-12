@@ -17,7 +17,7 @@ class SideMenuViewController: BaseViewController {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,59 +61,69 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
         if let container = self.revealViewController()?.frontViewController as? MainContainerViewController{
             self.revealViewController()?.revealToggle(nil)
             
-            if indexPath.row == 0{
-                container.showAdminController()
-                
-            }else if indexPath.row == 1{
+            if indexPath.row == 0 {
+               if Global.shared.user.loginType == LoginType.Admin{
+                    self.showAlertView(message: PopupMessages.youDontHavePermitonForTheFeature, title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                        container.showHomeController()
+                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in }
+                } else {
+                     container.showAdminController()
+                }
+            } else if indexPath.row == 1{
                 container.showTechnicianController()
                 
             }else if indexPath.row == 2{
                 container.showCategoryController()
                 
-            }else if indexPath.row == 3{
-                container.showStoreListController()
-                
+            }else if indexPath.row == 3 {
+                if Global.shared.user.loginType == LoginType.Admin{
+                    self.showAlertView(message: PopupMessages.youDontHavePermitonForTheFeature, title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                        container.showHomeController()
+                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in }
+                } else {
+                    container.showStoreListController()
+                }
             }else if indexPath.row == 4{
                 container.showSettingController()
+                }
             }
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if Global.shared.user.loginType == LoginType.Admin{
-            if indexPath.row == 0 || indexPath.row == 3{
-                return 0
-            }else{
-                return 60
-            }
-        }else{
+        
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            //if Global.shared.user.loginType == LoginType.Admin{
+            //            if indexPath.row == 0 || indexPath.row == 3{
+            //                return 0
+            //            }else{
+            //                return 60
+            //            }
+            //        }else{
             return 60
+            // }
         }
+        
+        
     }
     
-    
-}
-
-//MARK: - EXTENSION API CALLS
-extension SideMenuViewController{
-    func logoutApiCall(){
-        self.startActivity()
-        GCD.async(.Background) {
-            LoginService.shared().logoutUserApi(params: [:]) { (message, success) in
-                GCD.async(.Main) {
-                    self.stopActivity()
-                    
-                    if success{
-                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
-                            self.logoutUserAccount()
-                        }
+    //MARK: - EXTENSION API CALLS
+    extension SideMenuViewController{
+        func logoutApiCall(){
+            self.startActivity()
+            GCD.async(.Background) {
+                LoginService.shared().logoutUserApi(params: [:]) { (message, success) in
+                    GCD.async(.Main) {
+                        self.stopActivity()
                         
-                    }else{
-                        self.showAlertView(message: message)
+                        if success{
+                            self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+                                self.logoutUserAccount()
+                            }
+                            
+                        }else{
+                            self.showAlertView(message: message)
+                        }
                     }
                 }
             }
         }
+        
     }
-    
-}

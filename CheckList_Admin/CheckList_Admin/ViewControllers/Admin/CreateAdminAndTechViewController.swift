@@ -173,7 +173,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 self.txtEmail.text = obj.email
                 self.txtMobileNumber.text = obj.phoneNumber
                 self.setImageWithUrl(imageView: self.imgimage, url: obj.image, placeholderImage: AssetNames.Box_Blue)
-                self.btnSave.setTitle("Update", for: .normal)
+                //self.btnSave.setTitle("Update", for: .normal)
                 self.storeId = obj.storeID
                 self.UserId = obj.id
             }

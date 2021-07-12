@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -194,16 +194,19 @@
                                                                             <constraint firstItem="Sz3-Jr-dke" firstAttribute="leading" secondItem="VDM-zW-8aL" secondAttribute="leading" constant="20" id="yb9-8r-dNh"/>
                                                                         </constraints>
                                                                     </view>
-                                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oO0-ID-ZgN">
-                                                                        <rect key="frame" x="20" y="476" width="374" height="50"/>
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oO0-ID-ZgN">
+                                                                        <rect key="frame" x="20" y="689" width="374" height="45"/>
                                                                         <color key="backgroundColor" red="0.98039215690000003" green="0.066666666669999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="50" id="wBI-nK-UrX"/>
+                                                                            <constraint firstAttribute="height" constant="45" id="wBI-nK-UrX"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="23"/>
-                                                                        <state key="normal" title="Submit Task">
+                                                                        <state key="normal" title="Update">
                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="submitTaskubcat:" destination="6un-jU-0oE" eventType="touchUpInside" id="cSp-Nd-vgj"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.98028594260000002" green="0.9804533124" blue="0.98027533290000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -225,6 +228,7 @@
                                                                     <constraint firstAttribute="trailing" secondItem="VDM-zW-8aL" secondAttribute="trailing" constant="25" id="fal-Z8-e6C"/>
                                                                     <constraint firstItem="99h-wc-9z0" firstAttribute="leading" secondItem="vNW-6i-b2j" secondAttribute="leading" constant="25" id="h3G-Hj-qoU"/>
                                                                     <constraint firstAttribute="trailing" secondItem="oO0-ID-ZgN" secondAttribute="trailing" constant="20" id="hwN-6U-fsP"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="oO0-ID-ZgN" secondAttribute="bottom" constant="30" id="mj8-oh-tkx"/>
                                                                     <constraint firstItem="fdI-PZ-KSU" firstAttribute="top" secondItem="vNW-6i-b2j" secondAttribute="top" constant="30" id="oHl-t3-iRJ"/>
                                                                     <constraint firstItem="99h-wc-9z0" firstAttribute="top" secondItem="LTY-Q1-Oa8" secondAttribute="bottom" constant="10" id="qpv-Ae-h8e"/>
                                                                     <constraint firstItem="LTY-Q1-Oa8" firstAttribute="top" secondItem="eXH-8W-J4P" secondAttribute="bottom" constant="10" id="vaF-eX-qFs"/>
@@ -281,6 +285,7 @@
                     <connections>
                         <outlet property="btnNotAvailable" destination="U0c-24-6jN" id="fBs-eU-8EU"/>
                         <outlet property="btnPriority" destination="qBR-XS-oCq" id="T2Y-N2-sw0"/>
+                        <outlet property="descriptionTextView" destination="UJU-Gf-Zog" id="RLL-G1-izW"/>
                         <outlet property="txtTitle" destination="xE0-S8-SSb" id="6Rk-BV-F9g"/>
                         <outlet property="viewImageDespHeight" destination="fiq-vD-2xe" id="Ebh-2q-Ypp"/>
                     </connections>

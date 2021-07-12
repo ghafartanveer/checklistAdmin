@@ -14,6 +14,9 @@ class CreateSubCategoryTableViewCell: BaseTableViewCell {
     @IBOutlet weak var btnNotAvailable: UIButton!
     @IBOutlet weak var lblTitle: UILabel!
     
+    @IBOutlet weak var descriptionLbl: UILabel!
+    
+    
     //MARK: - OBJECT AND VERIBALES
     weak var delegate: SubCategoryListTableViewCellDelegate?
     var index: Int = -1
@@ -35,6 +38,7 @@ class CreateSubCategoryTableViewCell: BaseTableViewCell {
         if info.notApplicable == 1{
             self.btnNotAvailable.isSelected = true
         }
+        descriptionLbl.text = info.subcategoryDescription
     }
     
     

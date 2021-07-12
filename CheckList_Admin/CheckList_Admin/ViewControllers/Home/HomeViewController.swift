@@ -21,7 +21,7 @@ class HomeViewController: BaseViewController {
         super.viewDidLoad()
         // self.btnPlusShadow.dropShadow(radius: 3, opacity: 0.2)
         
-        self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
+      ///  self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
         self.tabelView.register(UINib(nibName: CellIdentifier.BarChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.BarChartTableViewCell)
     }
     
@@ -31,7 +31,7 @@ class HomeViewController: BaseViewController {
         self.getStatesServerCall()
         
         if let container = self.mainContainer{
-            container.setMenuButton(false, title: TitleNames.Home,isTopBarWhite: false)
+            container.setMenuButton(false, title: "",isTopBarWhite: false)
             self.setImageWithUrl(imageView: container.imgUser, url: Global.shared.user.image, placeholderImage: AssetNames.Box_Blue)
         }
     }
@@ -51,6 +51,7 @@ class HomeViewController: BaseViewController {
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCategoryTableViewCellDelegate{
+
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -58,7 +59,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1{
-            return 2
+            return 1
         }else{
             return 1
         }
@@ -73,21 +74,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             cell.viewCollection.reloadData()
             return cell
         }else{
-            if(indexPath.row == 0){
-                //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
-                //            cell.ConfigureTypes(index: indexPath.row)
-                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
-
-                cell.configureView()
-                return cell
-            }else{
+//            if(indexPath.row == 0){
+//                //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
+//                //            cell.ConfigureTypes(index: indexPath.row)
+//                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
+//
+//                cell.configureView()
+//                return cell
+//            }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
                 
                 cell.configureCell(info: self.graphviewModel)
         
                 return cell
-            }
+            //}
             
         }
     }
@@ -107,9 +108,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             return 420
             
         }else{
-            if(indexPath.row == 0){
-                return 160
-            }
+//            if(indexPath.row == 0){
+//                return 160
+//            }
             return 270
             
         }

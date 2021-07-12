@@ -40,8 +40,12 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        generatePdfReport.isHidden = true
-
+       // generatePdfReport.isHidden = true
+        if isPdf {
+            generatePdfReport.isHidden = false
+        } else {
+            generatePdfReport.isHidden = true
+        }
         if let container = self.mainContainer{
             container.delegate = self
             
