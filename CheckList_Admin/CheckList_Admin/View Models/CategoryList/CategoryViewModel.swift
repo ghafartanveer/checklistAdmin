@@ -63,7 +63,7 @@ class CategoryViewModel {
         }
         
         for imgDesc in 0..<imagesList.count {
-            let desc = self.imagesList[imgDesc].typeName
+            let desc = self.imagesList[imgDesc].image.description
             if !desc.isEmpty {
             imageStrArray.append(desc)
             }

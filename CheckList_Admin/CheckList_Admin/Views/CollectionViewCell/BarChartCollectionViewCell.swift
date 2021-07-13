@@ -34,6 +34,9 @@ class BarChartCollectionViewCell: UICollectionViewCell {
         self.youBarViewHeight?.constant = height
         let name = Utilities.getShortDayname(info.dayName)
         self.lblAge?.text = name
+        
+        viewYouBar?.backgroundColor = #colorLiteral(red: 0, green: 0.46, blue: 0.89, alpha: 0.6589821171)
+        viewYouBar?.layer.cornerRadius = 2.0
 
     }
     

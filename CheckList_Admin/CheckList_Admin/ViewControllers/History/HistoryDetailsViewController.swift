@@ -23,6 +23,11 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
     
     @IBOutlet weak var categoryNameLbl: UILabel!
     
+    @IBOutlet weak var checkInDateLbl: UILabel!
+    
+    @IBOutlet weak var chckOutDateLbl: UILabel!
+    @IBOutlet weak var checkInTimeLbl: UILabel!
+    @IBOutlet weak var checkOutTimeLbl: UILabel!
     
     @IBOutlet weak var taskListTableview: UITableView!
     
@@ -70,6 +75,14 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
         let checkInDateTime = historyDetailObject.activity?.checkIn
         dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "")
         timeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "")
+        checkInDateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "")
+        checkInTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "")
+        
+        let checkOutDateTime = historyDetailObject.activity?.checkOut
+        print(checkOutDateTime)
+        chckOutDateLbl.text = Utilities.getDatefromDateString(strDate: checkOutDateTime ?? "")
+        checkOutTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkOutDateTime ?? "")
+        
         
         categoryNameLbl.text = historyDetailObject.categoryName
     }

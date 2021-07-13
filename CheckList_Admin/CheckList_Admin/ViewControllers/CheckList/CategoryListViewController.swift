@@ -25,6 +25,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        Global.shared.indexOfCategory = 0
         Global.shared.isSubCategoryListEdited = false
         if let container = self.mainContainer{
             container.delegate = self
@@ -93,6 +94,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     func aditList(index: Int) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
         vc.categoryDetailObject = self.categoryObject.categoryList[index]
+        subCategoryList = self.categoryObject.categoryList[index].subCategoryList
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

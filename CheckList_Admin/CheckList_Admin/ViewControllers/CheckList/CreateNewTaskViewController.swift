@@ -59,7 +59,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 //update Task
                 saveBtn.setTitle(LocalStrings.update, for: .normal)
                 container.setMenuButton(true, title: TitleNames.UpdateTask)
-                configureTaskData()
+                //configureTaskData()
             } else {
                 //Add new task
                 saveBtn.setTitle(LocalStrings.Save, for: .normal)
@@ -72,7 +72,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     //MARK: - functions
     
     func configureTaskData() {
-        taskTileTF.text = subCategoryList[indexToAdit].subcategoryName
+        taskTileTF.text = categoryObj.name // subCategoryList[indexToAdit].subcategoryName
         notApplicable = subCategoryList[indexToAdit].notApplicable
         isPriority = subCategoryList[indexToAdit].isPriority
     }
@@ -118,7 +118,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     
     @IBAction func saveTaskAction(_ sender: Any) {
         if self.checkValidation() {
-            
+            //**
             if indexToAdit == -1 {
                 let newTask = SubCategoryViewModel()
                 //            checkListQuestionObjData.append(CheckListQuestionViewModel(id: 0, sub_category_name: taskTileTF.text!, not_applicable: notApplicable, sub_category_description: descriptionTexView.text!, is_priority: isPriority))
@@ -134,9 +134,20 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                     self.navigationController?.popViewController(animated: true)
                 }
             } else {
-                subCategoryList[indexToAdit].subcategoryName = self.taskTileTF.text!
-                subCategoryList[indexToAdit].notApplicable = notApplicable
-                subCategoryList[indexToAdit].isPriority = isPriority
+               
+                let newTask = SubCategoryViewModel()
+               
+                newTask.subcategoryName = taskTileTF.text!
+                newTask.notApplicable = notApplicable
+                newTask.subcategoryDescription = descriptionTexView.text!
+                newTask.isPriority = isPriority
+                //subCategoryList.append(newTask)
+                
+                subCategoryList.insert(newTask, at: 0)
+                Global.shared.isSubCategoryListEdited = true
+//                subCategoryList[indexToAdit].subcategoryName = self.taskTileTF.text!
+//                subCategoryList[indexToAdit].notApplicable = notApplicable
+//                subCategoryList[indexToAdit].isPriority = isPriority
                 
                 self.showAlertView(message: PopupMessages.ChecklistUpdated, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
                     self.navigationController?.popViewController(animated: true)

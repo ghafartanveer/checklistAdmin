@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTLETS
     @IBOutlet weak var viewTxtShadow: UIView!
@@ -17,13 +16,18 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - OBJECT AND VERIBALES
     var categoryObj = CategoryListViewModel()
-    var subCategoryList = [SubCategoryViewModel]()
+    var subCatList = [SubCategoryViewModel]()
     var indexToAdit = -1
     //
     var selectedCatieModel = CategoryViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        subCategoryList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
+        
+        self.txtTitle.text = self.categoryObj.categoryList[Global.shared.indexOfCategory].name
+        //indexToAdit = 0
+        self.subCatList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
         
         self.viewTxtShadow.dropShadow(radius: 4, opacity: 0.3)
         self.viewTabelHeight.constant = 0
@@ -32,12 +36,13 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //
-        self.selectedCatieModel = self.categoryObj.categoryList[0]
+        viewTabel.reloadData()
+        //subCategoryList = self.categoryObj.categoryList[indexOfCategory].subCategoryList
         
-        self.txtTitle.text = self.categoryObj.categoryList[0].name
-        indexToAdit = 0
-        self.subCategoryList = self.categoryObj.categoryList[0].subCategoryList
+        self.txtTitle.text = self.categoryObj.categoryList[Global.shared.indexOfCategory].name
+        self.selectedCatieModel = self.categoryObj.categoryList[Global.shared.indexOfCategory]
+        //indexToAdit = 0
+        //self.subCatList = self.categoryObj.categoryList[indexOfCategory].subCategoryList
         if let container = self.mainContainer{
             container.delegate = self
             container.setMenuButton(true, title: TitleNames.Create_Check_List)
@@ -47,7 +52,7 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.viewTabelHeight.constant = 0
     }
-
+    
     //MARK: - IBACTION METHODS
     
     @IBAction func hideList(_ sender: Any) {
@@ -62,10 +67,6 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     @IBAction func actionAddSubCategory(_ sender: UIButton){
         
         self.moveToAddTaskVC()
-        
-//        let storyboard = UIStoryboard(name: StoryboardNames.Category, bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CreateSubCategoryViewController) as! CreateSubCategoryViewController
-//  self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func actionOpenCategoryList(_ sender: UIButton){
@@ -73,20 +74,41 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     @IBAction func actionSubmit(_ sender: UIButton){
+        let catViewModel = CategoryViewModel()
+        catViewModel.subCategoryList = subCategoryList
+        selectedCatieModel.subCategoryList = subCategoryList
+        //print("Category ID: ",selectedCatieModel.id)
         
+        let paramsDic = selectedCatieModel.getParams()  //catViewModel.getParams()
+        print(paramsDic)
+        submitCategoryApi(params: paramsDic)
     }
     
     //MARK: - FUNCTIONS
     
     func moveToAddTaskVC() {
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateNewTaskViewController) as! CreateNewTaskViewController
         vc.indexToAdit = indexToAdit
-        vc.categoryObj = self.categoryObj.categoryList[indexToAdit]
+        vc.categoryObj = self.selectedCatieModel
+        
+        // self.categoryObj.categoryList[indexToAdit]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func actionBack() {
-        self.navigationController?.popViewController(animated: true)
+        
+        if !Global.shared.isSubCategoryListEdited {
+            self.navigationController?.popViewController(animated: true)
+        } else  {
+            
+            self.showAlertView(message: PopupMessages.sureToGoBackWithOutSaving, title: ALERT_TITLE_APP_NAME, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                self.navigationController?.popViewController(animated: true)
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                
+            }
+            
+        }
     }
     
     func configureTabelViewList(){
@@ -94,8 +116,23 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
             self.viewTabelList.reloadData()
         }
     }
+
+    func deleteSubCategoryAction(index: Int) {
+        self.showAlertView(message: PopupMessages.Sure_To_Delete_Task, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+            
+            subCategoryList.remove(at: index)
+            self.viewTabel.reloadData()
+        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+            
+        }
+    }
     
+    func aditAction(index: Int) {
+        self.indexToAdit = index
+        self.moveToAddTaskVC()
+    }
 }
+
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -103,7 +140,8 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
         if tableView == self.viewTabelList{
             return self.categoryObj.categoryList.count
         }else{
-            return self.subCategoryList.count
+            //return self.subCatList.count
+            return subCategoryList.count
         }
     }
     
@@ -114,7 +152,8 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.CreateSubCategoryTableViewCell) as! CreateSubCategoryTableViewCell
-            cell.configureSubCategory(info: self.subCategoryList[indexPath.row])
+            cell.configureSubCategory(info: subCategoryList[indexPath.row])
+            //cell.configureSubCategory(info: self.subCategoryList[indexPath.row])
             cell.viewShadow.dropShadow(radius: 5, opacity: 0.4)
             return cell
         }
@@ -124,14 +163,19 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == viewTabelList {
-        self.txtTitle.text = self.categoryObj.categoryList[indexPath.row].name
-            self.indexToAdit = indexPath.row
-        
-        self.subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
-        self.viewTabel.reloadData()
+            self.txtTitle.text = self.categoryObj.categoryList[indexPath.row].name
+            //self.indexToAdit = indexPath.row
+            
+            //vc.categoryDetailObject = self.categoryObject.categoryList[index]
+            subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
+            self.selectedCatieModel = self.categoryObj.categoryList[indexPath.row]
+            Global.shared.indexOfCategory = indexPath.row
+            // self.subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
+            subCategoryList = self.categoryObj.categoryList[indexPath.row].subCategoryList
+            self.viewTabel.reloadData()
         }
         self.viewTabelHeight.constant = 0
-               
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -143,7 +187,64 @@ extension CreateCategoryViewController: UITableViewDelegate, UITableViewDataSour
         
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let size = tableView.cellForRow(at: indexPath)!.frame.size.height
+        let backView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        backView.dropShadow()
+        let myImage = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+        myImage.contentMode = .scaleAspectFit
+        myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
+        //myImage.tintColor = .red
+        myImage.backgroundColor = .white
+        backView.addSubview(myImage)
+        
+        let imgSize: CGSize = tableView.frame.size
+        UIGraphicsBeginImageContextWithOptions(imgSize, false, UIScreen.main.scale)
+        let context = UIGraphicsGetCurrentContext()
+        backView.layer.render(in: context!)
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        let delete = UITableViewRowAction(style: .normal, title: "") { (action, indexPath) in
+            print("“Delete”")
+            
+            
+            self.deleteSubCategoryAction(index: indexPath.row)
+            
+        }
+        delete.backgroundColor = UIColor(patternImage: newImage)
+        let backView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        backView1.dropShadow()
+        backView1.backgroundColor = .white
+        let myImage1 = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+        myImage1.image = #imageLiteral(resourceName: "edit-icon") //UIImage(named: AssetNames.Edit_Icon)
+        myImage1.tintColor = .gray
+        myImage1.contentMode = .scaleAspectFit
+        myImage1.backgroundColor = .white
+        backView1.addSubview(myImage1)
+        myImage1.translatesAutoresizingMaskIntoConstraints = false
+        myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
+        myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true
+        let imgSize1: CGSize = tableView.frame.size
+        UIGraphicsBeginImageContextWithOptions(imgSize1, false, UIScreen.main.scale)
+        let context1 = UIGraphicsGetCurrentContext()
+        backView1.layer.render(in: context1!)
+        let newImage1: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        let Edit = UITableViewRowAction(style: .destructive, title: "") { (action, indexPath) in
+            
+            print("Edit here")
+            self.aditAction(index: indexPath.row)
+        }
+        Edit.backgroundColor = UIColor(patternImage: newImage1)
+        return [delete,Edit]
+    }
+    
 }
+
 //MARK: - EXTENSION API CALLS
 extension CreateCategoryViewController{
     func getCategoryListApi(){
@@ -158,6 +259,32 @@ extension CreateCategoryViewController{
                             self.viewTabelList.reloadData()
                         }
                         
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
+    }
+}
+
+//MARK: - Server calls
+extension CreateCategoryViewController {
+    func submitCategoryApi(params:ParamsAny){
+        self.startActivity()
+        GCD.async(.Background) {
+            StoreCategoryService.shared().submitSubcategoryApi(params: params) { (message, success) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    if success{
+                        //                        if let category = catInfo{
+                        //                            self.categoryObject = category
+                        //                            self.viewTabel.reloadData()
+                        
+                        //}
+                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }else{
                         self.showAlertView(message: message)
                     }

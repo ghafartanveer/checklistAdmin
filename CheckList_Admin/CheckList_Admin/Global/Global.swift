@@ -21,7 +21,8 @@ class Global {
     var currentNavigationController = ""
     var currentStoryBoard = ""
     var isSubCategoryListEdited = false
-  
+    var indexOfCategory = 0
+
        
     
   }
