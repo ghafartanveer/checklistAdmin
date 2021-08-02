@@ -99,7 +99,6 @@ class BaseService {
                 }
             })
     }
-    
     //MARK:- Multipart Post API Call
     func makePostAPICallWithMultipart(with completeURL:String, dict:[String:Data]?, params:ParamsAny, headers:HTTPHeaders? = nil, completion: @escaping (_ error: String, _ success: Bool, _ jsonData:JSON?, _ responseType:ServiceResponseType)->Void) {
         print(completeURL)

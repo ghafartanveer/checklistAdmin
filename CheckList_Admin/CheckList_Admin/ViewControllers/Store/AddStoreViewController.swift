@@ -63,6 +63,8 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
         var message = ""
         var isValid: Bool = true
         
+        let isCityNameValid = Validations.CityNameValidation(txtCity.text!)
+        
         if self.txtStoreName.text!.isEmpty{
             message = ValidationMessages.Empty_Store_Name
             isValid = false
@@ -75,7 +77,12 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
             message = ValidationMessages.Empty_City_Name
             isValid = false
             
+        } else if !isCityNameValid.isValid {
+            message = isCityNameValid.message
+            isValid = false
         }
+        
+    
         if !isValid{
             self.showAlertView(message: message)
         }

@@ -11,19 +11,25 @@ class ForgotPasswordViewController: BaseViewController {
     //MARK: - IBOUTLETS
     @IBOutlet weak var txtEmail: UITextField!
     
-    
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-
+       
         // Do any additional setup after loading the view.
     }
     
     //MARK: - IBACTION METHODS
     @IBAction func actionSendInstructions(_ sender: UIButton){
+        var  loginType = ""
+        if self.txtEmail.text! == SuperAdminEmail.super_admin_emailId {
+            loginType = LoginType.super_admin
+        } else {
+            loginType = LoginType.Admin
+        }
+        
         let emailValidation = Validations.emailValidation(self.txtEmail.text!)
         if emailValidation.isValid{
-            self.forgotPasswordApiCall(Params: [DictKeys.email: self.txtEmail.text!])
+            self.forgotPasswordApiCall(Params: [DictKeys.email: self.txtEmail.text!, DictKeys.login_type: loginType])
         }else{
             self.showAlertView(message: emailValidation.message)
         }
@@ -36,6 +42,7 @@ class ForgotPasswordViewController: BaseViewController {
     //MARK: - FUNCTIONS
     func moveToUpdatePasswordVC(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.UpdatePasswordViewController) as! UpdatePasswordViewController
+        vc.email = txtEmail.text ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

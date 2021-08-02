@@ -258,6 +258,18 @@ class Utilities {
         
     }
     
+    static func getCurrentMonthYear() -> String{
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM yyyy"
+        formatter.timeZone = .current
+        let timeStemp = formatter.string(from: date)
+        
+        return timeStemp
+        
+    }
+    
+    
     static func getCurrentDate() -> Date{
         return Date()
 //        let date = Date()
@@ -296,11 +308,12 @@ class Utilities {
         
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "dd MMM YYYY"
+        formatter.dateFormat = "YYYY-MM-dd"
         let timeStemp = formatter.string(from: tomorrow!)
         
         return timeStemp
     }
+    
     static func getNextDateStringForDay(date:Date,value:Int? = 1) -> String{
         let today = date
         let tomorrow = Calendar.current.date(byAdding: .day, value: value!, to: today)
@@ -392,7 +405,7 @@ class Utilities {
         
         return timeStemp
     }
-    static func getDatefromDateString(strDate:String) -> String{
+    static func getDatefromDateString(strDate:String, formate : String = "dd-MM-yyyy" ) -> String{
         
         if(strDate.trimmingCharacters(in: .whitespaces).isEmpty){
             return ""
@@ -402,25 +415,30 @@ class Utilities {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = formatter.date(from: strDate) ?? Date()
         
-        formatter.dateFormat = "dd-MM-yy"
+        formatter.dateFormat = formate//"dd-MM-yyyy"
         let strdate = formatter.string(from: date)
         // let newDate = formatter.date(from: timeStemp)
       //  print(strdate)
         
         return strdate
     }
-    static func getTimeFromDateString(strDate:String) -> String{
+    static func getTimeFromDateString(strDate:String, formate:String = "yyyy-MM-dd HH:mm:ss") -> String{
         
         if(strDate.trimmingCharacters(in: .whitespaces).isEmpty){
             return ""
         }
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = formatter.date(from: strDate) ?? Date()
         
-        formatter.dateFormat = "HH:mm"
+        var replaced = strDate.replacingOccurrences(of: " pm", with: "", options: [.caseInsensitive])
+        
+        replaced = replaced.replacingOccurrences(of: " am", with: "", options: [.caseInsensitive])
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = formate//"yyyy-MM-dd HH:mm:ss"
+        let date = formatter.date(from: replaced) ?? Date()
+        
+        formatter.dateFormat = "HH:mm:ss"
         let timeStemp = formatter.string(from: date)
-        //print(timeStemp)
+       // print(timeStemp)
         
         return timeStemp
     }

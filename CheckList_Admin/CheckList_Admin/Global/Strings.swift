@@ -8,11 +8,12 @@ typealias ParamsString          = [String:String]
 
 let ALERT_TITLE_APP_NAME        = "CheckList"
 let EMAIL_REGULAR_EXPRESSION    = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
+let NAME_REGULER_EXPRESSION = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 struct SideMenu {
     static let MENULIST = [["title":"Admin","image":"Admin"],
-                           ["title":"Technician","image":"Technician"],
+                           
                            ["title":"Check List","image":"CheckList-menu"],
+                           ["title":"Technician","image":"Technician"],
                            ["title":"Store List","image":"StoreList"],
                            ["title":"Setting","image":"settings"]]
 }
@@ -129,6 +130,7 @@ struct ControllerIdentifier {
     static let HistoryDetailsViewController = "HistoryDetailsViewController"
     static let CheckListHistoryViewController = "CheckListHistoryViewController"
     static let HistoryPdfGeneratorViewController = "HistoryPdfGeneratorViewController"
+    static let HistoryNavVC = "HistoryNavVC"
 }
 
 struct ValidationMessages {
@@ -144,6 +146,8 @@ struct ValidationMessages {
     static let Empty_Store_Name = "Please enter store name"
     static let Empty_Store_Address = "Please enter store address"
     static let Empty_City_Name = "Please enter your city name"
+    static let Valid_City_Name = "Please enter a valid city name"
+
     static let Empty_Full_Name = "Please enter your name"
     static let emptyEmail                   = "Please enter your email"
     static let enterValidEmail              = "Please enter valid email"
@@ -166,6 +170,7 @@ struct ValidationMessages {
     static let noLocationAdded              = "Location info is must in order to become a supplier"
     static let fillAllFields              = "Please fill all fields"
     static let taskName = "Please enter task name"
+    static let enterAValidPhone = "Please enter a valid phone number"
 }
 struct CellIdentifier {
     static let TaskCategoryTableViewCell = "TaskCategoryTableViewCell"
@@ -193,7 +198,7 @@ struct CellIdentifier {
 struct PopupMessages {
     static let emptySearch = "Please enter something for search"
     static let verification = "Verification Code Sent Again Successfully"
-    static let Sure_To_Delete_Store = "Are you sure to delete Store"
+    static let Sure_To_Delete_Store = "Are you sure you want to delete this Store?"
     static let Sure_To_Delete_Technician = "Are you sure to delete Technician"
     static let Sure_To_Delete_Admin = "Are you sure to delete Admin"
     static let Sure_To_Delete_Category = "Are you sure to delete Category"
@@ -207,13 +212,20 @@ struct PopupMessages {
     static let cameraPermissionNeeded       = "Camera permission needed to scan QR Code. Goto settings to enable camera permission"
     static let SomethingWentWrong           = "Something went wrong, please check your internet connection or try again later!"
     static let ChecklistCreated = "Checklist added succesfully"
+    static let TechAddedSuccess = "Technician added successfully!"
+    static let AdminAddedSuccess = "Admin added successfully!"
+    
     static let ChecklistUpdated = "Checklist updated succesfully"
+    static let TechUpdatedSuccess = "Technician updated successfully!"
+    static let AdminUpdatedSuccess = "Admin updated successfully!"
     static let Sure_To_Delete_Task = "Are you sure to delete Task"
     static let Sure_To_Delete_Check_List = "Are you sure you want to delete this Check List?"
     static let youDontHavePermitonForTheFeature = "You do not have permission to access this feature!"
     static let sureToGoBackWithOutSaving = "New added tasks will be lost if you go back. Are you sure you want to go back?"
-    static let TaskUpdatedSuccessfully = "Task Updated Successfully!"
-
+    static let TaskAddedSuccessfully = "Task added Successfully!"
+    static let TaskUpdatedSuccessfully = "Task updated Successfully!"
+    static let EntertaskName = "Plese Enter task Title!"
+    
 }
 
 struct LocalStrings {

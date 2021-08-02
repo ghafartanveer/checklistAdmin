@@ -12,11 +12,13 @@ class BarChartTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionView:UICollectionView?
     @IBOutlet weak var viewBackground:UIView?
     
+    @IBOutlet weak var monthYearLbl: UILabel!
+    
+   
     var graphviewModel = GraphStatesListViewModel()
     var maxAdminCount = 0.0
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         // Initialization code
         self.collectionView?.delegate = self
         self.collectionView?.register(UINib(nibName: CellIdentifier.BarChartCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifier.BarChartCollectionViewCell)
@@ -32,6 +34,11 @@ class BarChartTableViewCell: UITableViewCell {
     }
     
     func configureCell(info:GraphStatesListViewModel ) {
+        
+        if let label = monthYearLbl {
+            label.text = Utilities.getCurrentMonthYear()
+        }
+        
         self.graphviewModel = info
         let max = graphviewModel.graphList.max { $0.admin < $1.admin }?.admin ?? 0
         maxAdminCount = Double(max)
@@ -51,10 +58,28 @@ extension BarChartTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         return CGSize(width: width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier.BarChartCollectionViewCell, for: indexPath) as! BarChartCollectionViewCell
+        
         cell.configureCllHeight(info: self.graphviewModel.graphList[indexPath.item], maxAdminCount: self.maxAdminCount, collectIonHeight: Double((collectionView.frame.height)))
 //        cell.configureView(index: indexPath.row, chart: self.chartList[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! BarChartCollectionViewCell
+        print(indexPath, cell.numberLabel)
+        cell.numberLabel.isHidden = false
+        cell.viewYouBar?.backgroundColor = #colorLiteral(red: 0, green: 0.46, blue: 0.89, alpha: 0.5807473949)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! BarChartCollectionViewCell
+        print(indexPath, cell.numberLabel)
+        cell.numberLabel.isHidden = true
+        cell.viewYouBar?.backgroundColor = #colorLiteral(red: 0, green: 0.46, blue: 0.89, alpha: 0.6589821171)
     }
 }
 

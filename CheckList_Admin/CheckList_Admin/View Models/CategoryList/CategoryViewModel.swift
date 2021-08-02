@@ -53,15 +53,18 @@ class CategoryViewModel {
         }
     }
     
-    func getParams() -> ParamsAny {
+    func getParams(ids:[Int] = []) -> ParamsAny {
         var categoryParam = [ParamsAny]()
-        var imageStrArray:[String] = []
+        var imageStrArray:[String] = [""]
+        let idArr:[Int] = ids
         for question in subCategoryList {
             let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.subcategoryName,"not_applicable": question.notApplicable,"sub_category_description" :question.subcategoryDescription, "is_priority" : question.isPriority ]
             
             categoryParam.append(questionParams)
         }
-        
+//        for idOfSubCat in subCategoryList {
+//            idArr.append(idOfSubCat.id)
+//        }
         for imgDesc in 0..<imagesList.count {
             let desc = self.imagesList[imgDesc].image.description
             if !desc.isEmpty {
@@ -69,10 +72,25 @@ class CategoryViewModel {
             }
         }
         
-        let param: ParamsAny = ["id" : self.id, "name" : self.name, "hasImages" : self.hasImages ,  "checkListQuestions" : categoryParam , "imagesRequired": imageStrArray]
+        let param: ParamsAny = [  "checkListQuestions" : categoryParam ,"hasImages" : self.hasImages, "id" : self.id, "imagesRequired": imageStrArray, "sub_cat_ids": idArr]
         return param
     }
 }
 
-
-
+//{
+//    "checkListQuestions": [
+//    {
+//    "id": "",
+//    "is_priority": 1,
+//    "not_applicable": "1",
+//    "sub_category_description": "",
+//    "sub_category_name": "Testing task 4324"
+//    }
+//    ],
+//    "hasImages": 0,
+//    "id": 1,
+//    "imagesRequired": [
+//    ""
+//    ],
+//    "sub_cat_ids": []
+//}

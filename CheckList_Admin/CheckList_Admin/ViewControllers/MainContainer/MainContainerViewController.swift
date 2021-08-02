@@ -37,7 +37,20 @@ class MainContainerViewController: BaseViewController{
             revealViewController()?.delegate = self
             self.btnMenu.addTarget(revealViewController(), action: #selector(SWRevealViewController.revealToggle(_ :)), for: .touchUpInside)
         }
-         self.showHomeController()
+         //self.showHomeController()
+        if(Global.shared.isFromNotification){
+           // let notifcationVM = NotificatioViewModel()
+            showHistoryController()
+            //            if Global.shared.notificationId == 2 {
+            //                showCheckListController()
+            //            } else {
+            //                 // task submitted
+            //                showHistoryController()
+            //            }
+        }
+        else{
+            self.showHomeController()
+        }
     }
         
     //MARK: - IBACTION METHODS
@@ -62,6 +75,36 @@ class MainContainerViewController: BaseViewController{
     
     
     //MARK:- FUNCTIONS
+    func showCheckListController()  {
+        let storyBoard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+        var controller = BaseNavigationController()
+        controller = storyBoard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryVC) as! BaseNavigationController
+        if let oldRef = self.baseNavigationController {
+            oldRef.viewDidDisappear(true)
+            oldRef.view.removeFromSuperview()
+        }
+        self.baseNavigationController = controller
+        addChild(controller)
+        controller.view.frame = self.viewContainer.bounds
+        self.viewContainer.addSubview(controller.view)
+        controller.didMove(toParent: self)
+    }
+    
+    func showHistoryController()  {
+        let storyBoard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+        var controller = BaseNavigationController()
+        controller = storyBoard.instantiateViewController(withIdentifier: ControllerIdentifier.HistoryNavVC) as! BaseNavigationController
+        if let oldRef = self.baseNavigationController {
+            oldRef.viewDidDisappear(true)
+            oldRef.view.removeFromSuperview()
+        }
+        self.baseNavigationController = controller
+        addChild(controller)
+        controller.view.frame = self.viewContainer.bounds
+        self.viewContainer.addSubview(controller.view)
+        controller.didMove(toParent: self)
+    }
+    
     func isSideMenuSwipeEnabled(isEnable: Bool) {
 
 

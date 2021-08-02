@@ -152,15 +152,37 @@ class Validations {
     }
     
     class func phoneNumberValidation(_ phoneNumber:String) -> ValidationResult {
+        
         var validationResult = ValidationResult()
         validationResult.text = phoneNumber
-        
-        if phoneNumber.count < 9 {
+        let charcterSet  = NSCharacterSet(charactersIn: "+#-*0123456789").inverted
+        let inputString = phoneNumber.components(separatedBy: charcterSet)
+        let filtered = inputString.joined(separator: "")
+
+        if !(phoneNumber == filtered)  {
             validationResult.isValid = false
             validationResult.message = ValidationMessages.invalidPhoneNumber
         }
-        
         return validationResult
     }
+    
+    class func CityNameValidation(_ cityName:String) -> ValidationResult {
+
+        var validationResult = ValidationResult()
+        validationResult.text = cityName
+
+        let charcterSet  = NSCharacterSet(charactersIn: NAME_REGULER_EXPRESSION).inverted
+        let inputString = cityName.components(separatedBy: charcterSet)
+        let filtered = inputString.joined(separator: " ")
+
+        if !(cityName == filtered)  {
+            validationResult.isValid = false
+            validationResult.message = ValidationMessages.Valid_City_Name
+        }
+        return validationResult
+    }
+    
+    
+    
     
 }

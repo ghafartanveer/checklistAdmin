@@ -22,8 +22,9 @@ class Global {
     var currentStoryBoard = ""
     var isSubCategoryListEdited = false
     var indexOfCategory = 0
-
-       
-    
+    var isAddingSubTask = false
+    var subCategoryList = [SubCategoryViewModel]()
+    var subCatIdsToDel:[Int] = []
+    var isFromNotification = false
   }
 

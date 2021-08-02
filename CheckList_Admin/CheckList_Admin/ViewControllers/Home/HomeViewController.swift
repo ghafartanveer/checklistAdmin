@@ -12,6 +12,7 @@ class HomeViewController: BaseViewController {
     @IBOutlet weak var btnPlusShadow: UIButton!
     @IBOutlet weak var tabelView: UITableView!
     
+    
     //MARK: - Vars, Objects
     
     var graphviewModel = GraphStatesListViewModel()
@@ -19,6 +20,7 @@ class HomeViewController: BaseViewController {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAuthObserver()
         // self.btnPlusShadow.dropShadow(radius: 3, opacity: 0.2)
         
       ///  self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
@@ -36,6 +38,7 @@ class HomeViewController: BaseViewController {
         }
     }
     
+
     
     //MARK: - IBACTION METHODS
     @IBAction func actionAddTask(_ sender: UIButton){
@@ -84,7 +87,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
 //            }else{
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
-                
+            
                 cell.configureCell(info: self.graphviewModel)
         
                 return cell

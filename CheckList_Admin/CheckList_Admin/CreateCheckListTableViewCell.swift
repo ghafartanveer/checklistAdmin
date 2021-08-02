@@ -36,9 +36,13 @@ class CreateCheckListTableViewCell: BaseTableViewCell {
         
         if info.isPriority == 1{
             self.btnPriority.isSelected = true
+        } else {
+            self.btnPriority.isSelected = false
         }
         if info.notApplicable == 1{
             self.btnNotAvailable.isSelected = true
+        } else {
+            self.btnNotAvailable.isSelected = false
         }
     }
     

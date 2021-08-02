@@ -14,21 +14,31 @@ class UpdatePasswordViewController: BaseViewController {
     @IBOutlet weak var txtNewPassword: UITextField!
     
     //MARK: - OBJECT AND VERIBAELS
-    
-    
+    var email = ""
     
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        txtEmail.text = email
+    }
+    
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - IBACTION METHODS
     @IBAction func actionSave(_ sender: UIButton){
+        var  loginType = ""
+        if self.txtEmail.text! == SuperAdminEmail.super_admin_emailId {
+            loginType = LoginType.super_admin
+        } else {
+            loginType = LoginType.Admin
+        }
+        
         let params: ParamsAny = [DictKeys.email: self.txtEmail.text!,
                                  DictKeys.Pin_Code: self.txtPinCode.text!,
                                  DictKeys.New_Password: self.txtNewPassword.text!,
-                                 DictKeys.login_type: LoginType.Admin]
+                                 DictKeys.login_type: loginType]
         self.updatePasswordApiCall(Params: params)
     }
     

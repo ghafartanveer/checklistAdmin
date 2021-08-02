@@ -38,10 +38,16 @@ class TaskHistoryTableViewCell: BaseTableViewCell {
     }
     
     func configureHistoryList(info: HistoryTaskViewModel) {
-        self.customeNameLbl.text = info.activity?.customerName
+        
+//        if pdfRecordsList.contains(where: info) {
+//            
+//        }
+        self.customeNameLbl.text = (info.technician?.firstName ?? "") + " " + (info.technician?.lastName ?? "") 
+        
         self.regNoLbl.text = info.technician?.email ?? ""
-        let checkInDateTime = info.activity?.checkIn
-        self.dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "")
+        let checkInDateTime = info.createdAt
+        self.dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "", formate: "yyyy-MM-dd")
+                                                            
         self.timeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "")
         
         self.checkBtn.isSelected = info.isSelectedForPdf

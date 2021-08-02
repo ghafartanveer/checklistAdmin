@@ -23,7 +23,7 @@ class SubCategoryViewModel {
     var subcategoryDescription: String
     
     init() {
-        self.id = 0
+        self.id = -1
         self.categoryId = 0
         self.notApplicable = 0
         self.no = 0
@@ -38,7 +38,7 @@ class SubCategoryViewModel {
     
     init(obj: JSON) {
         
-        self.id = obj["id"].int ?? 0
+        self.id = obj["id"].int ?? -1
         self.categoryId = obj["category_id"].int ?? 0
         self.notApplicable = obj["not_applicable"].int ?? 0
         self.no = obj["no"].int ?? 0

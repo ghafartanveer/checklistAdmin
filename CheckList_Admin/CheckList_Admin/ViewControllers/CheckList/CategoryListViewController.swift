@@ -21,6 +21,7 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupAuthObserver()
+        self.viewTabel.estimatedRowHeight = 80
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,12 +40,10 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateCategoryViewController) as! CreateCategoryViewController
         vc.categoryObj = self.categoryObject
         
-        //vc.indexToAdit = indexToAdit
+        vc.indexToAditSubCat = -1//indexToAdit
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
+
     //MARK: - FUNCTIONS
     func moveToAddCategoryVC(isForEdit: Bool, catObject: CategoryViewModel?) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddCategoryViewController) as! AddCategoryViewController
@@ -54,7 +53,17 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     }
     
     func actionBack() {
-        self.loadHomeController()
+        if Global.shared.isFromNotification{
+            if let contianer = self.mainContainer{
+                Global.shared.isFromNotification = false
+                //Global.shared.notificationId = 0
+                contianer.showHomeController()
+            }
+        }else{
+            self.loadHomeController()
+            //self.navigationController?.popViewController(animated: true)
+        }
+        
         //self.navigationController?.popViewController(animated: true)
     }
     
@@ -94,7 +103,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     func aditList(index: Int) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
         vc.categoryDetailObject = self.categoryObject.categoryList[index]
-        subCategoryList = self.categoryObject.categoryList[index].subCategoryList
+        Global.shared.subCategoryList = self.categoryObject.categoryList[index].subCategoryList
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -119,16 +128,28 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
         let size = tableView.cellForRow(at: indexPath)!.frame.size.height
-        let backView = UIView(frame: CGRect(x: 2, y: 0, width: 62, height: size))
-        backView.dropShadow()
-        let myImage = UIImageView(frame: CGRect(x: 5, y: 5, width: 60, height: size))
+        
+        let backView = UIView(frame: CGRect(x: 5, y: 0, width: 70, height: size))
+        let innerView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        let myImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 35))
+        
+        myImage.center = innerView.frame.center
+        innerView.center = backView.frame.center
+        
+        backView.addSubview(innerView)
+        innerView.addSubview(myImage)
+        
+        backView.backgroundColor = .clear
+        innerView.backgroundColor = .white
+        innerView.dropShadow()
         myImage.contentMode = .scaleAspectFit
-        myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
-        //myImage.tintColor = .red
+        myImage.image = #imageLiteral(resourceName: "delete-icon") // deleteImage
+        
         myImage.backgroundColor = .white
-        backView.addSubview(myImage)
-       
+        
+        
         let imgSize: CGSize = tableView.frame.size
         UIGraphicsBeginImageContextWithOptions(imgSize, false, UIScreen.main.scale)
         let context = UIGraphicsGetCurrentContext()
@@ -143,13 +164,26 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         }
         delete.backgroundColor = UIColor(patternImage: newImage)
         
-        let backView1 = UIView(frame: CGRect(x: 2, y: 0, width: 62, height: size-10))
-        backView1.dropShadow()
-        let myImage1 = UIImageView(frame: CGRect(x: 20, y: 20, width: 40, height: size-20))
-        myImage1.image = #imageLiteral(resourceName: "edit_icon") //UIImage(named: AssetNames.Edit_Icon)
+        
+        let backView1 = UIView(frame: CGRect(x: 5, y: 0, width: 70, height: size))
+        let innerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        let myImage1 = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 35))
+
+        myImage1.center = innerView1.frame.center
+        innerView1.center = backView1.frame.center
+        
+        backView1.addSubview(innerView1)
+        innerView1.addSubview(myImage1)
+        
+        backView1.backgroundColor = .clear
+        innerView1.backgroundColor = .white
+        myImage1.backgroundColor = .white
+
+        innerView1.dropShadow()
         myImage1.contentMode = .scaleAspectFit
-        myImage1.tintColor = .white
-        backView1.addSubview(myImage1)
+
+        myImage1.image = #imageLiteral(resourceName: "edit_icon") //UIImage(named: AssetNames.Edit_Icon)
+
         myImage1.translatesAutoresizingMaskIntoConstraints = false
         myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
         myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true

@@ -18,6 +18,9 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var viewGlobalBar: UIView?
     @IBOutlet weak var lblAge: UILabel?
     
+    @IBOutlet weak var numberLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -28,16 +31,26 @@ class BarChartCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCllHeight(info:GraphStatesViewModel, maxAdminCount:Double, collectIonHeight: Double ) {
-        let h = Double(collectIonHeight)
+        self.numberLabel?.isHidden = true
+        self.numberLabel?.text =  String(info.admin)
+        
+        let h = Double(collectIonHeight*0.7)
+        if maxAdminCount > 0 {
         let height = CGFloat(Double(info.admin) / maxAdminCount * (h))
-       
-        self.youBarViewHeight?.constant = height
+           
+            self.youBarViewHeight?.constant = height
+        } else {
+            self.youBarViewHeight?.constant = 0
+        }
+        
         let name = Utilities.getShortDayname(info.dayName)
         self.lblAge?.text = name
         
         viewYouBar?.backgroundColor = #colorLiteral(red: 0, green: 0.46, blue: 0.89, alpha: 0.6589821171)
         viewYouBar?.layer.cornerRadius = 2.0
 
+        viewYouBar?.layer.cornerRadius = (viewYouBar?.frame.size.width ?? 10)/2
+        viewYouBar?.clipsToBounds = true
     }
     
 //    func configureView(index:Int,chart:ChartViewModel)  {

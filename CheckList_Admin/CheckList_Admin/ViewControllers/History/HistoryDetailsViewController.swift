@@ -19,7 +19,7 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
     
     @IBOutlet weak var dateLbl: UILabel!
     
-    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var createdAtTimeLbl: UILabel!
     
     @IBOutlet weak var categoryNameLbl: UILabel!
     
@@ -38,7 +38,6 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
 //MARK: - Overridden Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -66,23 +65,27 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
     }
     
     func setCheckinDetails() {
-       
+       print(historyDetailObject)
         teckNameLbl.text = (historyDetailObject.technician?.firstName ?? "") + " " + (historyDetailObject.technician?.firstName ?? "")
         techEmail.text = historyDetailObject.technician?.email
         customerNameLbl.text = historyDetailObject.activity?.customerName
         regNoLbl.text = historyDetailObject.activity?.registrationNumber
-       
+        
+        let createdAtDateTime = historyDetailObject.createdAt
         let checkInDateTime = historyDetailObject.activity?.checkIn
-        dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "")
-        timeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "")
-        checkInDateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "")
-        checkInTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "")
-        
         let checkOutDateTime = historyDetailObject.activity?.checkOut
-        print(checkOutDateTime)
-        chckOutDateLbl.text = Utilities.getDatefromDateString(strDate: checkOutDateTime ?? "")
-        checkOutTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkOutDateTime ?? "")
         
+        dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "" , formate: "yyyy-MM-dd")
+        
+        createdAtTimeLbl.text = Utilities.getTimeFromDateString(strDate: createdAtDateTime ?? "")
+        
+        checkInTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "", formate: "dd-MM-yyyy HH:mm:ss" ) //00
+
+        checkOutTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkOutDateTime ?? "" , formate: "dd-MM-yyyy HH:mm:ss") //00
+        
+        checkInDateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "" )
+        
+        chckOutDateLbl.text = Utilities.getDatefromDateString(strDate: checkOutDateTime ?? "")
         
         categoryNameLbl.text = historyDetailObject.categoryName
     }

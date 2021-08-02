@@ -29,7 +29,7 @@ struct HistoryTaskListViewModel {
 
 //MARK: - TaskList
 
-struct HistoryTaskViewModel {
+class HistoryTaskViewModel {
     
     var id, userID, categoryID, activityID: Int?
     var categoryName: String?

@@ -55,9 +55,16 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.email: self.txtEmail.text!,
                                      DictKeys.phone_number: self.txtPhone.text!,
                                      DictKeys.Store_Id: Global.shared.user.storeID,
-                                     DictKeys.User_Id: Global.shared.user.id]
+                                     DictKeys.User_Id: Global.shared.user.id, DictKeys.login_type: Global.shared.user.loginType ]
+           
+            if let profileImg = self.imgProfile.image {
+                imageData = [DictKeys.image: profileImg.jpegData(compressionQuality: 0.50)!]
+            } else {
+                let image: UIImage = #imageLiteral(resourceName: "BoxBlue")
+                imageData = [DictKeys.image: image.jpegData(compressionQuality: 0.50)!]
+            }
             
-            imageData = [DictKeys.image: self.imgProfile.image!.jpegData(compressionQuality: 0.50)!]
+            //imageData = [DictKeys.image: self.imgProfile.image!.jpegData(compressionQuality: 0.50)!]
             self.ProfileUpdateApi(params: params, imageData: imageData)
         }
     }
@@ -72,9 +79,12 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
         var isValid: Bool = true
         let isValidEmail = Validations.emailValidation(self.txtEmail.text!)
         
+        let isPhoneValid = Validations.phoneNumberValidation(txtPhone.text!)
+        
         if self.txtFirstName.text!.isEmpty{
             message = ValidationMessages.Empty_First_Name
             isValid = false
+            
             
         }else if self.txtLastName.text!.isEmpty{
             message = ValidationMessages.Empty_Last_Name
@@ -87,7 +97,12 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
         }else if !isValidEmail.isValid{
             message = isValidEmail.message
             isValid = false
+        } else if !isPhoneValid.isValid {
+            message = isPhoneValid.message
+            isValid = false
         }
+        
+
         if !isValid{
             self.showAlertView(message: message)
         }

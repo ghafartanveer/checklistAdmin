@@ -16,7 +16,6 @@ class LoginViewController: BaseViewController {
     
     //MARK: - OBJECT AND VERIBALES
     
-    
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +25,12 @@ class LoginViewController: BaseViewController {
         //self.txtEmail.text = "newton@yopmail.com"
         //self.txtPassword.text = "123456"
         
-        //self.txtEmail.text = "muaaz@mailinator.com"
-        //self.txtPassword.text = "12345678"
-
-        //self.txtEmail.text = "superadminchecklist@yopmail.com"
-        //self.txtPassword.text = "638930"
+//        self.txtEmail.text = "muaazadmin@yopmail.com"
+//        self.txtPassword.text = "1234567"
+        
+        self.txtEmail.text = "superadminchecklist@yopmail.com"
+        self.txtPassword.text = "200333"//"12345678"
         #endif
-       
     }
     
     //MARK: - IBACTION METHODS

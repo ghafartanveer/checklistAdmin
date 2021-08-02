@@ -7,8 +7,6 @@
 
 import UIKit
 
-var subCategoryList = [SubCategoryViewModel]()
-
 class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTLETS
     
@@ -42,13 +40,17 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - FUNCTIONS
     func actionBack() {
         let catViewModel = CategoryViewModel()
-        print("catViewModel.subCategoryList.count : ",catViewModel.subCategoryList.count ," subCategoryList.count : ",subCategoryList.count)
+
         
         if !Global.shared.isSubCategoryListEdited {
+            Global.shared.subCategoryList.removeAll()
+            Global.shared.subCatIdsToDel.removeAll()
         self.navigationController?.popViewController(animated: true)
         } else  {
             
             self.showAlertView(message: PopupMessages.sureToGoBackWithOutSaving, title: ALERT_TITLE_APP_NAME, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                Global.shared.subCategoryList.removeAll()
+                Global.shared.subCatIdsToDel.removeAll()
                 self.navigationController?.popViewController(animated: true)
             }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
                 
@@ -65,13 +67,15 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     }
     
     func deleteSubCategoryAction(index: Int) {
+        
+        
         self.showAlertView(message: PopupMessages.Sure_To_Delete_Task, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            
-                            subCategoryList.remove(at: index)
+            Global.shared.subCatIdsToDel.append(Global.shared.subCategoryList[index].id)
+            Global.shared.subCategoryList.remove(at: index)
             self.subCatTV.reloadData()
-                        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
             
-                        }
+        }
     }
     
     func aditAction(index: Int) {
@@ -81,28 +85,34 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBAtion
     
     @IBAction func addTaskAction(_ sender: Any) {
-        
+        indexToAdit = -1
         moveToAddTaskVC()
     }
     
     @IBAction func submitCategoryAction(_ sender: Any) {
             
-            
         let catViewModel = CategoryViewModel()
-        catViewModel.subCategoryList = subCategoryList
-        categoryDetailObject.subCategoryList = subCategoryList
-        print("Category ID: ",categoryDetailObject.id)
+        catViewModel.subCategoryList = Global.shared.subCategoryList
+        categoryDetailObject.subCategoryList = Global.shared.subCategoryList
         
-        let paramsDic = categoryDetailObject.getParams()  //catViewModel.getParams()
+        var paramsDic = categoryDetailObject.getParams()
+        let dummyIds = [0,-1]
+        Global.shared.subCatIdsToDel.removeAll(where: { dummyIds.contains($0) })
+        if Global.shared.subCatIdsToDel.count > 0 {
+            paramsDic = categoryDetailObject.getParams(ids: Global.shared.subCatIdsToDel)
+        }
+  //catViewModel.getParams()
         print(paramsDic)
         submitCategoryApi(params: paramsDic)
+       // subCategoryList.removeAll()
+        
     }
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSource, SubCategoryListTableViewCellDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return subCategoryList.count
+        return Global.shared.subCategoryList.count
        
 //        else{
 //            self.showAlertView(message: "No subcategory list found")
@@ -113,7 +123,7 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.SubCategoryListTableViewCell) as! SubCategoryListTableViewCell
         
-        cell.configureSubCategory(info: subCategoryList[indexPath.row])
+        cell.configureSubCategory(info: Global.shared.subCategoryList[indexPath.row])
         cell.delegate = self
         cell.viewShadow.dropShadow(radius: 5, opacity: 0.4)
         return cell
@@ -135,8 +145,12 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let size = tableView.cellForRow(at: indexPath)!.frame.size.height
         let backView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        backView.backgroundColor = .white
         backView.dropShadow()
-        let myImage = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+        let myImage = UIImageView(frame: CGRect(x: 5, y: 17, width: 30, height: 35))
+        
+        myImage.center = backView.frame.center
+        
         myImage.contentMode = .scaleAspectFit
         myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
         //myImage.tintColor = .red
@@ -152,7 +166,7 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
         let delete = UITableViewRowAction(style: .normal, title: "") { (action, indexPath) in
             print("“Delete”")
             
-            
+
             self.deleteSubCategoryAction(index: indexPath.row)
             
         }
@@ -160,12 +174,14 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
         let backView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
         backView1.dropShadow()
         backView1.backgroundColor = .white
-        let myImage1 = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+        let myImage1 = UIImageView(frame: CGRect(x: 5, y: 0, width: 35, height: 40))
         myImage1.image = #imageLiteral(resourceName: "edit-icon") //UIImage(named: AssetNames.Edit_Icon)
-        myImage1.tintColor = .gray
+        myImage1.tintColor = .darkGray
         myImage1.contentMode = .scaleAspectFit
         myImage1.backgroundColor = .white
         backView1.addSubview(myImage1)
+        myImage1.center = backView1.frame.center
+
         myImage1.translatesAutoresizingMaskIntoConstraints = false
         myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
         myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true
@@ -238,6 +254,8 @@ extension SubCategoryListViewController {
 //                            self.viewTabel.reloadData()
                         
                         //}
+                        Global.shared.subCategoryList.removeAll()
+                        Global.shared.subCatIdsToDel.removeAll()
                         self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
                         }

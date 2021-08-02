@@ -15,6 +15,7 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var imgBox: UIImageView!
     @IBOutlet weak var lblCount: UILabel!
     
+    
     func configureMenu(data: [String: String], index: Int,countTxt: Int){
         
         if (Global.shared.user.loginType == LoginType.Admin) && index == 0{
@@ -27,7 +28,6 @@ class HomeCollectionViewCell: BaseCollectionViewCell {
             lblCount.isHidden = false
             
         }
-        
         lblCount.text = String(countTxt)
         self.lblTitle.text = data["title"] ?? ""
         self.lblSubTitle.text = data["subTitle"] ?? ""

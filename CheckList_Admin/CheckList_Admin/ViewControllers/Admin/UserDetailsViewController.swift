@@ -42,6 +42,9 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        getTechnicianListApi()
+        configureDetail()
+
         techListTV.delegate = self
         techListTV.dataSource = self
         // Do any additional setup after loading the view.
@@ -50,8 +53,6 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureDropShadow()
-        configureDetail()
-        getTechnicianListApi()
         togleEditable(isAditAble: false)
         if let container = self.mainContainer{
             container.delegate = self
@@ -96,8 +97,8 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
             var imageData: [String: Data]?
             
             
-            if self.isImageSelected{
-                imageData = [DictKeys.image: self.profileImageView.image!.jpegData(compressionQuality: 0.50)!]
+            if self.profileImageView.image != nil{
+                imageData = [DictKeys.image: self.profileImageView.image!.jpegData(compressionQuality: 0.20)!]
             }
             let params: ParamsAny = [DictKeys.first_name: self.firstNameTF.text!,
                                      DictKeys.last_name: self.lastNameTF.text!,
@@ -189,16 +190,11 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         self.profileImageView.image = image
-        self.isImageSelected = true
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
 }
 
 extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource {
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return techList.count //self.technicianObject.adminList.count
@@ -217,7 +213,7 @@ extension UserDetailsViewController: UITableViewDelegate, UITableViewDataSource 
         
         cell.shadowView.dropShadow(radius: 5, opacity: 0.4)
         cell.userImageView.cornerRadius = cell.userImageView.frame.width/2
-        print(cell.userImageView.frame.width/2)
+       // print(cell.userImageView.frame.width/2)
         cell.userImageView.clipsToBounds = true
         return cell
     }

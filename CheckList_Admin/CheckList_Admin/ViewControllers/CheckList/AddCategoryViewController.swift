@@ -23,7 +23,7 @@ class AddCategoryViewController: BaseViewController, TopBarDelegate{
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureCategory()
+        
         self.setupAuthObserver()
     }
     
@@ -34,7 +34,9 @@ class AddCategoryViewController: BaseViewController, TopBarDelegate{
             if self.isForUpdate{
                 btnSave.setTitle(LocalStrings.update, for: .normal)
                 container.setMenuButton(true, title: TitleNames.Update_Category)
+                self.configureCategory()
             }else{
+                Global.shared.indexOfCategory = 0
                 btnSave.setTitle(LocalStrings.Save, for: .normal)
                 container.setMenuButton(true, title: TitleNames.Add_Category)
             }
@@ -48,7 +50,6 @@ class AddCategoryViewController: BaseViewController, TopBarDelegate{
             if self.isForUpdate{
                 self.updateCategoryApi()
             }else{
-                
                 self.addCategoryApi()
             }
         }
@@ -99,6 +100,8 @@ extension AddCategoryViewController{
                     self.stopActivity()
                     
                     if success{
+                        Global.shared.indexOfCategory = 0
+                        
                         self.showAlertView(message: message, title: LocalStrings.success, doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
                         }
@@ -124,7 +127,9 @@ extension AddCategoryViewController{
                     if success{
                         self.showAlertView(message: message, title: LocalStrings.success, doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
-                        }                    }else{
+                        }
+                        
+                    }else{
                         self.showAlertView(message: message)
                     }
                 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -25,23 +25,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="93" height="190"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-fZ-2Xz">
-                                <rect key="frame" x="42" y="-1.5" width="11" height="160"/>
+                                <rect key="frame" x="42" y="14" width="11" height="150"/>
                                 <color key="backgroundColor" red="1" green="0.37254901959999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="E9H-r7-Lmg"/>
+                                    <constraint firstAttribute="height" constant="150" id="E9H-r7-Lmg"/>
                                     <constraint firstAttribute="width" constant="11" id="YXy-2x-qO9"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="conrnerRadious">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="idN-iU-IiX">
-                                <rect key="frame" x="37" y="170.5" width="19" height="10.5"/>
+                                <rect key="frame" x="37" y="171" width="19" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="pqE-lb-7uq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="SegoeUI-Bold" family="Segoe UI" pointSize="9"/>
                                 <color key="textColor" red="0.29411764709999999" green="0.36862745099999999" blue="0.41960784309999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIs-LX-yWM">
+                                <rect key="frame" x="32" y="0.0" width="31" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="j9b-98-XjE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="idN-iU-IiX" firstAttribute="top" secondItem="9g3-fZ-2Xz" secondAttribute="bottom" constant="12" id="SQk-SF-PzF"/>
+                            <constraint firstItem="idN-iU-IiX" firstAttribute="top" secondItem="9g3-fZ-2Xz" secondAttribute="bottom" constant="7" id="SQk-SF-PzF"/>
+                            <constraint firstItem="aIs-LX-yWM" firstAttribute="bottom" secondItem="9g3-fZ-2Xz" secondAttribute="top" priority="999" constant="-10" id="TT1-tU-ucB"/>
+                            <constraint firstItem="aIs-LX-yWM" firstAttribute="centerX" secondItem="9g3-fZ-2Xz" secondAttribute="centerX" id="Vbs-5D-Hvt"/>
+                            <constraint firstItem="aIs-LX-yWM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="VWK-dd-ZAf" secondAttribute="top" id="W5G-ya-HAQ"/>
                             <constraint firstItem="idN-iU-IiX" firstAttribute="centerX" secondItem="VWK-dd-ZAf" secondAttribute="centerX" id="l6g-17-Nhx"/>
                             <constraint firstItem="9g3-fZ-2Xz" firstAttribute="centerX" secondItem="VWK-dd-ZAf" secondAttribute="centerX" constant="1" id="ljR-BW-VVK"/>
                             <constraint firstAttribute="bottom" secondItem="idN-iU-IiX" secondAttribute="bottom" constant="9" id="qSy-MB-V9D"/>
@@ -58,6 +78,7 @@
             <size key="customSize" width="93" height="190"/>
             <connections>
                 <outlet property="lblAge" destination="idN-iU-IiX" id="BEa-nt-Ibm"/>
+                <outlet property="numberLabel" destination="aIs-LX-yWM" id="N9g-vO-Uc1"/>
                 <outlet property="viewYouBar" destination="9g3-fZ-2Xz" id="rUz-Z6-zWv"/>
                 <outlet property="youBarViewHeight" destination="E9H-r7-Lmg" id="RGM-iT-25A"/>
                 <outlet property="youBarViewWidth" destination="YXy-2x-qO9" id="1Qd-dy-Bsx"/>

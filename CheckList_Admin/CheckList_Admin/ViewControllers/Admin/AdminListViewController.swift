@@ -37,12 +37,15 @@ class AdminListViewController: BaseViewController, TopBarDelegate {
     }
     
     func deleteAdmin(index:Int) {
+       
         self.showAlertView(message: PopupMessages.Sure_To_Delete_Admin, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
             
             let userID = self.adminObject.adminList[index].id
             self.deleteAdminApi(param: [DictKeys.User_Id: userID])
             
-        })
+        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+            
+        }
     }
     
     func aditAdmin(index: Int) {
@@ -97,15 +100,36 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let size = tableView.cellForRow(at: indexPath)!.frame.size.height
+//        let backView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+//        backView.dropShadow()
+//        let myImage = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+//        myImage.contentMode = .scaleAspectFit
+//        myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
+//        //myImage.tintColor = .red
+//        myImage.backgroundColor = .white
+//        backView.addSubview(myImage)
+        
         let size = tableView.cellForRow(at: indexPath)!.frame.size.height
-        let backView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
-        backView.dropShadow()
-        let myImage = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+        
+        let backView = UIView(frame: CGRect(x: 5, y: 0, width: 70, height: size))
+        let innerView = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        let myImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 35))
+        
+        myImage.center = innerView.frame.center
+        innerView.center = backView.frame.center
+        
+        backView.addSubview(innerView)
+        innerView.addSubview(myImage)
+        
+        backView.backgroundColor = .clear
+        innerView.backgroundColor = .white
+        innerView.dropShadow()
         myImage.contentMode = .scaleAspectFit
-        myImage.image = #imageLiteral(resourceName: "delete-icon")//UIImage(named: AssetNames.Delete_Icon)
-        //myImage.tintColor = .red
+        myImage.image = #imageLiteral(resourceName: "delete-icon") // deleteImage
+        
         myImage.backgroundColor = .white
-        backView.addSubview(myImage)
+        
         
         let imgSize: CGSize = tableView.frame.size
         UIGraphicsBeginImageContextWithOptions(imgSize, false, UIScreen.main.scale)
@@ -121,15 +145,37 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
             
         }
         delete.backgroundColor = UIColor(patternImage: newImage)
-        let backView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
-        backView1.dropShadow()
-        backView1.backgroundColor = .white
-        let myImage1 = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
-        myImage1.image = #imageLiteral(resourceName: "edit-icon") //UIImage(named: AssetNames.Edit_Icon)
-        myImage1.tintColor = .gray
-        myImage1.contentMode = .scaleAspectFit
+
+        //        let backView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+//        backView1.dropShadow()
+//        backView1.backgroundColor = .white
+//        let myImage1 = UIImageView(frame: CGRect(x: 5, y: 0, width: 70, height: size-20))
+//        myImage1.image = #imageLiteral(resourceName: "edit-icon") //UIImage(named: AssetNames.Edit_Icon)
+//        myImage1.tintColor = .gray
+//        myImage1.contentMode = .scaleAspectFit
+//        myImage1.backgroundColor = .white
+//        backView1.addSubview(myImage1)
+        
+        
+        let backView1 = UIView(frame: CGRect(x: 5, y: 0, width: 70, height: size))
+        let innerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
+        let myImage1 = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 35))
+        
+        myImage1.center = innerView1.frame.center
+        innerView1.center = backView1.frame.center
+        
+        backView1.addSubview(innerView1)
+        innerView1.addSubview(myImage1)
+        
+        backView1.backgroundColor = .clear
+        innerView1.backgroundColor = .white
         myImage1.backgroundColor = .white
-        backView1.addSubview(myImage1)
+        
+        innerView1.dropShadow()
+        myImage1.contentMode = .scaleAspectFit
+        
+        myImage1.image = #imageLiteral(resourceName: "edit_icon") //UIImage(named: AssetNames.Edit_Icon)
+        
         myImage1.translatesAutoresizingMaskIntoConstraints = false
         myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
         myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true

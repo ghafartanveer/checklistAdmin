@@ -7,6 +7,8 @@
 
 import UIKit
 
+var pdfRecordsList = [HistoryTaskViewModel]()
+
 class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTLETS
     
@@ -20,7 +22,7 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     var historyObject = HistoryTaskListViewModel()
     var filteredObject = [HistoryTaskViewModel]()
     
-    var pdfRecordsList = [HistoryTaskViewModel]()
+    
     var isPdf = false
 //    var resturantFilterList = [RestaurantViewModel]()
 //
@@ -33,13 +35,14 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         getHistoryListApi()
         searchBarTF.delegate = self
         
-        searchBarTF.addTarget(self, action: #selector(yourHandler(textField:)), for: .editingChanged)
-
-       
+        searchBarTF.addTarget(self, action: #selector(searchHandler(textField:)), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+       // tempList()
+        
        // generatePdfReport.isHidden = true
         if isPdf {
             generatePdfReport.isHidden = false
@@ -56,6 +59,14 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         }
     }
     
+    func tempList() {
+        for (i,data) in self.historyObject.historyTaskList.enumerated() {
+            pdfRecordsList.append(data)
+            if i == 80 {
+                break
+            }
+        }
+    }
     override func viewWillDisappear(_ animated: Bool) {
         if let container = self.mainContainer{
             container.delegate = self
@@ -65,10 +76,11 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         }
     }
     override func callBackYesterdayPressed() {
-        
+        //:"2021-07-19,2021-07-26
+        let today = Utilities.getNextDateString(date: Date(), value: 0)
         let yesterDay = Utilities.getNextDateString(date: Date(), value: -1)
         
-        SearchHistoryListApi(params: ["date":yesterDay])
+        SearchHistoryListApi(params: ["date":yesterDay + "," + today])
         self.alertView?.close()
     }
     
@@ -77,7 +89,7 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         let today = Utilities.getNextDateString(date: Date(), value: 0)
         let lastWeek = Utilities.getNextDateString(date: Date(), value: -7)
 
-        SearchHistoryListApi(params: ["date":today+","+lastWeek])
+        SearchHistoryListApi(params: ["date": lastWeek + "," + today])
         self.alertView?.close()
     }
     
@@ -86,7 +98,7 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         let today = Utilities.getNextDateString(date: Date(), value: 0)
         let lastMonth = Utilities.getNextDateString(date: Date(), value: -30)
         
-        SearchHistoryListApi(params: ["date":today+","+lastMonth])
+        SearchHistoryListApi(params: ["date":lastMonth+","+today])
         self.alertView?.close()
     }
     
@@ -94,7 +106,6 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         getHistoryListApi()
         self.alertView?.close()
     }
-    
     
     //MARK: - IBACTIONS
     @IBAction func showFilterPopUp(_ sender: Any) {
@@ -109,35 +120,62 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - FUNCTIONS . Search
     
+    func checkIfAnItemIsSelected() {
+
+        //print(pdfRecordsList.count)
+
+        if pdfRecordsList.count > 0 {
+            generatePdfReport.isHidden = false
+        } else {
+            generatePdfReport.isHidden = true
+        }
+    }
+    
     func navigateToPdfViewer() {
         
         let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.HistoryPdfGeneratorViewController) as! HistoryPdfGeneratorViewController
-        vc.pdfRecordsList = self.pdfRecordsList
+       // vc.pdfRecordsList = pdfRecordsList
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc final private func yourHandler(textField: UITextField) {
-        print("Text changed", textField.text)
+    @objc final private func searchHandler(textField: UITextField) {
+        //print("Text changed", textField.text)
     
         if(textField.text == ""){
             self.historyObject.historyTaskList = self.filteredObject
             self.historyTableView.reloadData()
         }
         else{
-            let filterdItemsArray = self.filteredObject.filter({ ($0.activity?.customerName?.lowercased().contains(textField.text!.lowercased()))! || ($0.activity?.registrationNumber?.lowercased().contains(textField.text!.lowercased()))!
+            
+            let filterdItemsArray = self.filteredObject.filter({
+                ((($0.technician?.firstName?.lowercased() ?? "") + " " +  ($0.technician?.lastName?.lowercased() ?? "") ).contains(textField.text!.lowercased()))
+                    || ($0.technician?.email?.lowercased().contains(textField.text!.lowercased()))!
             })
             self.historyObject.historyTaskList = filterdItemsArray
             
             self.historyTableView.reloadData()
-            print(filterdItemsArray)
+           // print(filterdItemsArray)
         }
         
             
     }
     
     func actionBack() {
-        self.navigationController?.popViewController(animated: true)
+        
+        pdfRecordsList.removeAll()
+        if Global.shared.isFromNotification{
+            if let contianer = self.mainContainer{
+                Global.shared.isFromNotification = false
+               // Global.shared.notificationId = 0
+                contianer.showHomeController()
+            }
+        }else{
+
+            self.loadHomeController()
+            //self.navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     func rightButtonAction() {
@@ -190,19 +228,20 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
 extension CheckListHistoryViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+       // print(self.historyObject.historyTaskList.count)
         return self.historyObject.historyTaskList.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskHistoryTableViewCell) as! TaskHistoryTableViewCell
+        cell.cellIndex = indexPath.row
         cell.configureHistoryList(info: self.historyObject.historyTaskList[indexPath.row])
         cell.checkBtn.isHidden = !isPdf
         
         cell.containerView.dropShadow()
         cell.delegate = self
-        cell.cellIndex = indexPath.row
+        
         
         return cell
     }
@@ -231,16 +270,18 @@ extension CheckListHistoryViewController{
                 GCD.async(.Main) { [self] in
                     self.stopActivity()
                     if success{
-                        if let history = historyInfo{
-                            
+                        if var history = historyInfo{
+                            history.historyTaskList.reverse()
                             self.historyObject = history
                             self.filteredObject.append(contentsOf: self.historyObject.historyTaskList)
                             if historyObject.historyTaskList.count == 0 {
                                 historyTableView.setNoDataMessage(LocalStrings.NoDataFound)
+                                pdfRecordsList.removeAll()
                                 self.historyTableView.reloadData()
 
                             } else {
                                 historyTableView.setNoDataMessage("")
+                                self.searchHandler(textField: searchBarTF)
                             self.historyTableView.reloadData()
                             }
                             
@@ -271,6 +312,8 @@ extension CheckListHistoryViewController{
 
                             } else {
                                 historyTableView.setNoDataMessage("")
+                                pdfRecordsList.removeAll()
+                                self.searchHandler(textField: searchBarTF)
                                 self.historyTableView.reloadData()
                             }
                         }
@@ -285,27 +328,31 @@ extension CheckListHistoryViewController{
 }
 
 // MARK: - See details History delegate
-
 extension CheckListHistoryViewController : TaskHistoryTableViewCellDelegate {
+   
     func selectCellHistory(index: Int, cell: TaskHistoryTableViewCell) {
         if cell.checkBtn.isSelected {
             cell.checkBtn.isSelected = false
             self.historyObject.historyTaskList[index].isSelectedForPdf = false
-            for recordId in 0..<pdfRecordsList.count-1 {
-                if pdfRecordsList[recordId].id == self.historyObject.historyTaskList[index].id {
-                    pdfRecordsList.remove(at: recordId)
+            //for (recordId,recod) in pdfRecordsList.enumerated() {
+            
+            for selectdRecordIndex in 0..<pdfRecordsList.count {
+                if pdfRecordsList[selectdRecordIndex].id == self.historyObject.historyTaskList[index].id {
+                    pdfRecordsList.remove(at: selectdRecordIndex)
+                    break;
                 }
             }
-        
+            
         } else {
             cell.checkBtn.isSelected = true
             self.historyObject.historyTaskList[index].isSelectedForPdf = true
             pdfRecordsList.append(self.historyObject.historyTaskList[index])
             
         }
-        
+        checkIfAnItemIsSelected()
+        print(pdfRecordsList.count)
+
     }
-    
     
     func seeDetilsCallBack(index: Int) {
         let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)

@@ -47,36 +47,42 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     var storeId: Int = 0
     var storeObj = StoreListViewModel()
     var UserId: Int = 0
-    
+    var adminListViewModel = AdminListViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureDetail()
         self.configureDropShadow()
-        self.getStoreListApi()
         self.configureDropDown()
         self.setupAuthObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getStoreListApi()
+
         if let container = self.mainContainer{
             container.delegate = self
             
             txtStoreName.isUserInteractionEnabled = false
             txtStoreAddress.isUserInteractionEnabled = false
             
+            if Global.shared.user.loginType == LoginType.Admin {
+                self.viewAddStoreHeight.constant = 0
+            }
             if isFromTechnician{
                 if isForEdit {
                     container.setMenuButton(true, title: TitleNames.Update_Technician)
                 } else {
                     container.setMenuButton(true, title: TitleNames.Create_Technician)
                 }
-                self.viewAddStoreHeight.constant = 0
+                
+                
                 self.typeLogin = LoginType.Technician
             }else{ //else from admin
                 container.setMenuButton(true, title: TitleNames.Create_Admin)
                 self.viewAddStoreHeight.constant = 70
+                
             }
         }
     }
@@ -127,7 +133,24 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     //MARK: - FUNCTIONS
     func configureDropDown(){
         self.txtSearchList.selectedIndex = 0
-
+        if self.storeObj.storeList.count > 0 && !isForEdit  {
+            if Global.shared.user.loginType == LoginType.super_admin {
+                txtSearchList.text = self.storeObj.storeList[0].name
+                txtStoreName.text = self.storeObj.storeList[0].name
+                txtStoreAddress.text = self.storeObj.storeList[0].address
+                self.storeId = self.storeObj.storeList[0].id
+            }
+        }
+        if UserDefaultsManager.shared.userInfo.loginType == LoginType.super_admin {
+        var  indexOfStore = 0
+        for (index,store) in storeObj.storeList.enumerated() {
+            if store.id == self.storeId {
+                indexOfStore = index
+                break
+            }
+        }
+        self.txtSearchList.selectedIndex = indexOfStore
+            }
         self.txtSearchList.didSelect { (selectedText, index, id) in
             self.configureStoreList(idStore: self.storeObj.storeList[index].id)
             
@@ -145,6 +168,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.passwordShadow.dropShadow(radius: 4, opacity: 0.3)
         self.ConfirmPasswordShadow.dropShadow(radius: 4, opacity: 0.3)
         self.viewImgShadow.dropShadow(radius: 4, opacity: 0.5)
+        viewImgShadow.dropShadow()
         self.viewImgShadow.cornerRadius = viewImgShadow.frame.height/2
         self.viewImgShadow.clipsToBounds = true
     }
@@ -155,12 +179,24 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             self.txtStoreName.text = storeInfo.name
             self.txtStoreAddress.text = storeInfo.address
             self.storeId = idStore
+            self.txtSearchList.text = storeInfo.name
+            
+            var  indexOfStore = 0
+            for (index,store) in storeObj.storeList.enumerated() {
+                if store.id == self.storeId {
+                    indexOfStore = index
+                    break
+                }
+            }
+            self.txtSearchList.selectedIndex = indexOfStore
+            
         } else {
         let id = UserDefaultsManager.shared.userInfo?.storeID
         let storeInfo = storeObj.getStoreDetailAganistID(storeID: id!)
         self.txtStoreName.text = storeInfo.name
         self.txtStoreAddress.text = storeInfo.address
         self.storeId = id ?? 0
+            
        
         }
     }
@@ -174,6 +210,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 self.txtMobileNumber.text = obj.phoneNumber
                 self.setImageWithUrl(imageView: self.imgimage, url: obj.image, placeholderImage: AssetNames.Box_Blue)
                 //self.btnSave.setTitle("Update", for: .normal)
+                self
                 self.storeId = obj.storeID
                 self.UserId = obj.id
             }
@@ -190,6 +227,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         let isValidEmail = Validations.emailValidation(self.txtEmail.text!)
         let isValidPassword = Validations.passwordValidation(self.txtPassword.text!)
         let isValidRePassword = Validations.confirmPasswordValidation(self.txtPassword.text!, repeat: self.txtConfirmPassword.text!)
+        let isPhoneValid = Validations.phoneNumberValidation(txtMobileNumber.text!)
         
         if self.txtFirstName.text!.isEmpty{
             message = ValidationMessages.Empty_First_Name
@@ -214,8 +252,11 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         }else if self.txtStoreAddress.text!.isEmpty{
             message = ValidationMessages.Empty_Store_Address
             isValid = false
+        }else if !isPhoneValid.isValid {
+            message = isPhoneValid.message //ValidationMessages.enterAValidPhone
+            isValid = false
         }
-        
+    
         //if isForEdit{
            else if !isValidPassword.isValid{
                 message = isValidPassword.message
@@ -257,7 +298,16 @@ extension CreateAdminAndTechViewController{
                     self.stopActivity()
                     
                     if success{
-                        self.showAlertView(message: message, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
+                        var msg = ""
+                        if self.typeLogin == LoginType.Technician{
+                            msg = PopupMessages.TechAddedSuccess
+                        } else if self.typeLogin ==  LoginType.Admin{
+                            msg = PopupMessages.AdminAddedSuccess
+                        } else {
+                            msg = message
+                        }
+                        
+                        self.showAlertView(message: msg, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
                         }
                         
@@ -277,7 +327,15 @@ extension CreateAdminAndTechViewController{
                     self.stopActivity()
                     
                     if success{
-                        self.showAlertView(message: message, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
+                        var msg = ""
+                        if self.typeLogin == LoginType.Technician{
+                            msg = PopupMessages.TechUpdatedSuccess
+                        } else if self.typeLogin ==  LoginType.Admin{
+                            msg = PopupMessages.AdminUpdatedSuccess
+                        } else {
+                            msg = message
+                        }
+                        self.showAlertView(message: msg, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
                         }
                         

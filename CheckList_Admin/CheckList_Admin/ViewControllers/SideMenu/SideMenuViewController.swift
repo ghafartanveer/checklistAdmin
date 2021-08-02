@@ -70,11 +70,9 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
                      container.showAdminController()
                 }
             } else if indexPath.row == 1{
-                container.showTechnicianController()
-                
-            }else if indexPath.row == 2{
                 container.showCategoryController()
-                
+            }else if indexPath.row == 2{
+                container.showTechnicianController()
             }else if indexPath.row == 3 {
                 if Global.shared.user.loginType == LoginType.Admin{
                     self.showAlertView(message: PopupMessages.youDontHavePermitonForTheFeature, title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in

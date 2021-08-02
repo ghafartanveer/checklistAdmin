@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -135,9 +135,20 @@
                                     <constraint firstItem="3NH-MM-2UR" firstAttribute="top" secondItem="m2k-sp-bdF" secondAttribute="top" constant="40" id="tez-wv-aYf"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jul 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pld-fB-DBr">
+                                <rect key="frame" x="300" y="10" width="64" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="0Xu-UM-9RR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Pld-fB-DBr" secondAttribute="trailing" constant="10" id="1E3-wp-r9x"/>
+                            <constraint firstItem="Pld-fB-DBr" firstAttribute="top" secondItem="4ry-59-57l" secondAttribute="top" constant="10" id="DSk-MQ-YYu"/>
                             <constraint firstAttribute="trailing" secondItem="m2k-sp-bdF" secondAttribute="trailing" id="Fhc-S3-9Y7"/>
                             <constraint firstItem="m2k-sp-bdF" firstAttribute="top" secondItem="4ry-59-57l" secondAttribute="top" constant="20" id="aLx-OR-U2C"/>
                             <constraint firstAttribute="bottom" secondItem="m2k-sp-bdF" secondAttribute="bottom" constant="10" id="h3f-bC-SQM"/>
@@ -160,6 +171,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="collectionView" destination="3NH-MM-2UR" id="uwy-Fa-NDk"/>
+                <outlet property="monthYearLbl" destination="Pld-fB-DBr" id="Ouu-fL-HQO"/>
                 <outlet property="viewBackground" destination="4ry-59-57l" id="r4I-q9-bRA"/>
             </connections>
             <point key="canvasLocation" x="-608.69565217391312" y="-214.28571428571428"/>
