@@ -47,7 +47,7 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
         if let container = self.mainContainer{
             container.delegate = self
            
-            container.setMenuButton(true, title: TitleNames.History)
+            container.setMenuButton(true, title: TitleNames.HistoryDetails)
             //container.viewTopColour.backgroundColor = .white
         }
         layoutSetup()
@@ -75,17 +75,17 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
         let checkInDateTime = historyDetailObject.activity?.checkIn
         let checkOutDateTime = historyDetailObject.activity?.checkOut
         
-        dateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "" , formate: "yyyy-MM-dd")
+        dateLbl.text = Utilities.getDatefromDateStringWithFormate(strDate: createdAtDateTime ?? "", inPutFormate: "yyyy-MM-dd HH:mm:ss", outPutFormate: "yyyy-MM-dd")
         
-        createdAtTimeLbl.text = Utilities.getTimeFromDateString(strDate: createdAtDateTime ?? "")
+        checkInDateLbl.text = Utilities.getDatefromDateStringWithFormate(strDate: checkInDateTime ?? "", inPutFormate: "dd-MM-yyyy HH:mm:ss", outPutFormate: "dd-MM-yyyy")
+        
+        chckOutDateLbl.text = Utilities.getDatefromDateStringWithFormate(strDate: checkOutDateTime ?? "", inPutFormate: "dd-MM-yyyy HH:mm:ss", outPutFormate: "dd-MM-yyyy")
+
+        createdAtTimeLbl.text = Utilities.getTimeFromDateString(strDate: createdAtDateTime ?? "dd-MM-yyyy HH:mm:ss")
         
         checkInTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkInDateTime ?? "", formate: "dd-MM-yyyy HH:mm:ss" ) //00
 
         checkOutTimeLbl.text = Utilities.getTimeFromDateString(strDate: checkOutDateTime ?? "" , formate: "dd-MM-yyyy HH:mm:ss") //00
-        
-        checkInDateLbl.text = Utilities.getDatefromDateString(strDate: checkInDateTime ?? "" )
-        
-        chckOutDateLbl.text = Utilities.getDatefromDateString(strDate: checkOutDateTime ?? "")
         
         categoryNameLbl.text = historyDetailObject.categoryName
     }
@@ -106,7 +106,7 @@ extension HistoryDetailsViewController: UITableViewDelegate, UITableViewDataSour
         
         let dataAtIndex = historyDetailObject.subcategories?.subCategoryList[indexPath.row]
         
-        cell.configureCell(info: dataAtIndex ?? SubcategoryViewModel())
+        cell.configureCell(index: (indexPath.row+1),info: dataAtIndex ?? SubcategoryViewModel())
         cell.shaowContainerView.dropShadow()
         
         return cell

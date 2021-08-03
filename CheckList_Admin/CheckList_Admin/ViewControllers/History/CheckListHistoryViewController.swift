@@ -41,7 +41,7 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       // tempList()
+        //tempList()
         
        // generatePdfReport.isHidden = true
         if isPdf {
@@ -183,7 +183,9 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
             
         } else {
             isPdf = true
+            if pdfRecordsList.count > 0 {
             generatePdfReport.isHidden = false
+            }
         }
         historyTableView.reloadData()
     }

@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 //                Global.shared.notificationId = id
                 gotoMainController()
             }
-            
             //setRoot(isfromNotifi: true , data: notificationData as? [AnyHashable : Any])
         }
         else{

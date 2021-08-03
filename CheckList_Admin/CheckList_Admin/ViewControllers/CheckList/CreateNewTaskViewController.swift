@@ -85,9 +85,13 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     func checkValidation() -> Bool{
         var message = ""
         var isValid: Bool = true
-        
+      
         if self.taskTileTF.text!.isEmpty{
             message = ValidationMessages.taskName
+            isValid = false
+        } else if Global.shared.subCategoryList.contains(where: { $0.subcategoryName.caseInsensitiveCompare(self.taskTileTF.text!) == .orderedSame }) {
+            print("contains is true")
+            message = ValidationMessages.tasknameAlreadyExist
             isValid = false
         }
         
@@ -120,7 +124,9 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     
     @IBAction func saveTaskAction(_ sender: Any) {
         if self.checkValidation() {
-            //**
+            
+            
+            
             if indexToAdit == -1 { // addTask
                
                 let newTask = SubCategoryViewModel()
@@ -148,6 +154,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 Global.shared.subCategoryList[indexToAdit].isPriority = self.isPriority
                 Global.shared.subCategoryList[indexToAdit].notApplicable = self.notApplicable
                 Global.shared.subCategoryList[indexToAdit].subcategoryName = taskTileTF.text!
+                Global.shared.subCategoryList[indexToAdit].subcategoryDescription =  descriptionTexView.text!
                 
                 //subCategoryList.insert(newTask, at: 0)
                 Global.shared.isSubCategoryListEdited = true

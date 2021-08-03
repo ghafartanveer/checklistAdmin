@@ -31,7 +31,7 @@ class StoreListTableViewCell: BaseTableViewCell {
     //MARK: - FUNCTIONS
     func configureStore(info: StoreViewModel, indexP: Int){
         self.lblStoreName.text = info.name
-        self.lblAddres.text = info.address + " " + info.city
+        self.lblAddres.text = info.address
         self.index = indexP
     }
     

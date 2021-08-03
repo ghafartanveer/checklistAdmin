@@ -162,7 +162,7 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
         var message = ""
         var isValid: Bool = true
         let isValidEmail = Validations.emailValidation(self.emailTF.text!)
-        
+        let isPhoneValid = Validations.phoneNumberValidation(phoneTF.text!)
         if self.firstNameTF.text!.isEmpty{
             message = ValidationMessages.Empty_First_Name
             isValid = false
@@ -177,6 +177,9 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
             
         }else if !isValidEmail.isValid{
             message = isValidEmail.message
+            isValid = false
+        }else if !isPhoneValid.isValid {
+            message = isPhoneValid.message //ValidationMessages.enterAValidPhone
             isValid = false
         }
         
@@ -258,7 +261,15 @@ extension UserDetailsViewController {
                     self.stopActivity()
                     
                     if success{
-                        self.showAlertView(message: message, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
+                        var msg = ""
+                        if self.typeLogin == LoginType.Technician{
+                            msg = PopupMessages.TechUpdatedSuccess
+                        } else if self.typeLogin ==  LoginType.Admin{
+                            msg = PopupMessages.AdminUpdatedSuccess
+                        } else {
+                            msg = message
+                        }
+                        self.showAlertView(message: msg, title: "", doneButtonTitle: LocalStrings.ok) { (UIAlertAction) in
                             self.navigationController?.popViewController(animated: true)
                         }
                         

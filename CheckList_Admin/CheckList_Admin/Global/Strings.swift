@@ -62,6 +62,8 @@ struct TitleNames {
     static let createTask = "Create Task"
     static let UpdateTask = "Update Task"
     static let History = "History"
+    static let HistoryDetails = "History Detail"
+
     
     
 }
@@ -171,6 +173,7 @@ struct ValidationMessages {
     static let fillAllFields              = "Please fill all fields"
     static let taskName = "Please enter task name"
     static let enterAValidPhone = "Please enter a valid phone number"
+    static let tasknameAlreadyExist = "Task Already Exists!"
 }
 struct CellIdentifier {
     static let TaskCategoryTableViewCell = "TaskCategoryTableViewCell"

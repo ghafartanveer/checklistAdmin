@@ -410,10 +410,16 @@ class Utilities {
         if(strDate.trimmingCharacters(in: .whitespaces).isEmpty){
             return ""
         }
+        
+        var replaced = strDate.replacingOccurrences(of: " pm", with: "", options: [.caseInsensitive])
+        
+        replaced = replaced.replacingOccurrences(of: " am", with: "", options: [.caseInsensitive])
+        
+        
         let formatter = DateFormatter()
         
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = formatter.date(from: strDate) ?? Date()
+        let date = formatter.date(from: replaced) ?? Date()
         
         formatter.dateFormat = formate//"dd-MM-yyyy"
         let strdate = formatter.string(from: date)
@@ -422,6 +428,31 @@ class Utilities {
         
         return strdate
     }
+    
+    static func getDatefromDateStringWithFormate(strDate:String, inPutFormate : String = "dd-MM-yyyy HH:mm:ss", outPutFormate : String = "dd-MM-yyyy" ) -> String{
+        
+        if(strDate.trimmingCharacters(in: .whitespaces).isEmpty){
+            return ""
+        }
+        
+        var replaced = strDate.replacingOccurrences(of: " pm", with: "", options: [.caseInsensitive])
+        
+        replaced = replaced.replacingOccurrences(of: " am", with: "", options: [.caseInsensitive])
+        
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = inPutFormate //"yyyy-MM-dd HH:mm:ss"
+        let date = formatter.date(from: replaced) ?? Date()
+        
+        formatter.dateFormat = outPutFormate//"dd-MM-yyyy"
+        let strdate = formatter.string(from: date)
+        // let newDate = formatter.date(from: timeStemp)
+        //  print(strdate)
+        
+        return strdate
+    }
+    
     static func getTimeFromDateString(strDate:String, formate:String = "yyyy-MM-dd HH:mm:ss") -> String{
         
         if(strDate.trimmingCharacters(in: .whitespaces).isEmpty){

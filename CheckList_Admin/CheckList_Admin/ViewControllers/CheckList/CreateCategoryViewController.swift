@@ -25,9 +25,8 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        //subCategoryList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
-       // Global.shared.indexOfCategory = 0
-     //   setupDropDown()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        viewTabel.addGestureRecognizer(tap)
     }
     
     
@@ -50,10 +49,7 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     //MARK: - IBACTION METHODS
-    
-    @IBAction func hideList(_ sender: Any) {
-        self.viewTabelHeight.constant = 0
-    }
+
     
     @IBAction func actionAddCategory(_ sender: UIButton){
         Global.shared.isAddingSubTask = false
@@ -92,6 +88,10 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     //MARK: - FUNCTIONS
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        self.viewTabelHeight.constant = 0
+    }
+    
     func setupDropDown() {
         self.txtTitle.text = self.categoryObj.categoryList[Global.shared.indexOfCategory].name
         //indexToAdit = 0

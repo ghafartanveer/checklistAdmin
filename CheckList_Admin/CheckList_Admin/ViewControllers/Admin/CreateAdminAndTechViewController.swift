@@ -50,6 +50,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     var adminListViewModel = AdminListViewModel()
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
+        self.txtSearchList.isSearchEnable = false
         super.viewDidLoad()
         self.configureDetail()
         self.configureDropShadow()

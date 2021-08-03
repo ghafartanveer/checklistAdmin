@@ -48,9 +48,14 @@ class CategoryViewModel {
             self.imagesList.append(contentsOf: list)
         }
         if let jsonList = obj["subcategories"].array{
-            let list = jsonList.map({SubCategoryViewModel(obj: $0)})
+            var list = jsonList.map({SubCategoryViewModel(obj: $0)})
+            
+            list = list.sorted(by: { $0.createdAt > $1.createdAt })
+            list = list.sorted(by: { $0.updatedAt > $1.updatedAt })
+            
             self.subCategoryList.append(contentsOf: list)
         }
+        
     }
     
     func getParams(ids:[Int] = []) -> ParamsAny {

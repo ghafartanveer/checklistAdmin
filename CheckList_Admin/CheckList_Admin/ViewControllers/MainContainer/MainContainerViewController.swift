@@ -118,6 +118,7 @@ class MainContainerViewController: BaseViewController{
         }else{
             self.imgUser.isHidden = false
             self.btnMenu.setImage(UIImage(named: AssetNames.sideLogo)!, for: .normal)
+            btnMenu.tintColor = .white
             self.btnMenu.addTarget(self, action: #selector(actionSideMenu(_:)), for: .touchUpInside)
         }
         

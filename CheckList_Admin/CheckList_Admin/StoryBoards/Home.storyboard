@@ -1077,13 +1077,6 @@
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o41-al-4lA">
                                                 <rect key="frame" x="0.0" y="80" width="399" height="534"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="esu-2V-R2X">
-                                                    <rect key="frame" x="0.0" y="258" width="399" height="336"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="hideList:" destination="el3-4J-Jnc" eventType="touchUpInside" id="g8k-7e-y29"/>
-                                                    </connections>
-                                                </button>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CreateSubCategoryTableViewCell" rowHeight="202" id="VTo-30-zJk" customClass="CreateSubCategoryTableViewCell" customModule="CheckList_Admin" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="399" height="202"/>
@@ -1127,7 +1120,7 @@
                                                                                 <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IH3-MW-OqQ">
                                                                                     <rect key="frame" x="10" y="1" width="165.5" height="39"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                    <color key="tintColor" red="0.1132830158" green="0.58042138809999999" blue="0.31367769839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="tintColor" red="0.44313725490196076" green="0.74901960784313726" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="4" maxY="0.0"/>
                                                                                     <state key="normal" title="Mark as Priority" image="circule">
                                                                                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1769,7 +1762,7 @@
                                                                                 <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZV-WP-6NH">
                                                                                     <rect key="frame" x="20" y="1" width="148.5" height="39"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                                                    <color key="tintColor" red="0.1132830158" green="0.58042138809999999" blue="0.31367769839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <color key="tintColor" red="0.4431372549" green="0.74901960779999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="3" maxY="0.0"/>
                                                                                     <state key="normal" title="Mark as Priority" image="circule">
                                                                                         <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2020,7 +2013,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jod-3E-F9K">
                                                         <rect key="frame" x="20" y="0.0" width="324" height="55"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="tintColor" red="0.1132830158" green="0.58042138809999999" blue="0.31367769839999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="tintColor" red="0.4431372549" green="0.74901960779999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" image="circule">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
@@ -2107,8 +2100,14 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D6Z-hb-oPy">
-                                                <rect key="frame" x="25" y="328" width="364" height="130"/>
+                                                <rect key="frame" x="25" y="358" width="364" height="130"/>
                                                 <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dO-Rq-2zL">
+                                                        <rect key="frame" x="0.0" y="-36" width="30.5" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Lm1-lj-bZD" customClass="KMPlaceholderTextView" customModule="CheckList_Admin" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="130"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2123,10 +2122,12 @@
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="2cG-67-bbP"/>
+                                                    <constraint firstItem="Lm1-lj-bZD" firstAttribute="top" secondItem="6dO-Rq-2zL" secondAttribute="bottom" constant="15" id="9QH-bA-cpl"/>
                                                     <constraint firstItem="Lm1-lj-bZD" firstAttribute="leading" secondItem="D6Z-hb-oPy" secondAttribute="leading" id="IKH-7C-2Lt"/>
                                                     <constraint firstAttribute="trailing" secondItem="Lm1-lj-bZD" secondAttribute="trailing" id="MdO-5l-Vku"/>
                                                     <constraint firstItem="Lm1-lj-bZD" firstAttribute="top" secondItem="D6Z-hb-oPy" secondAttribute="top" id="bhh-tK-M2P"/>
                                                     <constraint firstAttribute="bottom" secondItem="Lm1-lj-bZD" secondAttribute="bottom" id="him-V0-5k2"/>
+                                                    <constraint firstItem="6dO-Rq-2zL" firstAttribute="leading" secondItem="D6Z-hb-oPy" secondAttribute="leading" id="v5J-Ph-i7f"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -2134,7 +2135,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Zg2-li-o0u" secondAttribute="bottom" constant="30" id="6HF-bh-FDh"/>
                                             <constraint firstItem="er2-po-mwC" firstAttribute="top" secondItem="J3k-cz-Vez" secondAttribute="top" constant="15" id="6WN-2y-150"/>
-                                            <constraint firstItem="D6Z-hb-oPy" firstAttribute="top" secondItem="R4Y-C9-Ehx" secondAttribute="bottom" constant="30" id="Ajg-bg-4AQ"/>
+                                            <constraint firstItem="D6Z-hb-oPy" firstAttribute="top" secondItem="R4Y-C9-Ehx" secondAttribute="bottom" constant="60" id="Ajg-bg-4AQ"/>
                                             <constraint firstAttribute="trailing" secondItem="y23-RP-9ae" secondAttribute="trailing" constant="25" id="BRd-SN-N19"/>
                                             <constraint firstItem="R4Y-C9-Ehx" firstAttribute="leading" secondItem="J3k-cz-Vez" secondAttribute="leading" constant="25" id="GL0-dE-R0I"/>
                                             <constraint firstItem="y23-RP-9ae" firstAttribute="leading" secondItem="J3k-cz-Vez" secondAttribute="leading" constant="25" id="JEK-5c-2Q9"/>
@@ -2897,7 +2898,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TvI-lK-fUE">
                                                                 <rect key="frame" x="20" y="460" width="374" height="100"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-Mh-clK">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROU-Mh-clK">
                                                                         <rect key="frame" x="10" y="0.0" width="364" height="25"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>

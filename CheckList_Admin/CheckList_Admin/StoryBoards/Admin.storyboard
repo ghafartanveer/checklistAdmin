@@ -85,6 +85,7 @@
                                                                                     <userDefinedRuntimeAttribute type="number" keyPath="rowHeight">
                                                                                         <real key="value" value="40"/>
                                                                                     </userDefinedRuntimeAttribute>
+                                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSearchEnable" value="NO"/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textField>
                                                                         </subviews>
@@ -315,7 +316,7 @@
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                                 <userDefinedRuntimeAttributes>
-                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter your address or add ....."/>
+                                                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Enter your store address ..."/>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRl-eB-sZZ">
@@ -366,7 +367,7 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJS-Wc-mQt">
                                                                         <rect key="frame" x="5" y="40" width="374" height="58"/>
                                                                         <subviews>
-                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUu-jH-Ueg">
+                                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your phone number" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUu-jH-Ueg">
                                                                                 <rect key="frame" x="40" y="0.0" width="314" height="58"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
