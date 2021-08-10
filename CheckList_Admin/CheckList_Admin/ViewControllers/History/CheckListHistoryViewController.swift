@@ -31,7 +31,6 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         getHistoryListApi()
         searchBarTF.delegate = self
         
@@ -53,10 +52,18 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
             container.delegate = self
             
             container.setMenuButton(true, title: TitleNames.History)
-            container.rightBtn.tintColor = .systemPink
-            container.setRightBtn(isRightHidden: false, image: UIImage(named: AssetNames.PdfIcon)!)
-        
+            //container.rightBtn.tintColor = .systemPink
+            container.setRightBtn(isRightHidden: false, image: UIImage())
+            container.rightImagePdfIcon.isHidden = false
+            container.rightImagePdfIcon.image = UIImage(named: AssetNames.newPdficon)
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if let container = self.mainContainer{
+        container.rightImagePdfIcon.isHidden = true
+        }
+            
     }
     
     func tempList() {
@@ -88,17 +95,19 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
         
         let today = Utilities.getNextDateString(date: Date(), value: 0)
         let lastWeek = Utilities.getNextDateString(date: Date(), value: -7)
+        let weakFiterdays = Utilities.getLastWeekDates()
 
-        SearchHistoryListApi(params: ["date": lastWeek + "," + today])
+        SearchHistoryListApi(params: ["date": weakFiterdays])//lastWeek + "," + today])
         self.alertView?.close()
     }
     
     override func callBackLastMonthPressed() {
         
-        let today = Utilities.getNextDateString(date: Date(), value: 0)
-        let lastMonth = Utilities.getNextDateString(date: Date(), value: -30)
+       // let today = Utilities.getNextDateString(date: Date(), value: 0)
+        let lastMonth = Utilities.getDateLastmonthForFilter()//Utilities.getNextDateString(date: Date(), value: -30)
         
-        SearchHistoryListApi(params: ["date":lastMonth+","+today])
+        
+        SearchHistoryListApi(params: ["date":lastMonth])//lastMonth+","+today])
         self.alertView?.close()
     }
     
@@ -132,7 +141,9 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
     }
     
     func navigateToPdfViewer() {
-        
+        if let container = self.mainContainer{
+            container.rightImagePdfIcon.isHidden = true
+        }
         let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.HistoryPdfGeneratorViewController) as! HistoryPdfGeneratorViewController
        // vc.pdfRecordsList = pdfRecordsList
@@ -171,6 +182,9 @@ class CheckListHistoryViewController: BaseViewController, TopBarDelegate {
                 contianer.showHomeController()
             }
         }else{
+            if let container = self.mainContainer{
+                container.rightImagePdfIcon.isHidden = true
+            }
 
             self.loadHomeController()
             //self.navigationController?.popViewController(animated: true)
@@ -275,6 +289,7 @@ extension CheckListHistoryViewController{
                         if var history = historyInfo{
                             history.historyTaskList.reverse()
                             self.historyObject = history
+                            self.filteredObject.removeAll()
                             self.filteredObject.append(contentsOf: self.historyObject.historyTaskList)
                             if historyObject.historyTaskList.count == 0 {
                                 historyTableView.setNoDataMessage(LocalStrings.NoDataFound)
@@ -306,7 +321,9 @@ extension CheckListHistoryViewController{
                     self.stopActivity()
                     if success{
                         if let history = historyInfo{
+                        
                             self.historyObject = history
+                            self.filteredObject.removeAll()
                             self.filteredObject.append(contentsOf: self.historyObject.historyTaskList)
                             if historyObject.historyTaskList.count == 0 {
                                 historyTableView.setNoDataMessage(LocalStrings.NoDataFound)
@@ -315,6 +332,8 @@ extension CheckListHistoryViewController{
                             } else {
                                 historyTableView.setNoDataMessage("")
                                 pdfRecordsList.removeAll()
+                                //self.filteredObject.removeAll()
+
                                 self.searchHandler(textField: searchBarTF)
                                 self.historyTableView.reloadData()
                             }
@@ -357,6 +376,9 @@ extension CheckListHistoryViewController : TaskHistoryTableViewCellDelegate {
     }
     
     func seeDetilsCallBack(index: Int) {
+        if let container = self.mainContainer{
+            container.rightImagePdfIcon.isHidden = true
+        }
         let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.HistoryDetailsViewController) as! HistoryDetailsViewController
         vc.historyDetailObject = self.historyObject.historyTaskList[index]

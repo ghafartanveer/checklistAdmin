@@ -101,10 +101,15 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
         if Global.shared.subCatIdsToDel.count > 0 {
             paramsDic = categoryDetailObject.getParams(ids: Global.shared.subCatIdsToDel)
         }
-  //catViewModel.getParams()
-        print(paramsDic)
-        submitCategoryApi(params: paramsDic)
-       // subCategoryList.removeAll()
+        if Global.shared.subCategoryList.count == 0 {
+            self.showAlertView(message: PopupMessages.PleaseAddAtLeastOneTask)
+        } else {
+            print(Global.shared.subCatIdsToDel)
+            print(paramsDic)
+            submitCategoryApi(params: paramsDic)
+            // subCategoryList.removeAll()
+        }
+        
         
     }
 }

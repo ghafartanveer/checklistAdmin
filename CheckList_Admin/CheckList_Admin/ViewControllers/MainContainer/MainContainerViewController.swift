@@ -21,6 +21,7 @@ class MainContainerViewController: BaseViewController{
     @IBOutlet weak var imgUser: UIImageView!
     
     @IBOutlet weak var rightBtn: UIButton!
+    @IBOutlet weak var rightImagePdfIcon: UIImageView!
     
     //MARK: - OBJECT AND VERIABLES
     weak var delegate:TopBarDelegate?
@@ -29,7 +30,7 @@ class MainContainerViewController: BaseViewController{
     //MARK: - OVERRID METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        rightImagePdfIcon.isHidden = true
         if revealViewController() != nil{
             revealViewController()?.panGestureRecognizer()
             revealViewController()?.tapGestureRecognizer()

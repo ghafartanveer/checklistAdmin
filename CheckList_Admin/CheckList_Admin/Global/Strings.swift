@@ -82,7 +82,7 @@ struct AssetNames {
     static let PdfIcon = "pdf-Icon"
     static let swipeAdit = "edit_icon" // "edit-Swipeicon"
     static let swipeDelete = "DeleteSwipeIcon"
-    
+    static let newPdficon = "downloadPdf"//"pdfIcon3"//"pdfIconDowloadCoverted" //"ImagePdf"//"downloadPdf"
 }
 
 struct SuperAdminEmail {
@@ -228,6 +228,8 @@ struct PopupMessages {
     static let TaskAddedSuccessfully = "Task added Successfully!"
     static let TaskUpdatedSuccessfully = "Task updated Successfully!"
     static let EntertaskName = "Plese Enter task Title!"
+    static let PleaseAddAtLeastOneTask = "Please add at least one task!"
+    static let pdfCreatedSuccess = "Pdf report saved successfully!"
     
 }
 

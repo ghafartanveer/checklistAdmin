@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CropViewController
 
 class UserDetailsViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTETS
@@ -190,10 +191,17 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     }
 
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
-    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        self.profileImageView.image = image
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+    
+    
+    override func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true, completion: nil)
         self.profileImageView.image = image
-        picker.dismiss(animated: true, completion: nil)
+        // 'image' is the newly cropped version of the original image
     }
 }
 

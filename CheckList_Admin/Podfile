@@ -15,4 +15,6 @@ target 'CheckList_Admin' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
+  pod 'CropViewController'
+
  end

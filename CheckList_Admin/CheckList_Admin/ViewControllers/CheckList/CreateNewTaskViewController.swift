@@ -75,6 +75,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
         taskTileTF.text = Global.shared.subCategoryList[indexToAdit].subcategoryName
         notApplicable = Global.shared.subCategoryList[indexToAdit].notApplicable
         isPriority = Global.shared.subCategoryList[indexToAdit].isPriority
+        descriptionTexView.text = Global.shared.subCategoryList[indexToAdit].subcategoryDescription
         isPriorityBtn.isSelected = tf[isPriority]
         ifNeededBtn.isSelected = tf[notApplicable]
     }
@@ -90,9 +91,11 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
             message = ValidationMessages.taskName
             isValid = false
         } else if Global.shared.subCategoryList.contains(where: { $0.subcategoryName.caseInsensitiveCompare(self.taskTileTF.text!) == .orderedSame }) {
-            print("contains is true")
-            message = ValidationMessages.tasknameAlreadyExist
-            isValid = false
+            if indexToAdit == -1 { // its for Add task
+                print("contains is true")
+                message = ValidationMessages.tasknameAlreadyExist
+                isValid = false
+            }
         }
         
         if !isValid{
@@ -124,8 +127,6 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     
     @IBAction func saveTaskAction(_ sender: Any) {
         if self.checkValidation() {
-            
-            
             
             if indexToAdit == -1 { // addTask
                

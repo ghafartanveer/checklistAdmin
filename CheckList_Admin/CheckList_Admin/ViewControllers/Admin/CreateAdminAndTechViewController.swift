@@ -7,7 +7,7 @@
 
 import UIKit
 import iOSDropDown
-
+import CropViewController
 
 class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTETS
@@ -279,11 +279,18 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
-    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        self.imgimage.image = image
+//        self.isImageSelected = true
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+
+    override func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true, completion: nil)
         self.imgimage.image = image
         self.isImageSelected = true
-        picker.dismiss(animated: true, completion: nil)
+        // 'image' is the newly cropped version of the original image
     }
 }
 

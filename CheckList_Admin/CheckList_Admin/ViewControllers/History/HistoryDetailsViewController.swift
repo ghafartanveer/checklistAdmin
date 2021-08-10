@@ -66,7 +66,7 @@ class HistoryDetailsViewController: BaseViewController, TopBarDelegate {
     
     func setCheckinDetails() {
        print(historyDetailObject)
-        teckNameLbl.text = (historyDetailObject.technician?.firstName ?? "") + " " + (historyDetailObject.technician?.firstName ?? "")
+        teckNameLbl.text = (historyDetailObject.technician?.firstName ?? "") + " " + (historyDetailObject.technician?.lastName ?? "")
         techEmail.text = historyDetailObject.technician?.email
         customerNameLbl.text = historyDetailObject.activity?.customerName
         regNoLbl.text = historyDetailObject.activity?.registrationNumber

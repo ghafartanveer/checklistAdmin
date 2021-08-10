@@ -8,32 +8,67 @@
 import UIKit
 import WebKit
 
+import PDFKit
 class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKNavigationDelegate {
     
     //MARK: - IBOUTLETS
     @IBOutlet weak var webView: WKWebView!
+    
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var pageCountLbl: UILabel!
+    
+    @IBOutlet weak var bottomView: UIView!
+    
+    @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var containerLeadingConst: NSLayoutConstraint!
+    @IBOutlet weak var containerTrailConst: NSLayoutConstraint!
+    
     //MARK: - Var& Objects
     let imageLogo = UIImage(named: "login_logo")
+    var pdfView = PDFView()
+    var lable = UILabel()
+    
+    var numberOfPages = 0
+    var pageNumber = 0
+    
+    var isNext = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.navigationDelegate = self
+        
+        // webView.navigationDelegate = self
+        pdfView.backgroundColor = .clear
+        
+        pdfView = PDFView(frame: self.containerView.bounds)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.createPDF()
-        
-        
         if let container = self.mainContainer{
             container.delegate = self
             
         }
+        self.createPDF()
+        togleIsNext()
     }
-    
+        
+
+    func pageIndex(page: PDFPage) -> Int? {
+        guard let pdfDocument = pdfView.document else { return nil }
+        
+        return pdfDocument.index(for: page)
+    }
     
     //MARK: - Functions
     func actionBack() {
-        self.navigationController?.popViewController(animated: true)
+        if isNext {
+            togleIsNext()
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     func createPDF() {
@@ -75,16 +110,38 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKN
         
         guard let outputURL = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("ChecklistReport").appendingPathExtension("pdf")
         else { fatalError("Destination URL not created") }
-        
+        //{ self.showAlertView(message: PopupMessages.pdfCreatedSuccess) }
         pdfData.write(toFile: "\(documentsPath)/ChecklistReport.pdf", atomically: true)
+        
         drawImageOnPDF(path: "\(documentsPath)/ChecklistReport.pdf")
-        loadPDF(filename: "ChecklistReport.pdf")
+        
+        openInpdfKit(path:"\(documentsPath)/ChecklistReport.pdf")
+        //loadPDFInWebVie(filename: "ChecklistReport.pdf")
     }
     
-    func loadPDF(filename: String) {
+    func openInpdfKit(path: String) {
+        
+        let url = URL(fileURLWithPath: path)
+        pdfView.usePageViewController(true, withViewOptions: [UIPageViewController.OptionsKey.interPageSpacing: 20])
+        
+        pdfView.document = PDFDocument(url: url)
+        pdfView.displayDirection = .horizontal
+        pdfView.displayMode = .singlePageContinuous
+        pdfView.autoScales = true
+        pdfView.maxScaleFactor = 4.0
+        pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+        pdfView.backgroundColor = .clear
+        pdfView.tintColor = .clear
+        pdfView.document?.pageCount
+        self.containerView.addSubview(pdfView)
+    }
+    
+    func loadPDFInWebVie(filename: String) {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let url = URL(fileURLWithPath: documentsPath, isDirectory: true).appendingPathComponent(filename)
         let urlRequest = URLRequest(url: url)
+        pdfView.usePageViewController(true)
+
         webView.load(urlRequest)
     }
     
@@ -106,28 +163,7 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKN
     </thead>
     <tbody style="border-bottom: 1px solid black;">
 """
-        
-        
-        
-        
-        
-        
-        
-//        var text = """
-//
-// <table style="width:100%"> <tr> <td> <h1>Technician completed Task</h1> </td>  <td> <img src="breakFast.png"> </td>
-// </tr> </table> <br> <br> <br> <table style="width:100%">
-//            <tr> <th style="text-align: left;">Tech Name <hr style="width:110%"> </th>
-//            <th style="text-align: left;">Checklist Name <hr style="width:110%"> </th>
-//            <th style="text-align: left;">Check In <hr style="width:110%"> </th>
-//            <th style="text-align: left;">Check Out <hr style="width:100%"> </th>
-//
-//            </tr>
-// """
-        
-        
-        
-        //        var text1 = "<h1>Technician Completed Task </h1> <p><img src=\"\(imgData)\" alt=\"\" width=\"60\" height=\"72\" /></p> <hr> <br> </br> Tech name &emsp; CheckList Name &emsp; Check In &emsp; Check out <hr> "
+
         for record in pdfRecordsList {
             
             let  name = (record.technician?.firstName ?? "") + " " + (record.technician?.lastName ?? "")
@@ -169,7 +205,7 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKN
         //UIGraphicsBeginPDFContextToData(data, CGRectZero, nil)
         
         for index in 1...pageCount! {
-            
+            print(index)
             let page =  pdf?.page(at: index)
             
             let pageFrame = page?.getBoxRect(.mediaBox)
@@ -195,12 +231,66 @@ class HistoryPdfGeneratorViewController: BaseViewController, TopBarDelegate, WKN
             imageLogo!.draw(in: CGRect(x: 455.2, y: 40, width: 95, height: 65))
             }
             // Draw red box on top of page
-            //UIColor.redColor().set()
-            //UIRectFill(CGRectMake(20, 20, 100, 100));
+//            UIColor.red.set()
+//            UIRectFill(CGRect(x: 20, y: 20, width: 100, height: 100));
+            lable.text = "Page " + String(index)
+            pageCountLbl.text = "1 OF " + String(index)
+            numberOfPages = index
+            lable.drawText(in: CGRect(x: 595.2/2, y: 750.0, width: 60, height: 30))
         }
-        
-        
         UIGraphicsEndPDFContext()
     }
+    
+    func togleIsNext() {
+        if !isNext {
+            isNext = true
+            bottomViewHeight.constant = 0
+            bottomView.isHidden = true
+            containerLeadingConst.constant = 10
+            containerTrailConst.constant = 10
+            containerView.isUserInteractionEnabled = true
+            containerView.frame = CGRect(x: 10, y: 10, width: self.view.frame.width - 20, height: self.view.frame.height)
+            pdfView.frame = containerView.bounds
+            pdfView.layoutIfNeeded()
+            pdfView.reloadInputViews()
+
+            
+        } else {
+            isNext = false
+            bottomViewHeight.constant = 80
+            bottomView.isHidden = false
+            containerLeadingConst.constant = 50
+            containerTrailConst.constant = 50
+            containerView.isUserInteractionEnabled = false
+            containerView.frame = CGRect(x: 60, y: 10, width: self.view.frame.width - 120, height: self.view.frame.height - 80)
+            pdfView.frame = containerView.bounds
+            pdfView.layoutIfNeeded()
+            pdfView.reloadInputViews()
+            //self.viewWillAppear(true)
+           // self.viewWillLayoutSubviews()
+            pageCountLbl.text = "1 OF " + String(numberOfPages)
+            
+        }
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        openInpdfKit(path:"\(documentsPath)/ChecklistReport.pdf")
+    }
+    
+    @IBAction func previousPage(_ sender: Any) {
+        //pdfView.canGoForward = true
+        pdfView.goToNextPage(Any?.self)
+        pageCountLbl.text = String(pdfView.currentPage!.pageRef?.pageNumber ?? 0) + " OF " + String(pdfView.document?.pageCount ?? 0)
+
+    }
+    
+    @IBAction func nextGoPage(_ sender: Any) {
+        pdfView.goToPreviousPage(self)
+        pageCountLbl.text = String(pdfView.currentPage!.pageRef?.pageNumber ?? 0) + " OF " + String(pdfView.document?.pageCount ?? 0)
+    }
+    
+    @IBAction func nextBtnAction(_ sender: Any) {
+        
+        togleIsNext()
+    }
+    
 }
 

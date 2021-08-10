@@ -11,6 +11,7 @@ import SDWebImage
 import MBProgressHUD
 import StoreKit
 import AVFoundation
+import CropViewController
 
 
 extension UIView {
@@ -73,7 +74,7 @@ extension UIViewController{
 }
 
 
-public class BaseViewController : UIViewController,SWRevealViewControllerDelegate,UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,KYDrawerControllerDelegate {
+public class BaseViewController : UIViewController,SWRevealViewControllerDelegate,UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,KYDrawerControllerDelegate, CropViewControllerDelegate {
     
     var hud = MBProgressHUD()
     var disableMenuGesture: Bool = false
@@ -156,11 +157,30 @@ public class BaseViewController : UIViewController,SWRevealViewControllerDelegat
     }
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        picker.dismiss(animated: true, completion: nil)
+        presentCropViewController(imgToCrop: image)
+        
         print("image selected succesfully")
     }
     
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.profileImagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    public func presentCropViewController(imgToCrop: UIImage) {
+        let image: UIImage = imgToCrop //Load an image
+        
+        let cropViewController = CropViewController(image: image)
+        cropViewController.delegate = self
+        present(cropViewController, animated: true, completion: nil)
+    }
+    
+    public func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true, completion: nil)
+        
+        print("Croped image here")
+        // 'image' is the newly cropped version of the original image
     }
     
     func showAlertVIew(message:String, title:String) {

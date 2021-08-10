@@ -14,6 +14,7 @@ class SideMenuViewController: BaseViewController {
     @IBOutlet weak var lblEmail: UILabel!
     @IBOutlet weak var imgUser: UIImageView!
     
+    @IBOutlet weak var logoutIcon: UIImageView!
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,8 @@ class SideMenuViewController: BaseViewController {
     
     //MARK: - FUNCTIONS
     func refreshData(){
+        logoutIcon.tintColor = #colorLiteral(red: 0.9803921569, green: 0.06666666667, blue: 0, alpha: 1)
+
         if let info = Global.shared.user{
             self.lblTitle.text = info.firstName + " " + info.lastName
             self.lblEmail.text = info.email

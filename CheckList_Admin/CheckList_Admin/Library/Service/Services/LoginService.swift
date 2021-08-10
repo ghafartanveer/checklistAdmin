@@ -76,7 +76,9 @@ class LoginService: BaseService {
         self.makePostAPICallWithMultipart(with: completeURL, dict: dict, params: params, headers: self.getHeaders()) { (message, success, json, response) in
             
             if success{
+                let token = Global.shared.user.token
                 let info = UserViewModel(obj: json![KEY_RESPONSE_DATA])
+                info.token = token
                 self.saveUserInfo(info)
                 completion(message, success, info)
             }else{

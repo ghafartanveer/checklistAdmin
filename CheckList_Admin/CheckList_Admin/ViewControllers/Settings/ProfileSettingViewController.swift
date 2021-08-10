@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CropViewController
 
 class ProfileSettingViewController: BaseViewController, TopBarDelegate {
     
@@ -17,6 +18,10 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPhone: UITextField!
     
+    @IBOutlet weak var fNameUnderLineView: UIView!
+    @IBOutlet weak var lNameUnderLineView: UIView!
+    @IBOutlet weak var emailUnderLineView: UIView!
+    @IBOutlet weak var phoneUnderLineView: UIView!
     
     //MARK: - OBJECT AND VERIABLES
    
@@ -27,6 +32,11 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
         self.viewShadow.dropShadow(radius: 5, opacity: 0.4)
         self.configureUserInfo()
         self.setupAuthObserver()
+        
+        txtFirstName.delegate = self
+        txtLastName.delegate = self
+        txtEmail.delegate = self
+        txtPhone.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +80,18 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
     }
     
     //MARK: - FUNCTIONS
+    
+    func setUnderLineBGColor(view: UIView) {
+        
+        let inativeBottomLinecolor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        
+        fNameUnderLineView.backgroundColor = inativeBottomLinecolor
+        lNameUnderLineView.backgroundColor = inativeBottomLinecolor
+        emailUnderLineView.backgroundColor = inativeBottomLinecolor
+        phoneUnderLineView.backgroundColor = inativeBottomLinecolor
+        view.backgroundColor = #colorLiteral(red: 0.9803921569, green: 0.3450980392, blue: 0.3960784314, alpha: 1)
+    }
+    
     func actionBack() {
         self.loadHomeController()
     }
@@ -114,8 +136,11 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
             self.txtFirstName.text = info.firstName
             self.txtLastName.text = info.lastName
             self.txtEmail.text = info.email
+            self.txtEmail.isUserInteractionEnabled = false
             self.txtPhone.text = info.phoneNumber
             self.setImageWithUrl(imageView: self.imgProfile, url: info.image, placeholderImage: AssetNames.Box_Blue)
+        } else {
+            self.txtEmail.isUserInteractionEnabled = false
         }
     }
     
@@ -131,13 +156,36 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
     
     
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
-    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        self.imgProfile.image = image
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+    
+    override func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+        cropViewController.dismiss(animated: true, completion: nil)
         self.imgProfile.image = image
-        picker.dismiss(animated: true, completion: nil)
+        // 'image' is the newly cropped version of the original image
     }
 }
 
+extension ProfileSettingViewController :  UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case txtFirstName:
+            setUnderLineBGColor(view: fNameUnderLineView)
+        case txtLastName:
+            setUnderLineBGColor(view: lNameUnderLineView)
+        case txtEmail:
+            setUnderLineBGColor(view: emailUnderLineView)
+        case txtPhone:
+            setUnderLineBGColor(view: phoneUnderLineView)
+        default:
+            print("default not defined yet")
+        }
+    }
+}
 
 //MARK: - EXTENSION API CALLS
 extension ProfileSettingViewController{
@@ -169,6 +217,11 @@ extension ProfileSettingViewController{
                     self.stopActivity()
                     
                     if success{
+                        
+//                        self.showAlertView(message: message, title: "", doneButtonTitle: "Ok") { (UIAlertAction) in
+//                            //self.loadHomeController()
+//                            //self.navigationController?.popViewController(animated: true)
+//                        }
                         self.showAlertView(message: message)
                         self.configureUserInfo()
                         
