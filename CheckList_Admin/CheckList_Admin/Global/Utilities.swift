@@ -349,6 +349,8 @@ class Utilities {
         //let secndlastMondy = gregorian.date(byAdding: .day, value: -7, to: LastMonday)
         
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
         formatter.dateFormat = "YYYY-MM-dd"
         
         let lastMondStr = formatter.string(from: sunday ?? Date())
@@ -460,7 +462,8 @@ class Utilities {
         
         
         let formatter = DateFormatter()
-        
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = formatter.date(from: replaced) ?? Date()
         
@@ -484,7 +487,8 @@ class Utilities {
         
         
         let formatter = DateFormatter()
-        
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
         formatter.dateFormat = inPutFormate //"yyyy-MM-dd HH:mm:ss"
         let date = formatter.date(from: replaced) ?? Date()
         
@@ -507,6 +511,8 @@ class Utilities {
         replaced = replaced.replacingOccurrences(of: " am", with: "", options: [.caseInsensitive])
 
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
         formatter.dateFormat = formate//"yyyy-MM-dd HH:mm:ss"
         let date = formatter.date(from: replaced) ?? Date()
         
