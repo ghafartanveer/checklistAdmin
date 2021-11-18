@@ -25,8 +25,8 @@ class LoginViewController: BaseViewController {
         //self.txtEmail.text = "newton@yopmail.com"
         //self.txtPassword.text = "123456"
         
-        self.txtEmail.text = "muaazadmin@yopmail.com"
-        self.txtPassword.text = "1234567"
+        self.txtEmail.text = "superadminchecklist@yopmail.com"//"m1admin@yopmail.com"
+        self.txtPassword.text = "200333"//123456"
         
 //        self.txtEmail.text = "superadminchecklist@yopmail.com"
 //        self.txtPassword.text = "200333"//"12345678"
@@ -52,6 +52,12 @@ class LoginViewController: BaseViewController {
     @IBAction func actionForgotPassword(_ sender: UIButton){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.ForgotPasswordViewController) as! ForgotPasswordViewController
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func actionSignUp(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AdminSignupViewController) as! AdminSignupViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     //MARK: - FUNCTIONS

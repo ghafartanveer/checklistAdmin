@@ -132,16 +132,17 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
     }
     
     func configureUserInfo(){
-        if let info = Global.shared.user{
+            let info = Global.shared.user
             self.txtFirstName.text = info.firstName
             self.txtLastName.text = info.lastName
             self.txtEmail.text = info.email
             self.txtEmail.isUserInteractionEnabled = false
             self.txtPhone.text = info.phoneNumber
             self.setImageWithUrl(imageView: self.imgProfile, url: info.image, placeholderImage: AssetNames.Box_Blue)
-        } else {
+        if info.email != "" {
             self.txtEmail.isUserInteractionEnabled = false
         }
+        
     }
     
     //MARK: - CHANGE PASSWORD DELEGATE METHODS

@@ -85,12 +85,11 @@ extension StoreListViewController: UITableViewDelegate, UITableViewDataSource, S
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //                let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.WorkListViewController) as! WorkListViewController
-        //                self.navigationController?.pushViewController(vc, animated: true)
-        //            }
-        //        }
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.StoreWorkerListViewController) as! StoreWorkerListViewController
+        vc.store = self.storeObject.storeList[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension

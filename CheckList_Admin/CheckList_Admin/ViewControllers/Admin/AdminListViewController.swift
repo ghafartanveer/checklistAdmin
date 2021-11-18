@@ -65,12 +65,15 @@ class AdminListViewController: BaseViewController, TopBarDelegate {
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, AdminListTableViewCellDelegate{
     
+    func callBackApproveAdmin(index: Int) {
+        let adminID = self.adminObject.adminList[index].id
+        self.adminIndex = index
+        self.ApproveAdminApi(param: [DictKeys.User_Id: adminID])
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.adminObject.adminList.count
     }
-    
-   
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.AdminListTableViewCell) as! AdminListTableViewCell
@@ -194,40 +197,6 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
         return [delete,Edit]
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let deleteAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
-//            //delete Action here
-//
-//            self.showAlertView(message: PopupMessages.Sure_To_Delete_Admin, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-//
-//                let userID = self.adminObject.adminList[indexPath.row].id
-//                self.deleteAdminApi(param: [DictKeys.User_Id: userID])
-//
-//            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-//
-//            }
-//
-//        })
-//
-//        deleteAction.image = UIImage(named: AssetNames.swipeDelete)
-//        deleteAction.backgroundColor = .red
-//
-//
-//        let aditAction = UIContextualAction(style: .normal, title: "", handler: {a,b,c in
-//            //Adit Action here
-//
-//            let adminObj = self.adminObject.getAdminDetailAganistID(AdminID: self.adminObject.adminList[indexPath.row].id)
-//            self.moveToCreateAdminAndTechnicianVC(isForEdit: true, adminObject: adminObj)
-//
-//        })
-//
-//        aditAction.image = UIImage(named: AssetNames.swipeAdit)
-//        aditAction.backgroundColor = .white
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction,aditAction])
-//
-//    }
-    
     //MARK: - AdminListTableViewCell DELEGATE METHODS
     func callBackActionDeleteAdmin(index: Int) {
         //removed
@@ -252,6 +221,7 @@ extension AdminListViewController: UITableViewDelegate, UITableViewDataSource, A
         self.moveToAdminAndTechnicianDetailsVC(adminObject: adminObj, isFromTechnician: false)
         print("see admin details here")
     }
+    
     
 }
 //MARK: - EXTENSION API CALLS
@@ -319,6 +289,32 @@ extension AdminListViewController{
         }
     }
     
+    func ApproveAdminApi(param: ParamsAny){
+        self.startActivity()
+        GCD.async(.Background) {
+            AdminTechnicianService.shared().ApproveAdminApi(params: param) { (message, success, adminInfo) in
+                GCD.async(.Main) {
+                    self.stopActivity()
+                    
+                    if success{
+                        if self.adminObject.adminList[self.adminIndex].is_admin == 0{
+                            self.adminObject.adminList[self.adminIndex].is_admin = 1
+                        }
+                       // self.adminObject = adminInfo ?? AdminListViewModel()
+                        self.showAlertView(message: message)
+
+                        self.viewTabel.reloadData()
+                        
+                    }else{
+                        self.showAlertView(message: message)
+                    }
+                }
+            }
+        }
+    }
+    
+    
 }
+
 
 

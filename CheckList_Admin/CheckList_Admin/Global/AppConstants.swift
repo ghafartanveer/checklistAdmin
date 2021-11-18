@@ -57,12 +57,14 @@ struct DictKeys {
     static let sub_category_name = "sub_category_name"
     static let not_applicable = "not_applicable"
     static let is_priority = "is_priority"
+    static let is_payable = "is_payable"
+    static let is_admin = "is_admin"
     
     
 }
 
 struct EndPoints {
-    
+    static let PAYMENT_URL = "http://mashghol.com/checklist_app/public/pricing_plans/"
     static let BASE_URL = "http://mashghol.com/checklist_app/public/api/"
     static let login = "login"
     static let admins_List = "admins_list"
@@ -89,6 +91,7 @@ struct EndPoints {
     static let Search = "search"
     static let GraphStats = "stats"
     static let States = "statistics"
+    static let admin_approval = "admin_approval"
     
 
 }

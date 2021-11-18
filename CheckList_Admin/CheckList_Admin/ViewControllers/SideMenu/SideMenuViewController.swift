@@ -39,11 +39,11 @@ class SideMenuViewController: BaseViewController {
     func refreshData(){
         logoutIcon.tintColor = #colorLiteral(red: 0.9803921569, green: 0.06666666667, blue: 0, alpha: 1)
 
-        if let info = Global.shared.user{
+         let info = Global.shared.user
             self.lblTitle.text = info.firstName + " " + info.lastName
             self.lblEmail.text = info.email
             self.setImageWithUrl(imageView: self.imgUser, url: info.image, placeholderImage: AssetNames.Box_Blue)
-        }
+        
     }
 }
 
@@ -51,12 +51,22 @@ class SideMenuViewController: BaseViewController {
 //MARK: - EXTENISON TABEL VIEW METHODS
 extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SideMenu.MENULIST.count
+        if Global.shared.user.loginType == LoginType.Admin {
+            return SideMenu.AdminMenuList.count
+        } else {
+            return SideMenu.SuperAdminMenuList.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.SideMenuTableViewCell) as! SideMenuTableViewCell
-        cell.configureMenu(info: SideMenu.MENULIST[indexPath.row])
+        if Global.shared.user.loginType == LoginType.Admin {
+            cell.configureMenu(info: SideMenu.AdminMenuList[indexPath.row])
+        } else {
+            cell.configureMenu(info: SideMenu.SuperAdminMenuList[indexPath.row])
+        }
+        
         return cell
     }
     
@@ -73,14 +83,27 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
                      container.showAdminController()
                 }
             } else if indexPath.row == 1{
-                container.showCategoryController()
+                if Global.shared.user.loginType == LoginType.Admin {
+                    container.showCategoryController()
+                } else {
+                    
+                    self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin, title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                        container.showHomeController()
+                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in }
+                }
             }else if indexPath.row == 2{
                 container.showTechnicianController()
             }else if indexPath.row == 3 {
                 if Global.shared.user.loginType == LoginType.Admin{
-                    self.showAlertView(message: PopupMessages.youDontHavePermitonForTheFeature, title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-                        container.showHomeController()
-                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in }
+                    
+                    container.showwebViewController()
+//                    self.showAlertView(message: "goto payment plans", title: "", doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+//                        container.showHomeController()
+//                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in }
+                    
+                   // PaymentPlansViewController
+                    
+                
                 } else {
                     container.showStoreListController()
                 }

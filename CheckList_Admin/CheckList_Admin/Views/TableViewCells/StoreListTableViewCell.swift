@@ -30,7 +30,7 @@ class StoreListTableViewCell: BaseTableViewCell {
     }
     //MARK: - FUNCTIONS
     func configureStore(info: StoreViewModel, indexP: Int){
-        self.lblStoreName.text = info.name
+        self.lblStoreName.text = "\(indexP+1) " + ". " + info.name
         self.lblAddres.text = info.address
         self.index = indexP
     }

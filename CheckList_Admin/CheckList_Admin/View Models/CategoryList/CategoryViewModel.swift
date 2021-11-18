@@ -63,7 +63,8 @@ class CategoryViewModel {
         var imageStrArray:[String] = [""]
         let idArr:[Int] = ids
         for question in subCategoryList {
-            let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.subcategoryName,"not_applicable": question.notApplicable,"sub_category_description" :question.subcategoryDescription, "is_priority" : question.isPriority ]
+            let questionParams : ParamsAny = ["id" : question.id,"sub_category_name" : question.subcategoryName,"not_applicable": question.notApplicable,"sub_category_description" :question.subcategoryDescription, "is_priority" : question.isPriority,
+                                     "notes": question.note ]
             
             categoryParam.append(questionParams)
         }

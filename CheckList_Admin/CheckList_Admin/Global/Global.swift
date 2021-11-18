@@ -10,7 +10,7 @@ class Global {
         }
         return Static.instance
     }
-    var user: UserViewModel!
+    var user = UserViewModel()
     var isLogedIn:Bool = false
     var fcmToken:String = "some dummy text for now"
     var url: String  = "http://110.36.237.219"

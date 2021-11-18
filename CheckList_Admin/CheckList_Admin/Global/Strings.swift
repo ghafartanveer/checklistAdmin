@@ -10,12 +10,19 @@ let ALERT_TITLE_APP_NAME        = "CheckList"
 let EMAIL_REGULAR_EXPRESSION    = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 let NAME_REGULER_EXPRESSION = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 struct SideMenu {
-    static let MENULIST = [["title":"Admin","image":"Admin"],
+    static let SuperAdminMenuList = [["title":"Admin","image":"Admin"],
                            
                            ["title":"Check List","image":"CheckList-menu"],
                            ["title":"Technician","image":"Technician"],
                            ["title":"Store List","image":"StoreList"],
                            ["title":"Setting","image":"settings"]]
+    
+    static let AdminMenuList = [["title":"Admin","image":"Admin"],
+                            ["title":"Check List","image":"CheckList-menu"],
+                           ["title":"Technician","image":"Technician"],
+                           ["title":"Upgrad Plan ","image":"ic_upgrade"],
+                           ["title":"Setting","image":"settings"]]
+    
 }
 struct HomeMenu {
     static let MENU_LIST = [["title":"Admins","image":"Admin-icon", "subTitle": "Number of Admins"],
@@ -133,6 +140,9 @@ struct ControllerIdentifier {
     static let CheckListHistoryViewController = "CheckListHistoryViewController"
     static let HistoryPdfGeneratorViewController = "HistoryPdfGeneratorViewController"
     static let HistoryNavVC = "HistoryNavVC"
+    static let AdminSignupViewController = "AdminSignupViewController"
+    static let StoreWorkerListViewController = "StoreWorkerListViewController"
+    static let WebViewNavVC = "WebViewNavVC"
 }
 
 struct ValidationMessages {
@@ -230,6 +240,7 @@ struct PopupMessages {
     static let EntertaskName = "Plese Enter task Title!"
     static let PleaseAddAtLeastOneTask = "Please add at least one task!"
     static let pdfCreatedSuccess = "Pdf report saved successfully!"
+    static let PleaseLogInAsAdmin = "Please login as admin"
     
 }
 

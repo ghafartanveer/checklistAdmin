@@ -53,6 +53,19 @@ class AdminTechnicianService: BaseService{
         }
     }
     
+    //MARK:- APPROVE ADMIN API
+    func ApproveAdminApi(params: Parameters?,completion: @escaping (_ error: String, _ success: Bool, _ admin: AdminListViewModel?)->Void){
+        
+        let completeURL = EndPoints.BASE_URL + EndPoints.admin_approval
+        self.makePostAPICall(with: completeURL, params: params, headers: self.getHeaders()) { (message, success, json, responseType) in
+            if success{
+                let info = AdminListViewModel(list: json![KEY_RESPONSE_DATA])
+                completion(message,success, info)
+            }else{
+                completion(message,success, nil)
+            }
+        }
+    }
     //MARK:- ADD ADMIN API
     func registerAdminAndTechnicianApi(params: Parameters,dict: [String: Data]?, completion: @escaping (_ error: String, _ success: Bool)->Void){
         

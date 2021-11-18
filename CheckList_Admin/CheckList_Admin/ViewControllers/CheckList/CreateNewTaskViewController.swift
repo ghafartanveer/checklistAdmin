@@ -16,13 +16,14 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
     @IBOutlet weak var isPriorityBtn: UIButton!
     @IBOutlet weak var ifNeededBtn: UIButton!
     
+    @IBOutlet weak var descriptionContainerHeight: NSLayoutConstraint!
     @IBOutlet weak var descriptionTexView: KMPlaceholderTextView!
-    
     @IBOutlet weak var descriptionTxtVContainer: UIView!
     
+    @IBOutlet weak var notetxtVContainer: UIView!
+    @IBOutlet weak var noteTxtView: KMPlaceholderTextView!
+    
     @IBOutlet weak var saveBtn: UIButton!
-    
-    
     
     //MARK: - Vars/ objects
     // var categoryDetailObject = CategoryViewModel()
@@ -47,8 +48,10 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
         
         if categoryObj.hasImages == 0 {
             descriptionTxtVContainer.isHidden = true
+            descriptionContainerHeight.constant = 0
         } else {
             descriptionTxtVContainer.isHidden = false
+            descriptionContainerHeight.constant = 130
         }
         
         //saveTaskList()
@@ -76,6 +79,8 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
         notApplicable = Global.shared.subCategoryList[indexToAdit].notApplicable
         isPriority = Global.shared.subCategoryList[indexToAdit].isPriority
         descriptionTexView.text = Global.shared.subCategoryList[indexToAdit].subcategoryDescription
+        
+        noteTxtView.text = Global.shared.subCategoryList[indexToAdit].note
         isPriorityBtn.isSelected = tf[isPriority]
         ifNeededBtn.isSelected = tf[notApplicable]
     }
@@ -136,6 +141,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 newTask.subcategoryName = taskTileTF.text!
                 newTask.notApplicable = notApplicable
                 newTask.subcategoryDescription = descriptionTexView.text!
+                newTask.note = noteTxtView.text!
                 newTask.isPriority = isPriority
                 
                 Global.shared.subCategoryList.insert(newTask, at: 0)
@@ -156,7 +162,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                 Global.shared.subCategoryList[indexToAdit].notApplicable = self.notApplicable
                 Global.shared.subCategoryList[indexToAdit].subcategoryName = taskTileTF.text!
                 Global.shared.subCategoryList[indexToAdit].subcategoryDescription =  descriptionTexView.text!
-                
+                Global.shared.subCategoryList[indexToAdit].note =  noteTxtView.text!
                 //subCategoryList.insert(newTask, at: 0)
                 Global.shared.isSubCategoryListEdited = true
                 

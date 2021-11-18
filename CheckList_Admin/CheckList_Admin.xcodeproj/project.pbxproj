@@ -163,6 +163,9 @@
 		35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */; };
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
+		DA0FE8952743B4980000F130 /* AdminSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FE8942743B4980000F130 /* AdminSignupViewController.swift */; };
+		DA616293274525AF00474A20 /* PaymentPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA616292274525AF00474A20 /* PaymentPlansViewController.swift */; };
+		DAE2B9802743DE3D00CA975A /* StoreWorkerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */; };
 		DE0B27FD268DE0FF00E327CC /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */; };
 		DE51BBAF268F17C300923FFA /* CreateNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBAE268F17C300923FFA /* CreateNewTaskViewController.swift */; };
 		DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBB3268F1B8400923FFA /* CheckListService.swift */; };
@@ -377,6 +380,9 @@
 		35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTechnicianService.swift; sourceTree = "<group>"; };
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
+		DA0FE8942743B4980000F130 /* AdminSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSignupViewController.swift; sourceTree = "<group>"; };
+		DA616292274525AF00474A20 /* PaymentPlansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPlansViewController.swift; sourceTree = "<group>"; };
+		DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreWorkerListViewController.swift; sourceTree = "<group>"; };
 		DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		DE51BBAE268F17C300923FFA /* CreateNewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewTaskViewController.swift; sourceTree = "<group>"; };
 		DE51BBB3268F1B8400923FFA /* CheckListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListService.swift; sourceTree = "<group>"; };
@@ -949,6 +955,7 @@
 		3593C9BD26382582007B6660 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				DA6162912745258700474A20 /* PaymentPlans */,
 				3593C89D26382067007B6660 /* ViewController.swift */,
 				3593C92326382123007B6660 /* MainContainer */,
 				35A864D2264A6FAE005184BA /* Registration */,
@@ -1035,6 +1042,7 @@
 				35A73322263A875600EA481B /* LoginViewController.swift */,
 				35A864D6264A7002005184BA /* ForgotPasswordViewController.swift */,
 				35A864DB264A762A005184BA /* UpdatePasswordViewController.swift */,
+				DA0FE8942743B4980000F130 /* AdminSignupViewController.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1044,6 +1052,7 @@
 			children = (
 				35453D9A2643E7170080521B /* StoreListViewController.swift */,
 				35453D9F2643E72A0080521B /* AddStoreViewController.swift */,
+				DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -1055,6 +1064,14 @@
 				35453DA42643EB200080521B /* ProfileSettingViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DA6162912745258700474A20 /* PaymentPlans */ = {
+			isa = PBXGroup;
+			children = (
+				DA616292274525AF00474A20 /* PaymentPlansViewController.swift */,
+			);
+			path = PaymentPlans;
 			sourceTree = "<group>";
 		};
 		DE64C7D326947F9A00E0E921 /* GraphStates */ = {
@@ -1345,6 +1362,7 @@
 				DEC32093269310800051B46C /* HistoryTaskViewModel.swift in Sources */,
 				3593C98326382123007B6660 /* BaseService.swift in Sources */,
 				DEC320B126931E760051B46C /* HostoryPdfViewController.swift in Sources */,
+				DA0FE8952743B4980000F130 /* AdminSignupViewController.swift in Sources */,
 				3593C98A26382123007B6660 /* Validations.swift in Sources */,
 				3593C97B26382123007B6660 /* BaseNavigationController.swift in Sources */,
 				35875C46266108C60049F707 /* CreateSubCategoryTableViewCell.swift in Sources */,
@@ -1412,6 +1430,7 @@
 				3593C89A26382067007B6660 /* AppDelegate.swift in Sources */,
 				3593C95026382123007B6660 /* MKActivityIndicatorView.swift in Sources */,
 				3593C8A426382067007B6660 /* CheckList_Admin.xcdatamodeld in Sources */,
+				DAE2B9802743DE3D00CA975A /* StoreWorkerListViewController.swift in Sources */,
 				DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */,
 				3593C9C2263825A3007B6660 /* SideMenuTableViewCell.swift in Sources */,
 				3593C99026382123007B6660 /* AppConstants.swift in Sources */,
@@ -1434,6 +1453,7 @@
 				3593C98926382123007B6660 /* UserDefaultsManager.swift in Sources */,
 				3593C89C26382067007B6660 /* SceneDelegate.swift in Sources */,
 				3593C94A26382123007B6660 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				DA616293274525AF00474A20 /* PaymentPlansViewController.swift in Sources */,
 				35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */,
 				DEC3208D26930FAE0051B46C /* HistoryDetailsViewController.swift in Sources */,
 				3593C98D26382123007B6660 /* String+Extension.swift in Sources */,

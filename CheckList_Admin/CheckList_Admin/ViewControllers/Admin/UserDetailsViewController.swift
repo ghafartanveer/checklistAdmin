@@ -30,6 +30,9 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var techListTV: UITableView!
     @IBOutlet weak var tableViewContainerHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var editBtn: UIButton!
+    @IBOutlet weak var saveBtn: UIButton!
+    
     @IBOutlet weak var contntViewHeight: NSLayoutConstraint!
     //MARK: - OBJECT AND VERIABLES
     var typeLogin = LoginType.Admin
@@ -59,6 +62,13 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
             container.delegate = self
             
             if isFromTechnician {
+                if Global.shared.user.loginType == LoginType.super_admin {
+                    editBtn.isHidden = true
+                    saveBtn.isHidden = true
+                } else {
+                    editBtn.isHidden = false
+                    saveBtn.isHidden = false
+                }
                 technicianListContainerView.isHidden = true
                 tableViewContainerHeight.constant = 0
                 contntViewHeight.constant = 625
@@ -66,6 +76,8 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
                 container.setMenuButton(true, title: TitleNames.TechnicianDetails)
                 typeLogin = LoginType.Technician
             } else {
+                
+                
                 tableViewContainerHeight.constant = 300
                 technicianListContainerView.isHidden = false
                 contntViewHeight.constant = 950
@@ -74,6 +86,7 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
             }
             
         }
+        
     }
     
 //    func getTechWithAdminId() {

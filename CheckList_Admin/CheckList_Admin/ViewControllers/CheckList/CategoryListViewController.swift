@@ -11,7 +11,6 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     //MARK: - IBOUTLETS
     @IBOutlet weak var viewTabel: UITableView!
     
-    
     //MARK: - OBJECT AND VERIBAELS
     var categoryObject = CategoryListViewModel()
     //var checkListQuestionObjData : [CheckListQuestionViewModel] = []
@@ -37,13 +36,19 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - ACTION METHODS
     @IBAction func actionCreateCategory(_ sender: UIButton){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateCategoryViewController) as! CreateCategoryViewController
-        vc.categoryObj = self.categoryObject
         
-        vc.indexToAditSubCat = -1//indexToAdit
-        self.navigationController?.pushViewController(vc, animated: true)
+        if Global.shared.user.loginType == LoginType.super_admin {
+            self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin)
+        } else {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.CreateCategoryViewController) as! CreateCategoryViewController
+            vc.categoryObj = self.categoryObject
+            
+            vc.indexToAditSubCat = -1//indexToAdit
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
-
+    
     //MARK: - FUNCTIONS
     func moveToAddCategoryVC(isForEdit: Bool, catObject: CategoryViewModel?) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddCategoryViewController) as! AddCategoryViewController
@@ -70,20 +75,20 @@ class CategoryListViewController: BaseViewController, TopBarDelegate {
     func deleteCategry(index: Int) {
         self.showAlertView(message: PopupMessages.Sure_To_Delete_Check_List, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
             
-                            let catID = self.categoryObject.categoryList[index].id
-                            self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
+            let catID = self.categoryObject.categoryList[index].id
+            self.deleteCategoryListApi(param: [DictKeys.Category_Id: catID])
             
-                        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
             
-                        }
-            
-                    }
+        }
+        
+    }
     
     func editCategory(index: Int) {
-                    let catID = self.categoryObject.categoryList[index].id
-                    let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
-                    self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
-                }
+        let catID = self.categoryObject.categoryList[index].id
+        let catObject = self.categoryObject.getCategoryDetailAganistID(CategoryID: catID)
+        self.moveToAddCategoryVC(isForEdit: true, catObject: catObject)
+    }
 }
 
 //MARK: - EXTENSION TABEL VIEW METHODS
@@ -110,12 +115,12 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         aditList(index: indexPath.row)
-//        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
-//        subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
-//        vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
-////        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
-////        vc.checkListQuestionObjData = self.checkListQuestionObjData
-//        self.navigationController?.pushViewController(vc, animated: true)
+        //        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.SubCategoryListViewController) as! SubCategoryListViewController
+        //        subCategoryList = self.categoryObject.categoryList[indexPath.row].subCategoryList
+        //        vc.categoryDetailObject = self.categoryObject.categoryList[indexPath.row]
+        ////        saveTaskList(obj: self.categoryObject.categoryList[indexPath.row])
+        ////        vc.checkListQuestionObjData = self.checkListQuestionObjData
+        //        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -160,7 +165,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
             print("“Delete”")
             
             self.deleteCategry(index: indexPath.row)
-        
+            
         }
         delete.backgroundColor = UIColor(patternImage: newImage)
         
@@ -168,7 +173,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         let backView1 = UIView(frame: CGRect(x: 5, y: 0, width: 70, height: size))
         let innerView1 = UIView(frame: CGRect(x: 0, y: 0, width: 70, height: size-20))
         let myImage1 = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 35))
-
+        
         myImage1.center = innerView1.frame.center
         innerView1.center = backView1.frame.center
         
@@ -178,12 +183,12 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         backView1.backgroundColor = .clear
         innerView1.backgroundColor = .white
         myImage1.backgroundColor = .white
-
+        
         innerView1.dropShadow()
         myImage1.contentMode = .scaleAspectFit
-
+        
         myImage1.image = #imageLiteral(resourceName: "edit_icon") //UIImage(named: AssetNames.Edit_Icon)
-
+        
         myImage1.translatesAutoresizingMaskIntoConstraints = false
         myImage1.centerXAnchor.constraint(equalTo: backView1.centerXAnchor).isActive = true
         myImage1.centerYAnchor.constraint(equalTo: backView1.centerYAnchor).isActive = true
@@ -196,7 +201,7 @@ extension CategoryListViewController: UITableViewDelegate, UITableViewDataSource
         let Edit = UITableViewRowAction(style: .destructive, title: "") { (action, indexPath) in
             
             self.editCategory(index: indexPath.row)
-           print("Edit here")
+            print("Edit here")
         }
         Edit.backgroundColor = UIColor(patternImage: newImage1)
         return [delete,Edit]

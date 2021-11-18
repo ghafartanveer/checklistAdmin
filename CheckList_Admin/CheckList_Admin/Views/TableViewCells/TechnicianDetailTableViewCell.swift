@@ -19,7 +19,7 @@ class TechnicianDetailTableViewCell: BaseTableViewCell {
         // Initialization code
     }
     
-    func configureTechnician(info: AdminViewModel, indexP: Int){
+    func configureTechnician(info: AdminViewModel, indexP: Int = 0){
     
         self.fulNameLbl.text = info.firstName + " " + info.lastName
         self.emailLbl.text = info.email

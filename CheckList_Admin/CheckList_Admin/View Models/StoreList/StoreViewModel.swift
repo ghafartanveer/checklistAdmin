@@ -18,7 +18,8 @@ class StoreViewModel {
     var deletedAt: String
     var createdAt: String
     var updatedAt: String
-    
+    var storeAdmin = AdminViewModel()
+    var storeTechnitian = AdminListViewModel()
     init() {
         self.id = 0
         self.name = ""
@@ -27,6 +28,8 @@ class StoreViewModel {
         self.deletedAt = ""
         self.createdAt = ""
         self.updatedAt = ""
+        self.storeAdmin = AdminViewModel()
+        self.storeTechnitian = AdminListViewModel()
     }
     
     
@@ -38,6 +41,9 @@ class StoreViewModel {
         self.deletedAt = obj["deleted_at"].string ?? ""
         self.createdAt = obj["created_at"].string ?? ""
         self.updatedAt = obj["updated_at"].string ?? ""
+        self.storeAdmin = AdminViewModel(obj: obj["admin"])
+        self.storeTechnitian = AdminListViewModel(list: obj["technician"])
+        
         
     }
 }

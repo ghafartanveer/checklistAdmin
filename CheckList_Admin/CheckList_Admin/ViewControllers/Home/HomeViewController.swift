@@ -23,7 +23,7 @@ class HomeViewController: BaseViewController {
         setupAuthObserver()
         // self.btnPlusShadow.dropShadow(radius: 3, opacity: 0.2)
         
-      ///  self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
+        ///  self.tabelView.register(UINib(nibName: CellIdentifier.PieChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.PieChartTableViewCell)
         self.tabelView.register(UINib(nibName: CellIdentifier.BarChartTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifier.BarChartTableViewCell)
     }
     
@@ -39,7 +39,7 @@ class HomeViewController: BaseViewController {
     }
     
     
-
+    
     
     //MARK: - IBACTION METHODS
     @IBAction func actionAddTask(_ sender: UIButton){
@@ -55,7 +55,7 @@ class HomeViewController: BaseViewController {
 }
 //MARK: - EXTENSION TABEL VIEW METHODS
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCategoryTableViewCellDelegate{
-
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -78,20 +78,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             cell.viewCollection.reloadData()
             return cell
         }else{
-//            if(indexPath.row == 0){
-//                //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
-//                //            cell.ConfigureTypes(index: indexPath.row)
-//                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
-//
-//                cell.configureView()
-//                return cell
-//            }else{
-                
-                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
+            //            if(indexPath.row == 0){
+            //                //            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TaskTypesTableViewCell) as! TaskTypesTableViewCell
+            //                //            cell.ConfigureTypes(index: indexPath.row)
+            //                let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.PieChartTableViewCell) as! PieChartTableViewCell
+            //
+            //                cell.configureView()
+            //                return cell
+            //            }else{
             
-                cell.configureCell(info: self.graphviewModel)
-        
-                return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.BarChartTableViewCell) as! BarChartTableViewCell
+            
+            cell.configureCell(info: self.graphviewModel)
+            
+            return cell
             //}
             
         }
@@ -112,9 +112,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             return 420
             
         }else{
-//            if(indexPath.row == 0){
-//                return 160
-//            }
+            //            if(indexPath.row == 0){
+            //                return 160
+            //            }
             return 270
             
         }
@@ -133,16 +133,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, TaskCa
             }
             
         }else if index == 1{
+            
             let storyboard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.TechnicianListViewController) as! TechnicianListViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }else if index == 2 {
-                            let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
-                            let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
-                self.navigationController?.pushViewController(vc, animated: true)
+            
+            if Global.shared.user.loginType == LoginType.super_admin{
+                self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin)
             } else {
-                moveToTaskListHistiryVC()
+                let storyboard = UIStoryboard(name: StoryboardNames.Home, bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.CategoryListViewController) as! CategoryListViewController
+                self.navigationController?.pushViewController(vc, animated: true)
             }
+            
+        } else {
+            moveToTaskListHistiryVC()
+        }
     }
 }
 

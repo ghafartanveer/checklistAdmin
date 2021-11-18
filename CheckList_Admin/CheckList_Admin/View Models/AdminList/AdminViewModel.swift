@@ -22,9 +22,7 @@ class AdminViewModel {
     var fcmToken: String
     var loginType: String
     var createdAt: String
-    
-    
-    
+    var is_admin: Int
      init(){
         self.id = 0
         self.storeID = 0
@@ -38,6 +36,7 @@ class AdminViewModel {
         self.gender = ""
         self.fcmToken = ""
         self.createdAt = ""
+        self.is_admin = 0
     }
     
     convenience init(obj: JSON){
@@ -54,6 +53,7 @@ class AdminViewModel {
         self.gender = obj["gender"].string ?? ""
         self.fcmToken = obj["fcm_token"].string ?? ""
         self.createdAt = obj["created_at"].string ?? ""
+        self.is_admin = obj["is_admin"].intValue
     }
     
 }

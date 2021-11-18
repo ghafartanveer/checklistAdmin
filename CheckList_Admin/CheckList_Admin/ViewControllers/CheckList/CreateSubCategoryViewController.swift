@@ -16,8 +16,9 @@ class CreateSubCategoryViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var viewImageDespHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var descriptionTextView: KMPlaceholderTextView!
+   // @IBOutlet weak var descriptionTextView: KMPlaceholderTextView!
     
+    @IBOutlet weak var notesTextView: KMPlaceholderTextView!
     
     
     override func viewDidLoad() {

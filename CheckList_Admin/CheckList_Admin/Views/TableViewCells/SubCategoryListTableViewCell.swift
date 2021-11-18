@@ -60,6 +60,13 @@ class SubCategoryListTableViewCell: UITableViewCell {
         } else {
             dscriptionLbl.text = info.subcategoryDescription
         }
+        
+        if info.note.isEmpty || info.note == "null" {
+            dscriptionLbl.text = ""
+        } else {
+            dscriptionLbl.text = info.subcategoryDescription
+        }
+        
         if info.isPriority == 1 {
             self.btnPriority.isSelected = true
         } else {

@@ -38,6 +38,9 @@ class TechnicianListTableViewCell: BaseTableViewCell {
     
     //MARK: - FUNCTIONS
     func configureTechnician(info: AdminViewModel, indexP: Int){
+        if Global.shared.user.loginType == LoginType.super_admin {
+            btnBlock.isHidden = true
+        }
         self.lblFullName.text = info.firstName + " " + info.lastName
         self.lblEmail.text = info.email
         self.setImageWithUrl(imageView: self.imgImage, url: info.image, placeholder: AssetNames.Box_Blue)
@@ -49,12 +52,12 @@ class TechnicianListTableViewCell: BaseTableViewCell {
             self.btnBlock.isSelected = true
         }
         
-        if Global.shared.user.loginType == LoginType.Technician{
-            self.btnBlock.isHidden = true
-           
-        }else{
-            self.btnBlock.isHidden = false
-        }
+//        if Global.shared.user.loginType == LoginType.Technician{
+//            self.btnBlock.isHidden = true
+//           
+//        }else{
+//            self.btnBlock.isHidden = false
+//        }
     }
     
     //MARK: - IBACTION METHODS

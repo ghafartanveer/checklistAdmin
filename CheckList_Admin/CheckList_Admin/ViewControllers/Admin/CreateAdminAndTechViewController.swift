@@ -37,6 +37,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var imgimage: UIImageView!
     
     
+    @IBOutlet weak var btnContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var btnSelectionContainer: UIView!
+    @IBOutlet weak var payBtn: UIButton!
+    @IBOutlet weak var freeBtn: UIButton!
     
     //MARK: - OBJECT AND VERIABLES
     var isFromTechnician: Bool = false
@@ -48,6 +52,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     var storeObj = StoreListViewModel()
     var UserId: Int = 0
     var adminListViewModel = AdminListViewModel()
+    var isPayable = 0
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         self.txtSearchList.isSearchEnable = false
@@ -61,7 +66,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.getStoreListApi()
-
+        self.setPayFreeBtnSelectionOption()
         if let container = self.mainContainer{
             container.delegate = self
             
@@ -88,8 +93,9 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         }
     }
     
+    
     //MARK: - IBACTION METHODS
-   
+    
     @IBAction func addStoreAction(_ sender: Any) {
         navigateToAddStoreVC()
     }
@@ -112,7 +118,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.password: self.txtPassword.text!,
                                      DictKeys.login_type: typeLogin,
                                      DictKeys.Store_Id: self.storeId,
-                                     DictKeys.User_Id: self.UserId]
+                                     DictKeys.User_Id: self.UserId,
+                                     DictKeys.is_payable: isPayable,
+                                     DictKeys.is_admin: 0
+            ]
             if self.isForEdit{
                 let updateImg = [DictKeys.image: self.imgimage.image!.jpegData(compressionQuality: 0.50)!]
                 self.updateAdminProfileApi(params: params, imageData: updateImg)
@@ -122,7 +131,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             }
         }
     }
-
+    
     @IBAction func openDropDown(_ sender: Any) {
         txtSearchList.showList()
     }
@@ -131,7 +140,35 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.fetchProfileImage()
     }
     
+    @IBAction func payBtnAction(_ sender: Any) {
+        payBtn.isSelected = true
+        freeBtn.isSelected = false
+        isPayable = 1
+        
+    }
+    
+    @IBAction func freeBtnAction(_ sender: Any) {
+        payBtn.isSelected = false
+        freeBtn.isSelected = true
+        isPayable = 0
+    }
+    
+    
     //MARK: - FUNCTIONS
+    func setPayFreeBtnSelectionOption() {
+        if Global.shared.user.loginType == LoginType.super_admin {
+            btnContainerHeight.constant = 100
+            btnSelectionContainer.isHidden = false
+            payBtn.isSelected = true
+            freeBtn.isSelected = false
+            isPayable = 1
+            
+        } else {
+            btnContainerHeight.constant = 0
+            btnSelectionContainer.isHidden = true
+        }
+    }
+    
     func configureDropDown(){
         self.txtSearchList.selectedIndex = 0
         if self.storeObj.storeList.count > 0 && !isForEdit  {
@@ -143,15 +180,15 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             }
         }
         if UserDefaultsManager.shared.userInfo.loginType == LoginType.super_admin {
-        var  indexOfStore = 0
-        for (index,store) in storeObj.storeList.enumerated() {
-            if store.id == self.storeId {
-                indexOfStore = index
-                break
+            var  indexOfStore = 0
+            for (index,store) in storeObj.storeList.enumerated() {
+                if store.id == self.storeId {
+                    indexOfStore = index
+                    break
+                }
             }
+            self.txtSearchList.selectedIndex = indexOfStore
         }
-        self.txtSearchList.selectedIndex = indexOfStore
-            }
         self.txtSearchList.didSelect { (selectedText, index, id) in
             self.configureStoreList(idStore: self.storeObj.storeList[index].id)
             
@@ -192,13 +229,13 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             self.txtSearchList.selectedIndex = indexOfStore
             
         } else {
-        let id = UserDefaultsManager.shared.userInfo?.storeID
-        let storeInfo = storeObj.getStoreDetailAganistID(storeID: id!)
-        self.txtStoreName.text = storeInfo.name
-        self.txtStoreAddress.text = storeInfo.address
-        self.storeId = id ?? 0
+            let id = UserDefaultsManager.shared.userInfo?.storeID
+            let storeInfo = storeObj.getStoreDetailAganistID(storeID: id!)
+            self.txtStoreName.text = storeInfo.name
+            self.txtStoreAddress.text = storeInfo.address
+            self.storeId = id ?? 0
             
-       
+            
         }
     }
     
@@ -257,15 +294,15 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             message = isPhoneValid.message //ValidationMessages.enterAValidPhone
             isValid = false
         }
-    
+        
         //if isForEdit{
-           else if !isValidPassword.isValid{
-                message = isValidPassword.message
-                isValid = false
-           } else if !isValidRePassword.isValid {
+        else if !isValidPassword.isValid{
+            message = isValidPassword.message
+            isValid = false
+        } else if !isValidRePassword.isValid {
             message = isValidRePassword.message
             isValid = false
-           }
+        }
         //}
         
         if !isValid{
@@ -279,13 +316,13 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
-//    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-//        self.imgimage.image = image
-//        self.isImageSelected = true
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-
+    //    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    //        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+    //        self.imgimage.image = image
+    //        self.isImageSelected = true
+    //        picker.dismiss(animated: true, completion: nil)
+    //    }
+    
     override func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         cropViewController.dismiss(animated: true, completion: nil)
         self.imgimage.image = image
@@ -370,7 +407,7 @@ extension CreateAdminAndTechViewController{
                             self.txtSearchList.selectedIndex = 0
                             self.configureStoreList(idStore: self.storeId)
                             self.configureDropDown()
-
+                            
                         }
                     }else{
                         self.showAlertView(message: message)

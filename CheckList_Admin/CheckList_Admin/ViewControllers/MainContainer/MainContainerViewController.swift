@@ -179,6 +179,21 @@ class MainContainerViewController: BaseViewController{
         self.viewContainer.addSubview(controller.view)
         controller.didMove(toParent: self)
     }
+    
+    func showwebViewController()  {
+        let storyBoard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
+        var controller = BaseNavigationController()
+        controller = storyBoard.instantiateViewController(withIdentifier: ControllerIdentifier.WebViewNavVC) as! BaseNavigationController
+        if let oldRef = self.baseNavigationController {
+            oldRef.viewDidDisappear(true)
+            oldRef.view.removeFromSuperview()
+        }
+        self.baseNavigationController = controller
+        addChild(controller)
+        controller.view.frame = self.viewContainer.bounds
+        self.viewContainer.addSubview(controller.view)
+        controller.didMove(toParent: self)
+    }
     func showAdminController()  {
         let storyBoard = UIStoryboard(name: StoryboardNames.Admin, bundle: nil)
         var controller = BaseNavigationController()
@@ -239,7 +254,7 @@ class MainContainerViewController: BaseViewController{
     
     
     func logoutUser()  {
-        Global.shared.user = nil
+        Global.shared.user = UserViewModel()
         Global.shared.isLogedIn = false
         UserDefaultsManager.shared.clearUserData()
         UserDefaultsManager.shared.clearToken()

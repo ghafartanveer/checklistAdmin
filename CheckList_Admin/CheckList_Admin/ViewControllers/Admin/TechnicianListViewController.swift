@@ -46,21 +46,31 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
     }
     
     func aditTechAction(index: Int) {
-        let techID = self.technicianObject.adminList[index].id
-        let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
-        self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+        if Global.shared.user.loginType == LoginType.Admin {
+            let techID = self.technicianObject.adminList[index].id
+            let object = self.technicianObject.getAdminDetailAganistID(AdminID: techID)
+            self.moveToAddTechnicianVC(isForEdit: true, techObj: object)
+        } else {
+            self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin)
+
+        }
+        
 
     }
     
     func dleteTech(index: Int) {
-       
-        self.showAlertView(message: PopupMessages.Sure_To_Delete_Technician, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
-            let techID = self.technicianObject.adminList[index].id
-            self.deleteTechnicianApi(param: [DictKeys.User_Id: techID])
-            
-        }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
-            
+        if Global.shared.user.loginType == LoginType.Admin {
+            self.showAlertView(message: PopupMessages.Sure_To_Delete_Technician, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
+                let techID = self.technicianObject.adminList[index].id
+                self.deleteTechnicianApi(param: [DictKeys.User_Id: techID])
+                
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+            }
+        } else {
+            self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin)
+
         }
+       
 
         
     }
@@ -68,7 +78,12 @@ class TechnicianListViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - IBACTION METHODS
     @IBAction func actionAddTechnician(_ sender: UIButton){
-        self.moveToAddTechnicianVC(isForEdit: false, techObj: nil)
+        if Global.shared.user.loginType == LoginType.super_admin {
+            self.showAlertView(message: PopupMessages.PleaseLogInAsAdmin)
+        } else {
+            self.moveToAddTechnicianVC(isForEdit: false, techObj: nil)
+        }
+       
     }
     
     
