@@ -75,6 +75,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             
             if Global.shared.user.loginType == LoginType.Admin {
                 self.viewAddStoreHeight.constant = 0
+                isPayable = 0
             }
             if isFromTechnician{
                 if isForEdit {
@@ -120,7 +121,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.Store_Id: self.storeId,
                                      DictKeys.User_Id: self.UserId,
                                      DictKeys.is_payable: isPayable,
-                                     DictKeys.is_admin: 0
+                                     DictKeys.is_admin: 1
             ]
             if self.isForEdit{
                 let updateImg = [DictKeys.image: self.imgimage.image!.jpegData(compressionQuality: 0.50)!]
@@ -159,10 +160,19 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         if Global.shared.user.loginType == LoginType.super_admin {
             btnContainerHeight.constant = 100
             btnSelectionContainer.isHidden = false
-            payBtn.isSelected = true
-            freeBtn.isSelected = false
-            isPayable = 1
-            
+           
+            if let obj = self.adminObjc{
+                let payStatus = obj.is_payable
+                if payStatus == 0 {
+                    payBtn.isSelected = false
+                    freeBtn.isSelected = true
+                    isPayable = 0
+                } else {
+                    payBtn.isSelected = true
+                    freeBtn.isSelected = false
+                    isPayable = 1
+                }
+            }
         } else {
             btnContainerHeight.constant = 0
             btnSelectionContainer.isHidden = true
@@ -248,9 +258,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 self.txtMobileNumber.text = obj.phoneNumber
                 self.setImageWithUrl(imageView: self.imgimage, url: obj.image, placeholderImage: AssetNames.Box_Blue)
                 //self.btnSave.setTitle("Update", for: .normal)
-                self
+                
                 self.storeId = obj.storeID
                 self.UserId = obj.id
+                
             }
         }
     }

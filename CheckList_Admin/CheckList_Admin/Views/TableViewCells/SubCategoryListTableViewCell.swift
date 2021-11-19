@@ -54,7 +54,8 @@ class SubCategoryListTableViewCell: UITableViewCell {
     
     func configureSubCategory(info: SubCategoryViewModel){
         self.lblTitle.text = info.subcategoryName
-
+        print("Desc : ", info.subcategoryDescription)
+        print("Note : ", info.note)
         if info.subcategoryDescription.isEmpty || info.subcategoryDescription == "null" {
             dscriptionLbl.text = ""
         } else {

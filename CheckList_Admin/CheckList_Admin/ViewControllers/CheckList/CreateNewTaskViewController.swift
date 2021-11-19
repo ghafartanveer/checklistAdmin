@@ -137,7 +137,6 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
                
                 let newTask = SubCategoryViewModel()
                 
-               
                 newTask.subcategoryName = taskTileTF.text!
                 newTask.notApplicable = notApplicable
                 newTask.subcategoryDescription = descriptionTexView.text!

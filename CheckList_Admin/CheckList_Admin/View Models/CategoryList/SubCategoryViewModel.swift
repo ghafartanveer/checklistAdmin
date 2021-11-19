@@ -50,7 +50,7 @@ class SubCategoryViewModel {
         self.subcategoryName = obj["subcategory_name"].string ?? ""
         self.createdAt = obj["created_at"].string ?? ""
         self.subcategoryDescription = obj["subcategory_description"].string ?? ""
-        self.note = obj["note"].string ?? ""
+        self.note = obj["notes"].string ?? ""
     }
 }
           

@@ -8,7 +8,7 @@
 import UIKit
 
 class StoreWorkerListViewController: BaseViewController,TopBarDelegate {
-
+    
     var store = StoreViewModel()
     @IBOutlet weak var workerListtV: UITableView!
     
@@ -16,7 +16,7 @@ class StoreWorkerListViewController: BaseViewController,TopBarDelegate {
         super.viewDidLoad()
         if let container = self.mainContainer{
             container.delegate = self
-            
+            container.setMenuButton(true, title: "Store Wrker List", isTopBarWhite: true)
         }
         workerListtV.delegate = self
         workerListtV.dataSource = self
@@ -27,12 +27,13 @@ class StoreWorkerListViewController: BaseViewController,TopBarDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
-
+    
 }
 
 extension StoreWorkerListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 2
     }
     
@@ -45,16 +46,17 @@ extension StoreWorkerListViewController: UITableViewDelegate, UITableViewDataSou
        }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            if store.storeAdmin.id > 0 {
+                return 1
+            } else {
+                return 0
+            }
         } else {
             return store.storeTechnitian.adminList.count //self.technicianObject.adminList.count
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.TechnicianDetailTableViewCell) as! TechnicianDetailTableViewCell
@@ -62,11 +64,11 @@ extension StoreWorkerListViewController: UITableViewDelegate, UITableViewDataSou
         if indexPath.section == 0 {
             cell.configureTechnician(info: store.storeAdmin)
         } else {
-        cell.configureTechnician(info: store.storeTechnitian.adminList[indexPath.row])
+            cell.configureTechnician(info: store.storeTechnitian.adminList[indexPath.row])
         }
         cell.shadowView.dropShadow(radius: 5, opacity: 0.4)
         cell.userImageView.cornerRadius = cell.userImageView.frame.width/2
-       // print(cell.userImageView.frame.width/2)
+        // print(cell.userImageView.frame.width/2)
         cell.userImageView.clipsToBounds = true
         return cell
     }

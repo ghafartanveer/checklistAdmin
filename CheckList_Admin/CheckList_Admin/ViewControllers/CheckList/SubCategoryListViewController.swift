@@ -170,8 +170,6 @@ extension SubCategoryListViewController: UITableViewDelegate, UITableViewDataSou
         UIGraphicsEndImageContext()
         let delete = UITableViewRowAction(style: .normal, title: "") { (action, indexPath) in
             print("“Delete”")
-            
-
             self.deleteSubCategoryAction(index: indexPath.row)
             
         }

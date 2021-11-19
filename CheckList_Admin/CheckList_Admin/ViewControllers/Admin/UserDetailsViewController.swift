@@ -34,6 +34,11 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var saveBtn: UIButton!
     
     @IBOutlet weak var contntViewHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var btnContainerHeight: NSLayoutConstraint!
+    @IBOutlet weak var btnSelectionContainer: UIView!
+    @IBOutlet weak var payBtn: UIButton!
+    @IBOutlet weak var freeBtn: UIButton!
     //MARK: - OBJECT AND VERIABLES
     var typeLogin = LoginType.Admin
     var techList = [AdminViewModel]()
@@ -42,7 +47,7 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
     var isFromTechnician: Bool = false
     var isImageSelected: Bool = false
     
-    
+    var isPayable = 0
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +63,7 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
         super.viewWillAppear(animated)
         configureDropShadow()
         togleEditable(isAditAble: false)
+        setPayFreeBtnSelectionOption()
         if let container = self.mainContainer{
             container.delegate = self
             
@@ -65,22 +71,26 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
                 if Global.shared.user.loginType == LoginType.super_admin {
                     editBtn.isHidden = true
                     saveBtn.isHidden = true
+                    btnSelectionContainer.isHidden = true
+                    
                 } else {
                     editBtn.isHidden = false
                     saveBtn.isHidden = false
+                    print("here")
                 }
                 technicianListContainerView.isHidden = true
                 tableViewContainerHeight.constant = 0
-                contntViewHeight.constant = 625
+               // contntViewHeight.constant = 625
 
                 container.setMenuButton(true, title: TitleNames.TechnicianDetails)
                 typeLogin = LoginType.Technician
             } else {
-                
-                
+            
+                setPayFreeBtnSelectionOption()
+                //"S admin-> admin"
                 tableViewContainerHeight.constant = 300
                 technicianListContainerView.isHidden = false
-                contntViewHeight.constant = 950
+                //contntViewHeight.constant = 950
                 container.setMenuButton(true, title: TitleNames.AdminDetails)
                 typeLogin = LoginType.Admin
             }
@@ -89,6 +99,27 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
         
     }
     
+    func setPayFreeBtnSelectionOption() {
+        if Global.shared.user.loginType == LoginType.super_admin {
+            btnContainerHeight.constant = 100
+            btnSelectionContainer.isHidden = false
+            let obj = self.adminObjc
+            isPayable = obj?.is_payable ?? 0
+            if isPayable == 0 {
+                payBtn.isSelected = false
+                freeBtn.isSelected = true
+            } else {
+                payBtn.isSelected = true
+                freeBtn.isSelected = false
+
+            }
+            
+        } else {
+            btnContainerHeight.constant = 0
+            btnSelectionContainer.isHidden = true
+        }
+    }
+
 //    func getTechWithAdminId() {
 //        if let obj = self.adminObjc{
 //            self.techList = self.technicianObject.adminList.filter({$0.id == obj.id})
@@ -96,6 +127,19 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
 //    }
     
     //MARK: - IBACTION METHODS
+    
+    @IBAction func payBtnAction(_ sender: Any) {
+        payBtn.isSelected = true
+        freeBtn.isSelected = false
+        isPayable = 1
+        
+    }
+    
+    @IBAction func freeBtnAction(_ sender: Any) {
+        payBtn.isSelected = false
+        freeBtn.isSelected = true
+        isPayable = 0
+    }
     
     @IBAction func actionAddPhoto(_ sender: UIButton){
         self.fetchProfileImage()
@@ -120,7 +164,7 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.phone_number: self.phoneTF.text!,
                                      DictKeys.login_type: typeLogin,
                                      DictKeys.Store_Id: self.adminObjc?.storeID ?? 0,
-                                     DictKeys.User_Id: self.self.adminObjc?.id ?? 0]
+                                     DictKeys.User_Id: self.self.adminObjc?.id ?? 0, DictKeys.is_payable: isPayable]
           
 //                let updateImg = [DictKeys.image: self.profileImageView.image!.jpegData(compressionQuality: 0.50)!]
                 self.updateAdminProfileApi(params: params, imageData: imageData)
@@ -140,6 +184,8 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
         firstNameTF.isUserInteractionEnabled = isAditAble
         lastNameTF.isUserInteractionEnabled = isAditAble
         emailTF.isUserInteractionEnabled = isAditAble
+        payBtn.isUserInteractionEnabled = isAditAble
+        freeBtn.isUserInteractionEnabled = isAditAble
         if isAditAble {
             emailShdowView.borderWidth = 2.0
             emailShdowView.borderColor = .darkGray
