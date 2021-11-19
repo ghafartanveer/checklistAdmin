@@ -162,16 +162,20 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             btnSelectionContainer.isHidden = false
            
             if let obj = self.adminObjc{
-                let payStatus = obj.is_payable
-                if payStatus == 0 {
+                isPayable = obj.is_payable
+                if isPayable == 0 {
                     payBtn.isSelected = false
                     freeBtn.isSelected = true
-                    isPayable = 0
+                   // isPayable = 0
                 } else {
                     payBtn.isSelected = true
                     freeBtn.isSelected = false
-                    isPayable = 1
+                   // isPayable = 1
                 }
+            } else {
+                payBtn.isSelected = false
+                freeBtn.isSelected = true
+                isPayable = 0
             }
         } else {
             btnContainerHeight.constant = 0

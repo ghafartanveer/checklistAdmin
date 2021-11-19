@@ -23,7 +23,7 @@ class AdminViewModel {
     var loginType: String
     var createdAt: String
     var is_admin: Int
-    var  is_payable: Int
+    var is_payable: Int
      init(){
         self.id = 0
         self.storeID = 0
