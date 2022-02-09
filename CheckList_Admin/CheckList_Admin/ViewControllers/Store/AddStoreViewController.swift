@@ -12,7 +12,8 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var txtStoreName: UITextField!
     @IBOutlet weak var txtStoreAddress: UITextView!
     @IBOutlet weak var txtCity: UITextField!
-    
+    @IBOutlet weak var stateTF: UITextField!
+    @IBOutlet weak var zipCodeTF: UITextField!
     //MARK: - OBJECT AND VERIBALES
     var isFromEditStore = false
     var storeObj: StoreViewModel?
@@ -38,11 +39,16 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
             if self.isFromEditStore{
                 self.updateStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
-                                          DictKeys.Store_Id: self.storeObj?.id ?? 0])
+                                          DictKeys.Store_Id: self.storeObj?.id ?? 0,
+                                          DictKeys.state: stateTF.text!,
+                                          DictKeys.zip_code: zipCodeTF.text!,])
             }else{
                 self.addStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
-                                          DictKeys.city: self.txtCity.text!])
+                                          DictKeys.city: self.txtCity.text!,
+                                          DictKeys.state: stateTF.text!,
+                                          DictKeys.zip_code: zipCodeTF.text!
+                ])
             }
             
         }
@@ -55,6 +61,8 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
                 self.txtStoreName.text = obj.name
                 self.txtStoreAddress.text = obj.address
                 self.txtCity.text = obj.city
+                self.stateTF.text = obj.state
+                self.zipCodeTF.text = obj.zip_code
             }
         }
     }
@@ -77,7 +85,17 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
             message = ValidationMessages.Empty_City_Name
             isValid = false
             
-        } else if !isCityNameValid.isValid {
+        }  else if self.stateTF.text!.isEmpty{
+            message = ValidationMessages.Empty_State_Name
+            isValid = false
+            
+        } else if self.zipCodeTF.text!.isEmpty{
+            message = ValidationMessages.Empty_ZipCode_Name
+            isValid = false
+            
+        }
+        
+        else if !isCityNameValid.isValid {
             message = isCityNameValid.message
             isValid = false
         }

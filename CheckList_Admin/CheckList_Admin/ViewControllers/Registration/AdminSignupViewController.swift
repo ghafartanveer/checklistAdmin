@@ -29,6 +29,12 @@ class AdminSignupViewController: BaseViewController {
     @IBOutlet weak var cityShadowV: UIView!
     @IBOutlet weak var cityTF: UITextField!
     
+    @IBOutlet weak var stateShadowV: UIView!
+    @IBOutlet weak var stateTF: UITextField!
+    
+    @IBOutlet weak var zipShadowV: UIView!
+    @IBOutlet weak var zipcodeTF: UITextField!
+    
     @IBOutlet weak var emailShadoView: UIView!
     @IBOutlet weak var emailTF: UITextField!
     
@@ -58,6 +64,8 @@ class AdminSignupViewController: BaseViewController {
         self.viewImgShadow.dropShadow(radius: 4, opacity: 0.5)
         viewImgShadow.dropShadow(radius: 4, opacity: 0.5)
         cityShadowV.dropShadow(radius: 4, opacity: 0.5)
+        stateShadowV.dropShadow(radius: 4, opacity: 0.5)
+        zipShadowV.dropShadow(radius: 4, opacity: 0.5)
         self.viewImgShadow.cornerRadius = viewImgShadow.frame.height/2
         self.viewImgShadow.clipsToBounds = true
     }
@@ -100,10 +108,18 @@ class AdminSignupViewController: BaseViewController {
             message = ValidationMessages.Empty_City_Name
             isValid = false
             
+        } else if self.stateTF.text!.isEmpty{
+            message = ValidationMessages.Empty_State_Name
+            isValid = false
+            
+        } else if self.zipcodeTF.text!.isEmpty{
+            message = ValidationMessages.Empty_ZipCode_Name
+            isValid = false
+            
         } else if !isValidPassword.isValid{
                 message = isValidPassword.message
                 isValid = false
-           } else if !isValidRePassword.isValid {
+        } else if !isValidRePassword.isValid {
             message = isValidRePassword.message
             isValid = false
            }
@@ -149,6 +165,8 @@ class AdminSignupViewController: BaseViewController {
                                          DictKeys.login_type: LoginType.Admin,
                                          DictKeys.is_admin: 0,
                                          DictKeys.city: cityTF.text!,
+                                         DictKeys.state: stateTF.text!,
+                                         DictKeys.zip_code: zipcodeTF.text!,
                                          DictKeys.is_payable: 1
                 ]
              

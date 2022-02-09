@@ -38,6 +38,8 @@ struct DictKeys {
     static let name = "name"
     static let address = "address"
     static let city = "city"
+    static let state = "state"
+    static let zip_code = "zip_code"
     static let password = "password"
     static let login_type = "login_type"
     static let authoraization = "authoraization"
@@ -59,7 +61,6 @@ struct DictKeys {
     static let is_priority = "is_priority"
     static let is_payable = "is_payable"
     static let is_admin = "is_admin"
-    
     
 }
 

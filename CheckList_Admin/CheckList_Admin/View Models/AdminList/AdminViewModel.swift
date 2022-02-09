@@ -39,6 +39,7 @@ class AdminViewModel {
         self.createdAt = ""
         self.is_admin = 0
         self.is_payable = 0
+        
     }
     
     convenience init(obj: JSON){

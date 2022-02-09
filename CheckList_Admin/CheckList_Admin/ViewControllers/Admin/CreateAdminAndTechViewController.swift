@@ -16,6 +16,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var LastNameShadow: UIView!
     @IBOutlet weak var StoreNameShadow: UIView!
     @IBOutlet weak var StoreAddressShadow: UIView!
+    @IBOutlet weak var stateShadowV: UIView!
+    @IBOutlet weak var zipShadowV: UIView!
     @IBOutlet weak var mobileNumShadow: UIView!
     @IBOutlet weak var emailShadow: UIView!
     @IBOutlet weak var passwordShadow: UIView!
@@ -32,6 +34,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var txtConfirmPassword: UITextField!
     @IBOutlet weak var txtStoreAddress: UITextView!
+    @IBOutlet weak var zipcodeTF: UITextField!
+    @IBOutlet weak var stateTF: UITextField!
     @IBOutlet weak var viewAddStoreHeight: NSLayoutConstraint!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imgimage: UIImageView!
@@ -41,6 +45,9 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var btnSelectionContainer: UIView!
     @IBOutlet weak var payBtn: UIButton!
     @IBOutlet weak var freeBtn: UIButton!
+    
+    @IBOutlet weak var zipStateContainerH: NSLayoutConstraint!
+    @IBOutlet weak var zipStateContainerview: UIView!
     
     //MARK: - OBJECT AND VERIABLES
     var isFromTechnician: Bool = false
@@ -72,10 +79,15 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             
             txtStoreName.isUserInteractionEnabled = false
             txtStoreAddress.isUserInteractionEnabled = false
+            zipcodeTF.isUserInteractionEnabled = false
+            stateTF.isUserInteractionEnabled = false
             
             if Global.shared.user.loginType == LoginType.Admin {
                 self.viewAddStoreHeight.constant = 0
                 isPayable = 0
+                print("zipStateContainerH.constant = 0")
+                zipStateContainerH.constant = 0
+                zipStateContainerview.isHidden = true
             }
             if isFromTechnician{
                 if isForEdit {
@@ -83,13 +95,20 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 } else {
                     container.setMenuButton(true, title: TitleNames.Create_Technician)
                 }
-                
-                
                 self.typeLogin = LoginType.Technician
-            }else{ //else from admin
+            }
+            
+            
+            if Global.shared.user.loginType == LoginType.super_admin  {
+                if isForEdit {
+                    container.setMenuButton(true, title: TitleNames.Update_Admin)
+                } else {
+                    container.setMenuButton(true, title: TitleNames.Create_Admin)
+                }
+                //self.typeLogin = LoginType.super_admin//else from admin
                 container.setMenuButton(true, title: TitleNames.Create_Admin)
                 self.viewAddStoreHeight.constant = 70
-                
+
             }
         }
     }
@@ -119,6 +138,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.password: self.txtPassword.text!,
                                      DictKeys.login_type: typeLogin,
                                      DictKeys.Store_Id: self.storeId,
+                                     DictKeys.state: stateTF.text ?? "",
+                                     DictKeys.zip_code: zipcodeTF.text ?? "",
                                      DictKeys.User_Id: self.UserId,
                                      DictKeys.is_payable: isPayable,
                                      DictKeys.is_admin: 1
@@ -191,6 +212,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 txtStoreName.text = self.storeObj.storeList[0].name
                 txtStoreAddress.text = self.storeObj.storeList[0].address
                 self.storeId = self.storeObj.storeList[0].id
+                self.zipcodeTF.text = self.storeObj.storeList[0].zip_code
+                self.stateTF.text = self.storeObj.storeList[0].state
             }
         }
         if UserDefaultsManager.shared.userInfo.loginType == LoginType.super_admin {
@@ -215,6 +238,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         self.LastNameShadow.dropShadow(radius: 4, opacity: 0.3)
         self.StoreNameShadow.dropShadow(radius: 4, opacity: 0.3)
         self.StoreAddressShadow.dropShadow(radius: 4, opacity: 0.3)
+        self.zipShadowV.dropShadow(radius: 4, opacity: 0.3)
+        self.stateShadowV.dropShadow(radius: 4, opacity: 0.3)
         self.mobileNumShadow.dropShadow(radius: 4, opacity: 0.3)
         self.emailShadow.dropShadow(radius: 4, opacity: 0.3)
         self.passwordShadow.dropShadow(radius: 4, opacity: 0.3)
@@ -230,6 +255,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             let storeInfo = storeObj.getStoreDetailAganistID(storeID: idStore)
             self.txtStoreName.text = storeInfo.name
             self.txtStoreAddress.text = storeInfo.address
+            self.stateTF.text = storeInfo.state
+            self.zipcodeTF.text = storeInfo.zip_code
             self.storeId = idStore
             self.txtSearchList.text = storeInfo.name
             
@@ -247,6 +274,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             let storeInfo = storeObj.getStoreDetailAganistID(storeID: id!)
             self.txtStoreName.text = storeInfo.name
             self.txtStoreAddress.text = storeInfo.address
+            self.zipcodeTF.text = storeInfo.zip_code
+            self.stateTF.text = storeInfo.state
             self.storeId = id ?? 0
             
             
@@ -309,7 +338,6 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             message = isPhoneValid.message //ValidationMessages.enterAValidPhone
             isValid = false
         }
-        
         //if isForEdit{
         else if !isValidPassword.isValid{
             message = isValidPassword.message

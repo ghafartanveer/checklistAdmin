@@ -56,6 +56,7 @@ struct TitleNames {
     static let Update_Category = "Update Category"
     static let Admin_List = "Admin List"
     static let Create_Admin = "Create Admin"
+    static let Update_Admin = "Update Admin"
     static let Technician = "Technician"
     static let Create_Technician = "Create Technician"
     static let Update_Technician = "Update Technician"
@@ -158,6 +159,8 @@ struct ValidationMessages {
     static let Empty_Store_Name = "Please enter store name"
     static let Empty_Store_Address = "Please enter store address"
     static let Empty_City_Name = "Please enter your city name"
+    static let Empty_State_Name = "Please enter your state name"
+    static let Empty_ZipCode_Name = "Please enter your zip code"
     static let Valid_City_Name = "Please enter a valid city name"
 
     static let Empty_Full_Name = "Please enter your name"

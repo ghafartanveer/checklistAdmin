@@ -8,7 +8,7 @@
 import UIKit
 
 class StoreWorkerListViewController: BaseViewController,TopBarDelegate {
-    
+    var isFont = false
     var store = StoreViewModel()
     @IBOutlet weak var workerListtV: UITableView!
     
