@@ -163,7 +163,14 @@
 		35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */; };
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
+		DA0FA58027B5190200F47F70 /* NearByEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57D27B5190000F47F70 /* NearByEnum.swift */; };
+		DA0FA58127B5190200F47F70 /* GoogleApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */; };
+		DA0FA58227B5190200F47F70 /* GoogleApiHelper+Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */; };
+		DA0FA58427B5197D00F47F70 /* MapPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA58327B5197D00F47F70 /* MapPlacesViewController.swift */; };
 		DA0FE8952743B4980000F130 /* AdminSignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FE8942743B4980000F130 /* AdminSignupViewController.swift */; };
+		DA4795EF27B3BF5F001FB297 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4795EE27B3BF5F001FB297 /* MapViewController.swift */; };
+		DA4795F127B400ED001FB297 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4795F027B400EC001FB297 /* SearchPlacesViewController.swift */; };
+		DA4795F327B401C4001FB297 /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA4795F227B401C4001FB297 /* PlacesTableViewCell.swift */; };
 		DA616293274525AF00474A20 /* PaymentPlansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA616292274525AF00474A20 /* PaymentPlansViewController.swift */; };
 		DAE2B9802743DE3D00CA975A /* StoreWorkerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */; };
 		DE0B27FD268DE0FF00E327CC /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */; };
@@ -380,7 +387,14 @@
 		35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTechnicianService.swift; sourceTree = "<group>"; };
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
+		DA0FA57D27B5190000F47F70 /* NearByEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByEnum.swift; sourceTree = "<group>"; };
+		DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiHelper.swift; sourceTree = "<group>"; };
+		DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleApiHelper+Nearby.swift"; sourceTree = "<group>"; };
+		DA0FA58327B5197D00F47F70 /* MapPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlacesViewController.swift; sourceTree = "<group>"; };
 		DA0FE8942743B4980000F130 /* AdminSignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminSignupViewController.swift; sourceTree = "<group>"; };
+		DA4795EE27B3BF5F001FB297 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DA4795F027B400EC001FB297 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
+		DA4795F227B401C4001FB297 /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
 		DA616292274525AF00474A20 /* PaymentPlansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPlansViewController.swift; sourceTree = "<group>"; };
 		DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreWorkerListViewController.swift; sourceTree = "<group>"; };
 		DE0B27FC268DE0FF00E327CC /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
@@ -791,6 +805,7 @@
 		3593C92526382123007B6660 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				DA0FA57C27B518E300F47F70 /* Source */,
 				3593C92626382123007B6660 /* Response Handler */,
 				3593C92826382123007B6660 /* Service */,
 			);
@@ -897,6 +912,7 @@
 		3593C94226382123007B6660 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				DA4795F227B401C4001FB297 /* PlacesTableViewCell.swift */,
 				DEC32097269311D70051B46C /* HistoryDetailsTaskListTableViewCell.swift */,
 				3593C9C1263825A3007B6660 /* SideMenuTableViewCell.swift */,
 				3593C9DD26382850007B6660 /* TaskTypesTableViewCell.swift */,
@@ -1053,6 +1069,9 @@
 				35453D9A2643E7170080521B /* StoreListViewController.swift */,
 				35453D9F2643E72A0080521B /* AddStoreViewController.swift */,
 				DAE2B97F2743DE3D00CA975A /* StoreWorkerListViewController.swift */,
+				DA4795EE27B3BF5F001FB297 /* MapViewController.swift */,
+				DA0FA58327B5197D00F47F70 /* MapPlacesViewController.swift */,
+				DA4795F027B400EC001FB297 /* SearchPlacesViewController.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -1064,6 +1083,16 @@
 				35453DA42643EB200080521B /* ProfileSettingViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		DA0FA57C27B518E300F47F70 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */,
+				DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */,
+				DA0FA57D27B5190000F47F70 /* NearByEnum.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		DA6162912745258700474A20 /* PaymentPlans */ = {
@@ -1130,6 +1159,7 @@
 				3593C89326382067007B6660 /* Frameworks */,
 				3593C89426382067007B6660 /* Resources */,
 				191673C21ACE79E2517E7309 /* [CP] Embed Pods Frameworks */,
+				05B37796306FAE6C922AFDDC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1288,6 +1318,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05B37796306FAE6C922AFDDC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		191673C21ACE79E2517E7309 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1381,6 +1428,7 @@
 				35A73323263A875600EA481B /* LoginViewController.swift in Sources */,
 				DEC3209E269312ED0051B46C /* FilterSelctionPopUpViewController.swift in Sources */,
 				356D7B642643C300008257A1 /* CategoryViewModel.swift in Sources */,
+				DA0FA58127B5190200F47F70 /* GoogleApiHelper.swift in Sources */,
 				3593CA3B26394046007B6660 /* AdminListTableViewCell.swift in Sources */,
 				3593C97D26382123007B6660 /* MainContainerViewController.swift in Sources */,
 				3593C96D26382123007B6660 /* ActiveLabel.swift in Sources */,
@@ -1418,7 +1466,9 @@
 				04D1C71726775A99008720CB /* SimplePieChartView.swift in Sources */,
 				3593C96C26382123007B6660 /* KMPlaceholderTextView.swift in Sources */,
 				3593C96B26382123007B6660 /* CustomIOSAlertView.m in Sources */,
+				DA0FA58427B5197D00F47F70 /* MapPlacesViewController.swift in Sources */,
 				04D1C71526775A99008720CB /* CompatibilityShims.swift in Sources */,
+				DA0FA58227B5190200F47F70 /* GoogleApiHelper+Nearby.swift in Sources */,
 				3593C96E26382123007B6660 /* RegexParser.swift in Sources */,
 				3593C97526382123007B6660 /* BaseCollectionViewController.swift in Sources */,
 				DEC320A3269314EF0051B46C /* TaskHistoryTableViewCell.swift in Sources */,
@@ -1427,6 +1477,7 @@
 				3593CA3126394023007B6660 /* AdminListViewController.swift in Sources */,
 				04D1C71D26777A1C008720CB /* BarChartCollectionViewCell.swift in Sources */,
 				DEC3208C26930FAE0051B46C /* CheckListHistoryViewController.swift in Sources */,
+				DA0FA58027B5190200F47F70 /* NearByEnum.swift in Sources */,
 				3593C89A26382067007B6660 /* AppDelegate.swift in Sources */,
 				3593C95026382123007B6660 /* MKActivityIndicatorView.swift in Sources */,
 				3593C8A426382067007B6660 /* CheckList_Admin.xcdatamodeld in Sources */,
@@ -1434,6 +1485,7 @@
 				DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */,
 				3593C9C2263825A3007B6660 /* SideMenuTableViewCell.swift in Sources */,
 				3593C99026382123007B6660 /* AppConstants.swift in Sources */,
+				DA4795F127B400ED001FB297 /* SearchPlacesViewController.swift in Sources */,
 				DE95C14126959164000E6F87 /* StatesViewModel.swift in Sources */,
 				04D1C71626775A99008720CB /* PieChartView.swift in Sources */,
 				35453D8E2643DE610080521B /* TechnicianListViewController.swift in Sources */,
@@ -1452,11 +1504,13 @@
 				DE51BBAF268F17C300923FFA /* CreateNewTaskViewController.swift in Sources */,
 				3593C98926382123007B6660 /* UserDefaultsManager.swift in Sources */,
 				3593C89C26382067007B6660 /* SceneDelegate.swift in Sources */,
+				DA4795F327B401C4001FB297 /* PlacesTableViewCell.swift in Sources */,
 				3593C94A26382123007B6660 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				DA616293274525AF00474A20 /* PaymentPlansViewController.swift in Sources */,
 				35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */,
 				DEC3208D26930FAE0051B46C /* HistoryDetailsViewController.swift in Sources */,
 				3593C98D26382123007B6660 /* String+Extension.swift in Sources */,
+				DA4795EF27B3BF5F001FB297 /* MapViewController.swift in Sources */,
 				3593CA2626393BD2007B6660 /* CategoryListViewController.swift in Sources */,
 				356D7B742643D86E008257A1 /* AddCategoryViewController.swift in Sources */,
 				3593C99326382123007B6660 /* UserViewModel.swift in Sources */,

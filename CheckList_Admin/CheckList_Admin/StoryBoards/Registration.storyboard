@@ -1637,7 +1637,7 @@
                                                                         <rect key="frame" x="5" y="40" width="374" height="88"/>
                                                                         <subviews>
                                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uNs-ii-JtU" customClass="KMPlaceholderTextView" customModule="CheckList_Admin" customModuleProvider="target">
-                                                                                <rect key="frame" x="35" y="10" width="334" height="76"/>
+                                                                                <rect key="frame" x="35" y="10" width="316" height="76"/>
                                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1647,22 +1647,31 @@
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </textView>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n20-vv-JED">
-                                                                                <rect key="frame" x="344" y="0.0" width="30" height="30"/>
-                                                                                <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="LXl-Wm-MMB"/>
-                                                                                    <constraint firstAttribute="width" constant="30" id="XNr-qx-L3G"/>
-                                                                                </constraints>
-                                                                                <state key="normal" image="address-icon"/>
+                                                                                <rect key="frame" x="8" y="0.0" width="366" height="88"/>
+                                                                                <connections>
+                                                                                    <action selector="mapBtnAction:" destination="oPL-z2-kdF" eventType="touchUpInside" id="xsJ-zI-jwz"/>
+                                                                                </connections>
                                                                             </button>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="address-icon" translatesAutoresizingMaskIntoConstraints="NO" id="XfK-LN-SGc">
+                                                                                <rect key="frame" x="352" y="10" width="22" height="25"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="22" id="2w6-hr-Pjb"/>
+                                                                                    <constraint firstAttribute="height" constant="25" id="iJT-1t-uKZ"/>
+                                                                                </constraints>
+                                                                            </imageView>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
+                                                                            <constraint firstItem="n20-vv-JED" firstAttribute="leading" secondItem="yyN-8j-l6y" secondAttribute="leading" constant="8" id="8VO-F0-8ZI"/>
                                                                             <constraint firstItem="uNs-ii-JtU" firstAttribute="leading" secondItem="yyN-8j-l6y" secondAttribute="leading" constant="35" id="96m-YT-BVW"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="n20-vv-JED" secondAttribute="bottom" id="EWZ-M0-R9I"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="XfK-LN-SGc" secondAttribute="trailing" id="Go1-Pf-ics"/>
                                                                             <constraint firstAttribute="trailing" secondItem="n20-vv-JED" secondAttribute="trailing" id="MhV-q6-P3B"/>
                                                                             <constraint firstItem="uNs-ii-JtU" firstAttribute="top" secondItem="yyN-8j-l6y" secondAttribute="top" constant="10" id="WeN-8L-Cgz"/>
                                                                             <constraint firstAttribute="bottom" secondItem="uNs-ii-JtU" secondAttribute="bottom" constant="2" id="Z14-s0-i8a"/>
+                                                                            <constraint firstItem="XfK-LN-SGc" firstAttribute="leading" secondItem="uNs-ii-JtU" secondAttribute="trailing" constant="1" id="ciq-AO-tWz"/>
+                                                                            <constraint firstItem="XfK-LN-SGc" firstAttribute="top" secondItem="yyN-8j-l6y" secondAttribute="top" constant="10" id="slG-Zf-elv"/>
                                                                             <constraint firstItem="n20-vv-JED" firstAttribute="top" secondItem="yyN-8j-l6y" secondAttribute="top" id="syU-eb-PeX"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="uNs-ii-JtU" secondAttribute="trailing" constant="5" id="u93-mz-eWd"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2068,6 +2077,7 @@
                     <navigationItem key="navigationItem" id="v8f-3p-ESG"/>
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
+                        <outlet property="adressBtn" destination="n20-vv-JED" id="kfx-ui-YFT"/>
                         <outlet property="cityShadowV" destination="tdK-jB-AIH" id="AaN-on-RtU"/>
                         <outlet property="cityTF" destination="TqQ-h9-lBf" id="AFl-ge-5mc"/>
                         <outlet property="confirmPasswordShadowView" destination="GIo-6t-dMq" id="R12-CZ-2BQ"/>

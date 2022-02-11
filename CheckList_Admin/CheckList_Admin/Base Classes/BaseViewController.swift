@@ -12,6 +12,7 @@ import MBProgressHUD
 import StoreKit
 import AVFoundation
 import CropViewController
+import CoreLocation
 
 
 extension UIView {
@@ -137,6 +138,49 @@ public class BaseViewController : UIViewController,SWRevealViewControllerDelegat
             print("Camera is not available")
         }
     }
+    
+    //MARK: location services allowed
+    func isLocationOn() -> Bool {
+        var isAllow: Bool = false
+        
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+                
+                case .notDetermined:
+                    print("Ask for location access")
+                    self.showAlertView(message: PopupMessages.EnableLocationServices, title: ALERT_TITLE_APP_NAME, doneButtonTitle: "Settings", doneButtonCompletion: { (UIAlertAction) in
+                        UIApplication.shared.open(URL(string:"App-Prefs:root=PRIVECY")!)
+                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                    }
+                    //setupLocationManager()
+                case .restricted, .denied:
+                    print("No access")
+                    isAllow = false
+                    self.showAlertView(message: PopupMessages.AllowLocationAccesFromSettings, title: ALERT_TITLE_APP_NAME, doneButtonTitle: "Settings", doneButtonCompletion: { (UIAlertAction) in
+                        
+                        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+                        
+                    }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+                        
+                    }
+                case .authorizedAlways, .authorizedWhenInUse:
+                    print("Access")
+                    //locationManager.startUpdatingLocation()
+                    isAllow = true
+                @unknown default:
+                    break
+            }
+        } else {
+            self.showAlertView(message: PopupMessages.EnableLocationServices, title: ALERT_TITLE_APP_NAME, doneButtonTitle: "Settings", doneButtonCompletion: { (UIAlertAction) in
+                UIApplication.shared.open(URL(string:"App-Prefs:root=PRIVECY")!)
+            }, cancelButtonTitle: LocalStrings.Cancel) { (UIAlertAction) in
+            }
+            print("Location services are not enabled")
+        }
+        return isAllow
+    }
+
+    
     func fetchProfileImage(_ message:String = kBlankString){
         let actionSheet = UIAlertController.init(title: "Select Image", message: message, preferredStyle: UIAlertController.Style.actionSheet)
         actionSheet.addAction(UIAlertAction.init(title: "Camera", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
@@ -457,6 +501,9 @@ extension BaseViewController{
     
     func logoutUserAccount() {
         Global.shared.isLogedIn = false
+        Global.shared.subCategoryList = [SubCategoryViewModel]()
+        Global.shared.subCatIdsToDel = []
+
         UserDefaultsManager.shared.clearUserData()
         let storyboard = UIStoryboard(name: StoryboardNames.Registration, bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: ControllerIdentifier.LoginViewController) as! LoginViewController

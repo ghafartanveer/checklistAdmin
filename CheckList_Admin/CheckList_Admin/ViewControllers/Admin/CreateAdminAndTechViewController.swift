@@ -49,6 +49,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var zipStateContainerH: NSLayoutConstraint!
     @IBOutlet weak var zipStateContainerview: UIView!
     
+    @IBOutlet weak var locationBtn: UIButton!
+    
     //MARK: - OBJECT AND VERIABLES
     var isFromTechnician: Bool = false
     var isImageSelected: Bool = false
@@ -57,6 +59,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     var typeLogin = LoginType.Admin
     var storeId: Int = 0
     var storeObj = StoreListViewModel()
+    var storemodel = StoreViewModel()
     var UserId: Int = 0
     var adminListViewModel = AdminListViewModel()
     var isPayable = 0
@@ -79,7 +82,8 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
             
             txtStoreName.isUserInteractionEnabled = false
             txtStoreAddress.isUserInteractionEnabled = false
-            zipcodeTF.isUserInteractionEnabled = false
+            locationBtn.isUserInteractionEnabled = false
+           // zipcodeTF.isUserInteractionEnabled = false
             stateTF.isUserInteractionEnabled = false
             
             if Global.shared.user.loginType == LoginType.Admin {
@@ -118,6 +122,10 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
     
     @IBAction func addStoreAction(_ sender: Any) {
         navigateToAddStoreVC()
+    }
+    
+    @IBAction func goTomapAction(_ sender: Any) {
+        navigateToMapVC()
     }
     
     @IBAction func actionSaveChanges(_ sender: UIButton){
@@ -228,6 +236,7 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         }
         self.txtSearchList.didSelect { (selectedText, index, id) in
             self.configureStoreList(idStore: self.storeObj.storeList[index].id)
+            self.storemodel = self.storeObj.storeList[index]
             
         }
     }
@@ -358,6 +367,12 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func navigateToMapVC() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "MapPlacesViewController") as! MapPlacesViewController
+        vc.storemodel = self.storemodel
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     //MARK: - IMAGE PICKER CONTROLLER DELEGATE METHODS
     //    override func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     //        let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
@@ -463,3 +478,10 @@ extension CreateAdminAndTechViewController{
     
 }
 
+//extension CreateAdminAndTechViewController : MapPlacesViewControllerDelegate {
+//    func updateAdress(address: String, zipCode: String, isFromMap: Bool) {
+//        print("adress selected")
+//    }
+//    
+//    
+//}

@@ -38,7 +38,7 @@ class StoreListViewController: BaseViewController, TopBarDelegate {
     func moveToAddStoreVC(isFromEdit: Bool, storeInfo: StoreViewModel?){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
         vc.isFromEditStore = isFromEdit
-        vc.storeObj = storeInfo
+        vc.storeObj = storeInfo ?? StoreViewModel()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

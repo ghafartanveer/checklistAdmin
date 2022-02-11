@@ -16,5 +16,6 @@ target 'CheckList_Admin' do
   pod 'Firebase/Auth'
   pod 'Firebase/Messaging'
   pod 'CropViewController'
-
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
  end

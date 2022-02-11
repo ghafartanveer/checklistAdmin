@@ -10,6 +10,14 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Check list would like to access your location to update your store location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Check list would like to access your location to update your store location</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Check list would like to access your location to update your store location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Check list would like to access your location to update your store location</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

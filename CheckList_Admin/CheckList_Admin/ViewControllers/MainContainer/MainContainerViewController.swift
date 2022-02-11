@@ -7,11 +7,20 @@
 //
 
 import UIKit
-
+import GoogleMaps
+import GooglePlaces
 
 import UIKit
 
-class MainContainerViewController: BaseViewController{
+class MainContainerViewController: BaseViewController, GMSAutocompleteResultsViewControllerDelegate, UISearchControllerDelegate{
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
+        
+    }
+    
+    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
+
+    }
+    
     
     //MARK: - IBOUTLETS
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,6 +36,9 @@ class MainContainerViewController: BaseViewController{
     weak var delegate:TopBarDelegate?
     var baseNavigationController: BaseNavigationController?
     
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
+
     //MARK: - OVERRID METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +64,32 @@ class MainContainerViewController: BaseViewController{
         else{
             self.showHomeController()
         }
+    }
+    
+    func setupSearchController() {
+        resultsViewController = GMSAutocompleteResultsViewController()
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        resultsViewController?.delegate = self
+        searchController?.delegate = self
+//        if #available(iOS 13.0, *) {
+//            searchController?.searchBar.searchTextField.delegate = self
+//        }
+        searchController?.searchResultsUpdater = resultsViewController
+        
+        let searchBar = searchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search for places"
+        //searchBarContainer.addSubview(searchController!.searchBar)
+//        if let c = mainContainer {
+//            c.viewTopColour.isHidden = true
+//            c.navigationController?.isNavigationBarHidden = false
+//            // c.navigationController?.navigationBar.isHidden = false
+           //self.navigationItem.titleView = searchController?.searchBar
+//        }
+        // navigationItem.titleView = searchController?.searchBar
+        definesPresentationContext = true
+        
+        
     }
         
     //MARK: - IBACTION METHODS

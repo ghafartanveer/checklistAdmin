@@ -117,5 +117,7 @@ let kImageFileName = "file.png"
 let kMimeTypePDF = "application/pdf"
 let kPDFFileName = "document.pdf"
 
+let kGoogleApiKey = "AIzaSyBTfypSbx_zNMhWSBXMTA2BJBMQO7_9_T8"
+
 
 

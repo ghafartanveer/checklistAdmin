@@ -14,19 +14,23 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var txtCity: UITextField!
     @IBOutlet weak var stateTF: UITextField!
     @IBOutlet weak var zipCodeTF: UITextField!
+    
+    @IBOutlet weak var adressBtn: UIButton!
+    
     //MARK: - OBJECT AND VERIBALES
     var isFromEditStore = false
-    var storeObj: StoreViewModel?
+    var storeObj = StoreViewModel()
     
     
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureStoreDetail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.configureStoreDetail()
+
         if let container = self.mainContainer{
             container.delegate = self
             container.setMenuButton(true, title: TitleNames.Add_Store)
@@ -34,37 +38,44 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     }
     
     //MARK: - IBACTION METHODS
+   
+    @IBAction func mapBtnAction(_ sender: Any) {
+        navigateToMapVC()
+    }
+    
+    
     @IBAction func actionSaveStore(_ sender: UIButton){
         if checkValidation(){
             if self.isFromEditStore{
                 self.updateStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
-                                          DictKeys.Store_Id: self.storeObj?.id ?? 0,
+                                          DictKeys.Store_Id: self.storeObj.id ?? 0,
                                           DictKeys.state: stateTF.text!,
-                                          DictKeys.zip_code: zipCodeTF.text!,])
+                                          DictKeys.zip_code: zipCodeTF.text ?? "",])
             }else{
                 self.addStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
                                           DictKeys.city: self.txtCity.text!,
                                           DictKeys.state: stateTF.text!,
-                                          DictKeys.zip_code: zipCodeTF.text!
+                                          DictKeys.zip_code: zipCodeTF.text ?? ""
                 ])
             }
             
         }
     }
     
+    
     //MARK: - FUNCTIONS
     func configureStoreDetail(){
-        if self.isFromEditStore{
-            if let obj = self.storeObj{
+        //if self.isFromEditStore{
+             let obj = self.storeObj
                 self.txtStoreName.text = obj.name
                 self.txtStoreAddress.text = obj.address
                 self.txtCity.text = obj.city
                 self.stateTF.text = obj.state
                 self.zipCodeTF.text = obj.zip_code
-            }
-        }
+            
+        //}
     }
     
     func checkValidation() -> Bool{
@@ -89,11 +100,11 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
             message = ValidationMessages.Empty_State_Name
             isValid = false
             
-        } else if self.zipCodeTF.text!.isEmpty{
-            message = ValidationMessages.Empty_ZipCode_Name
-            isValid = false
-            
         }
+//        else if self.zipCodeTF.text!.isEmpty{
+//            message = ValidationMessages.Empty_ZipCode_Name
+//            isValid = false
+//        }
         
         else if !isCityNameValid.isValid {
             message = isCityNameValid.message
@@ -109,6 +120,12 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     
     func actionBack() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func navigateToMapVC() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.MapPlacesViewController) as! MapPlacesViewController
+        vc.storemodel = self.storeObj ?? StoreViewModel()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -156,4 +173,8 @@ extension AddStoreViewController{
     }
 }
 
-
+//extension AddStoreViewController : MapPlacesViewControllerDelegate {
+//    func updateAdress(address: String, zipCode: String, isFromMap: Bool) {
+//        print("adress selected")
+//    }
+//}

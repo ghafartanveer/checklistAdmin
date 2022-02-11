@@ -131,6 +131,8 @@ struct ControllerIdentifier {
     static let LoginViewController = "LoginViewController"
     static let AddCategoryViewController = "AddCategoryViewController"
     static let AddStoreViewController = "AddStoreViewController"
+    static let MapViewController = "MapViewController"
+    static let MapPlacesViewController = "MapPlacesViewController"
     static let ForgotPasswordViewController = "ForgotPasswordViewController"
     static let UpdatePasswordViewController = "UpdatePasswordViewController"
     static let TechnicianListViewController = "TechnicianListViewController"
@@ -212,6 +214,8 @@ struct CellIdentifier {
 
 
 struct PopupMessages {
+    static let EnableLocationServices = "Please enable location services form settings!"
+    static let AllowLocationAccesFromSettings = "Please allow location access to update locations for job!"
     static let emptySearch = "Please enter something for search"
     static let verification = "Verification Code Sent Again Successfully"
     static let Sure_To_Delete_Store = "Are you sure you want to delete this Store?"

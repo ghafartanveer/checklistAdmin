@@ -44,13 +44,22 @@ class AdminSignupViewController: BaseViewController {
     @IBOutlet weak var confirmPasswordShadowView: UIView!
     @IBOutlet weak var confirmPasswordTF: UITextField!
     
+    @IBOutlet weak var adressBtn: UIButton!
+    
+    var storeModel = StoreViewModel()
     var isImageSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDropShadow()
+        storeAddressTF.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.storeAddressTF.text = self.storeModel.address
+        self.zipcodeTF.text = self.storeModel.zip_code
+    }
     
     func configureDropShadow(){
         self.firstNameTF.dropShadow(radius: 4, opacity: 0.3)
@@ -112,11 +121,13 @@ class AdminSignupViewController: BaseViewController {
             message = ValidationMessages.Empty_State_Name
             isValid = false
             
-        } else if self.zipcodeTF.text!.isEmpty{
-            message = ValidationMessages.Empty_ZipCode_Name
-            isValid = false
-            
-        } else if !isValidPassword.isValid{
+        }
+//        else if self.zipcodeTF.text!.isEmpty{
+//            message = ValidationMessages.Empty_ZipCode_Name
+//            isValid = false
+//
+//        }
+        else if !isValidPassword.isValid{
                 message = isValidPassword.message
                 isValid = false
         } else if !isValidRePassword.isValid {
@@ -130,6 +141,13 @@ class AdminSignupViewController: BaseViewController {
         return isValid
     }
     
+    func navigateToMapVC() {
+        let st = UIStoryboard.init(name: StoryboardNames.Admin, bundle: nil)
+        let vc = st.instantiateViewController(withIdentifier: ControllerIdentifier.MapPlacesViewController) as! MapPlacesViewController
+        vc.storemodel = self.storeModel ?? StoreViewModel()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     override func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
         cropViewController.dismiss(animated: true, completion: nil)
         self.userImageView.image = image
@@ -137,7 +155,9 @@ class AdminSignupViewController: BaseViewController {
         // 'image' is the newly cropped version of the original image
     }
     
-
+    @IBAction func mapBtnAction(_ sender: Any) {
+        navigateToMapVC()
+    }
     
     @IBAction func actionAddPhoto(_ sender: UIButton){
         self.fetchProfileImage()
@@ -166,7 +186,7 @@ class AdminSignupViewController: BaseViewController {
                                          DictKeys.is_admin: 0,
                                          DictKeys.city: cityTF.text!,
                                          DictKeys.state: stateTF.text!,
-                                         DictKeys.zip_code: zipcodeTF.text!,
+                                         DictKeys.zip_code: zipcodeTF.text ?? "",
                                          DictKeys.is_payable: 1
                 ]
              
@@ -203,3 +223,21 @@ extension AdminSignupViewController {
     }
 
 }
+
+extension AdminSignupViewController : UITextViewDelegate {
+   
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == storeAddressTF {
+           // navigateToMapVC()
+        }
+    }
+    
+}
+
+//extension AdminSignupViewController : MapPlacesViewControllerDelegate {
+//    func updateAdress(address: String, zipCode: String, isFromMap: Bool) {
+//        print("adress selected")
+//    }
+//    
+//    
+//}

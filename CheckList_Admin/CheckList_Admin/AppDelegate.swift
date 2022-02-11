@@ -11,6 +11,8 @@ import Firebase
 import SwiftyJSON
 import FirebaseMessaging
 import IQKeyboardManagerSwift
+import GooglePlaces
+import GoogleMaps
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -22,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         //self.setupInitialController()
         IQKeyboardManager.shared.enable = true
         FirebaseApp.configure()
+        GMSPlacesClient.provideAPIKey(kGoogleApiKey)
+        GMSServices.provideAPIKey(kGoogleApiKey)
+        GoogleApi.shared.initialiseWithKey(kGoogleApiKey)
+
         // Messaging.messaging().isAutoInitEnabled = true
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         self.getFireBaseToken()
