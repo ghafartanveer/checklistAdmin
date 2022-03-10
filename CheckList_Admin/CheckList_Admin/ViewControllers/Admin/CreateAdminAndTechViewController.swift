@@ -90,9 +90,11 @@ class CreateAdminAndTechViewController: BaseViewController, TopBarDelegate {
                 self.viewAddStoreHeight.constant = 0
                 isPayable = 0
                 print("zipStateContainerH.constant = 0")
-                zipStateContainerH.constant = 0
-                zipStateContainerview.isHidden = true
+               // zipStateContainerH.constant = 0
+             //   zipStateContainerview.isHidden = true
             }
+             zipStateContainerH.constant = 0
+             zipStateContainerview.isHidden = true
             if isFromTechnician{
                 if isForEdit {
                     container.setMenuButton(true, title: TitleNames.Update_Technician)

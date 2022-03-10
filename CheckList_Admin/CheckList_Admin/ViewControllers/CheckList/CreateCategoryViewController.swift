@@ -25,6 +25,10 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewTabelHeight.constant = 0
+        viewTabelList.borderWidth = 0.5
+        viewTabelList.borderColor = .lightGray
+        viewTabelList.layer.cornerRadius = 5
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         viewTabel.addGestureRecognizer(tap)
     }
@@ -104,7 +108,6 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
         self.selectedCatieModel = self.categoryObj.categoryList[Global.shared.indexOfCategory]
        
         Global.shared.subCategoryList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
-
         viewTabelList.reloadData()
         viewTabel.reloadData()
 
@@ -305,6 +308,12 @@ extension CreateCategoryViewController{
                         }
                         
                     }else{
+                        if self.categoryObj.categoryList.count == 0{
+                            self.viewTabelList.setNoDataMessage("List is empty")
+                        }
+                        else{
+                            self.viewTabelList.setNoDataMessage("")
+                        }
                         self.showAlertView(message: message)
                     }
                 }

@@ -33,9 +33,11 @@ struct AppColors {
 
 
 struct DictKeys {
+    static let formatted_address = "formatted_address"
     static let hasImages = "has_images"
     static let email = "email"
     static let name = "name"
+    static let results = "results"
     static let address = "address"
     static let city = "city"
     static let state = "state"

@@ -114,6 +114,15 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
         }
         
         func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            if indexPath.row == 3 {
+                if Global.shared.user.loginType == LoginType.Admin{
+                    if(Global.shared.user.is_payable == 1){
+                        return 60
+                    }
+                    else{
+                        return 0
+                    }
+                }
             //if Global.shared.user.loginType == LoginType.Admin{
             //            if indexPath.row == 0 || indexPath.row == 3{
             //                return 0
@@ -124,7 +133,8 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
             return 60
             // }
         }
-        
+            return 60
+        }
         
     }
     
@@ -149,5 +159,4 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource{
                 }
             }
         }
-        
     }

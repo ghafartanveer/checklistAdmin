@@ -49,9 +49,11 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
             if self.isFromEditStore{
                 self.updateStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
-                                          DictKeys.Store_Id: self.storeObj.id ?? 0,
+                                          DictKeys.Store_Id: self.storeObj.id ,
                                           DictKeys.state: stateTF.text!,
-                                          DictKeys.zip_code: zipCodeTF.text ?? "",])
+                                          DictKeys.zip_code: zipCodeTF.text ?? "",
+                                          DictKeys.city: self.txtCity.text!
+                ])
             }else{
                 self.addStoreApi(Params: [DictKeys.name: self.txtStoreName.text!,
                                           DictKeys.address: self.txtStoreAddress.text!,
@@ -124,7 +126,7 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     
     func navigateToMapVC() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.MapPlacesViewController) as! MapPlacesViewController
-        vc.storemodel = self.storeObj ?? StoreViewModel()
+        vc.storemodel = self.storeObj
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

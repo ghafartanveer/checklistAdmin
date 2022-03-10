@@ -23,6 +23,7 @@ class UserViewModel: NSObject, NSCoding {
     var token: String
     var createdAt: String
     var fcmToken: String
+    var is_payable: Int
     
     
     override init(){
@@ -38,6 +39,7 @@ class UserViewModel: NSObject, NSCoding {
         self.token = ""
         self.createdAt = ""
         self.fcmToken = ""
+        self.is_payable = 0
     }
     
     convenience init(obj: JSON){
@@ -60,6 +62,7 @@ class UserViewModel: NSObject, NSCoding {
         self.token = obj["token"].string ?? ""
         self.createdAt = obj["created_at"].string ?? ""
         self.fcmToken = obj["fcm_token"].string ?? ""
+        self.is_payable = obj["is_payable"].intValue
     }
     
     func encode(with aCoder: NSCoder) {
@@ -75,6 +78,7 @@ class UserViewModel: NSObject, NSCoding {
         aCoder.encode(self.token, forKey: "token")
         aCoder.encode(self.createdAt, forKey: "createdAt")
         aCoder.encode(self.fcmToken, forKey: "fcmToken")
+        aCoder.encode(self.is_payable, forKey: "is_payable")
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -91,6 +95,7 @@ class UserViewModel: NSObject, NSCoding {
         self.token = aDecoder.decodeObject(forKey: "token") as? String ?? ""
         self.createdAt = aDecoder.decodeObject(forKey: "createdAt") as? String ?? ""
         self.fcmToken = aDecoder.decodeObject(forKey: "fcmToken") as? String ?? ""
+        self.is_payable = aDecoder.decodeInteger(forKey: "is_payable")
     }
     
     
