@@ -109,8 +109,6 @@ class SubCategoryListViewController: BaseViewController, TopBarDelegate {
             submitCategoryApi(params: paramsDic)
             // subCategoryList.removeAll()
         }
-        
-        
     }
 }
 //MARK: - EXTENSION TABEL VIEW METHODS

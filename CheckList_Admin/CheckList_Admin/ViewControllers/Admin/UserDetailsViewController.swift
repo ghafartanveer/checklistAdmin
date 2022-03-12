@@ -210,7 +210,6 @@ class UserDetailsViewController: BaseViewController, TopBarDelegate {
             self.emailTF.text = obj.email
             self.phoneTF.text = obj.phoneNumber
             self.setImageWithUrl(imageView: self.profileImageView, url: obj.image, placeholderImage: AssetNames.Box_Blue)
-            
         }
     }
     

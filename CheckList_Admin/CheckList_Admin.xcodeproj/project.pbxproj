@@ -163,6 +163,7 @@
 		35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */; };
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
+		7CCFE2FB27DB399A009F681A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */; };
 		DA0FA58027B5190200F47F70 /* NearByEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57D27B5190000F47F70 /* NearByEnum.swift */; };
 		DA0FA58127B5190200F47F70 /* GoogleApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */; };
 		DA0FA58227B5190200F47F70 /* GoogleApiHelper+Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */; };
@@ -178,7 +179,6 @@
 		DE51BBB4268F1B8400923FFA /* CheckListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBB3268F1B8400923FFA /* CheckListService.swift */; };
 		DE51BBC4268F2CA300923FFA /* AddSubCatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */; };
 		DE53EDAA268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */; };
-		DE619AC52696E31400DB9601 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE619AC42696E31400DB9601 /* GoogleService-Info.plist */; };
 		DE64C7CA2694432F00E0E921 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE64C7C92694432F00E0E921 /* WebKit.framework */; };
 		DE64C7CF269458BA00E0E921 /* GraphStatesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE64C7CE269458BA00E0E921 /* GraphStatesViewModel.swift */; };
 		DE64C7D926947FD800E0E921 /* GraphStatesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE64C7D826947FD800E0E921 /* GraphStatesListViewModel.swift */; };
@@ -387,6 +387,7 @@
 		35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTechnicianService.swift; sourceTree = "<group>"; };
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
+		7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA0FA57D27B5190000F47F70 /* NearByEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByEnum.swift; sourceTree = "<group>"; };
 		DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiHelper.swift; sourceTree = "<group>"; };
 		DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleApiHelper+Nearby.swift"; sourceTree = "<group>"; };
@@ -402,7 +403,6 @@
 		DE51BBB3268F1B8400923FFA /* CheckListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListService.swift; sourceTree = "<group>"; };
 		DE51BBC3268F2CA300923FFA /* AddSubCatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubCatViewModel.swift; sourceTree = "<group>"; };
 		DE53EDA9268DE3F40085B1EC /* TechnicianDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianDetailTableViewCell.swift; sourceTree = "<group>"; };
-		DE619AC42696E31400DB9601 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DE64C7C92694432F00E0E921 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		DE64C7CE269458BA00E0E921 /* GraphStatesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStatesViewModel.swift; sourceTree = "<group>"; };
 		DE64C7D826947FD800E0E921 /* GraphStatesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphStatesListViewModel.swift; sourceTree = "<group>"; };
@@ -540,6 +540,7 @@
 		3593C89826382067007B6660 /* CheckList_Admin */ = {
 			isa = PBXGroup;
 			children = (
+				7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */,
 				DE95C14E2695AB98000E6F87 /* CheckList_Admin.entitlements */,
 				3593C89926382067007B6660 /* AppDelegate.swift */,
 				3593C89B26382067007B6660 /* SceneDelegate.swift */,
@@ -555,7 +556,6 @@
 				3593C8A526382067007B6660 /* Assets.xcassets */,
 				3593C8A726382067007B6660 /* LaunchScreen.storyboard */,
 				3593C8AA26382067007B6660 /* Info.plist */,
-				DE619AC42696E31400DB9601 /* GoogleService-Info.plist */,
 				3593C8A226382067007B6660 /* CheckList_Admin.xcdatamodeld */,
 				3593C998263821E4007B6660 /* CheckList-bridging_header.h */,
 			);
@@ -1255,7 +1255,7 @@
 			files = (
 				3593CA0F26382FFA007B6660 /* OFL.txt in Resources */,
 				3593CA0526382FFA007B6660 /* Poppins-ExtraLight.ttf in Resources */,
-				DE619AC52696E31400DB9601 /* GoogleService-Info.plist in Resources */,
+				7CCFE2FB27DB399A009F681A /* GoogleService-Info.plist in Resources */,
 				3593C96826382123007B6660 /* GOTHICB_0.TTF in Resources */,
 				3593C96726382123007B6660 /* GOTHIC_0.TTF in Resources */,
 				3593CA1626382FFA007B6660 /* Poppins-Italic.ttf in Resources */,

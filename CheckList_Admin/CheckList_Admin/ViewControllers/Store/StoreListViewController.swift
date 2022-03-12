@@ -38,9 +38,18 @@ class StoreListViewController: BaseViewController, TopBarDelegate {
     func moveToAddStoreVC(isFromEdit: Bool, storeInfo: StoreViewModel?){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
         vc.isFromEditStore = isFromEdit
+        vc.titleMain = "Update Store"
         vc.storeObj = storeInfo ?? StoreViewModel()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    func moveToAdd_StoreVC(isFromEdit: Bool, storeInfo: StoreViewModel?){
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ControllerIdentifier.AddStoreViewController) as! AddStoreViewController
+        vc.isFromEditStore = isFromEdit
+        vc.titleMain = "Please add your store"
+        vc.storeObj = storeInfo ?? StoreViewModel()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+
     
     func deleteStore(index : Int){
         self.showAlertView(message: PopupMessages.Sure_To_Delete_Store, title: LocalStrings.Warning, doneButtonTitle: LocalStrings.ok, doneButtonCompletion: { (UIAlertAction) in
@@ -63,7 +72,7 @@ class StoreListViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - IBACTION METHODS
     @IBAction func actionAddStore(_ sender: UIButton){
-        self.moveToAddStoreVC(isFromEdit: false, storeInfo: nil)
+        self.moveToAdd_StoreVC(isFromEdit: false, storeInfo: nil)
     }
     
     

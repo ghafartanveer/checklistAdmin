@@ -10,13 +10,14 @@ import UIKit
 class StoreWorkerListViewController: BaseViewController,TopBarDelegate {
     var isFont = false
     var store = StoreViewModel()
+    
     @IBOutlet weak var workerListtV: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if let container = self.mainContainer{
             container.delegate = self
-            container.setMenuButton(true, title: "Store Wrker List", isTopBarWhite: true)
+            container.setMenuButton(true, title: "Store Worker List", isTopBarWhite: true)
         }
         workerListtV.delegate = self
         workerListtV.dataSource = self

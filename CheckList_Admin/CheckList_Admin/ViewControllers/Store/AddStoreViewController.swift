@@ -16,15 +16,19 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     @IBOutlet weak var zipCodeTF: UITextField!
     
     @IBOutlet weak var adressBtn: UIButton!
+    @IBOutlet weak var MainTitle: UILabel!
     
     //MARK: - OBJECT AND VERIBALES
     var isFromEditStore = false
     var storeObj = StoreViewModel()
-    
+    var titleMain: String = "Please add your store"
     
     //MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        MainTitle.text = titleMain
+        self.txtCity.isUserInteractionEnabled = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,7 +37,12 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
 
         if let container = self.mainContainer{
             container.delegate = self
+            if(isFromEditStore){
+                container.setMenuButton(true, title: TitleNames.Update_Store)
+            }
+            else{
             container.setMenuButton(true, title: TitleNames.Add_Store)
+            }
         }
     }
     
@@ -69,7 +78,7 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
     
     //MARK: - FUNCTIONS
     func configureStoreDetail(){
-        //if self.isFromEditStore{
+        if self.isFromEditStore{
              let obj = self.storeObj
                 self.txtStoreName.text = obj.name
                 self.txtStoreAddress.text = obj.address
@@ -77,7 +86,12 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
                 self.stateTF.text = obj.state
                 self.zipCodeTF.text = obj.zip_code
             
-        //}
+        }else{
+            let obj = self.storeObj
+            self.txtStoreAddress.text = obj.address
+            self.txtCity.text = obj.city
+
+        }
     }
     
     func checkValidation() -> Bool{
@@ -93,7 +107,6 @@ class AddStoreViewController: BaseViewController, TopBarDelegate {
         }else if self.txtStoreAddress.text!.isEmpty{
             message = ValidationMessages.Empty_Store_Address
             isValid = false
-            
         }else if self.txtCity.text!.isEmpty{
             message = ValidationMessages.Empty_City_Name
             isValid = false
@@ -180,3 +193,6 @@ extension AddStoreViewController{
 //        print("adress selected")
 //    }
 //}
+
+
+

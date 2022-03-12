@@ -46,19 +46,22 @@ class AdminSignupViewController: BaseViewController {
     
     @IBOutlet weak var adressBtn: UIButton!
     
-    var storeModel = StoreViewModel()
+    var storeMod = StoreViewModel()
     var isImageSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.cityTF.isUserInteractionEnabled = false
         configureDropShadow()
         storeAddressTF.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.storeAddressTF.text = self.storeModel.address
-        self.zipcodeTF.text = self.storeModel.zip_code
+        self.configureStoreDetail()
+        self.storeAddressTF.text = self.storeMod.address
+        self.zipcodeTF.text = self.storeMod.zip_code
     }
     
     func configureDropShadow(){
@@ -80,6 +83,8 @@ class AdminSignupViewController: BaseViewController {
     }
     
     func checkValidation() -> Bool{
+        
+        
         var message = ""
         var isValid: Bool = true
         let isValidEmail = Validations.emailValidation(self.emailTF.text!)
@@ -141,10 +146,15 @@ class AdminSignupViewController: BaseViewController {
         return isValid
     }
     
+    func configureStoreDetail(){
+             let obj = self.storeMod
+                self.cityTF.text = obj.city
+    }
+    
     func navigateToMapVC() {
         let st = UIStoryboard.init(name: StoryboardNames.Admin, bundle: nil)
         let vc = st.instantiateViewController(withIdentifier: ControllerIdentifier.MapPlacesViewController) as! MapPlacesViewController
-        vc.storemodel = self.storeModel ?? StoreViewModel()
+        vc.storemodel = self.storeMod
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

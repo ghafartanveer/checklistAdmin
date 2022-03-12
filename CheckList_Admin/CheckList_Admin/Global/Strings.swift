@@ -62,6 +62,7 @@ struct TitleNames {
     static let Update_Technician = "Update Technician"
     static let Store_List = "Store List"
     static let Add_Store = "Add Store"
+    static let Update_Store = "Update Store"
     static let Setting = "Setting"
     static let CheckList = "CheckList"
     static let TechnicianDetails = "Technician Details"

@@ -65,7 +65,7 @@ class ProfileSettingViewController: BaseViewController, TopBarDelegate {
                                      DictKeys.email: self.txtEmail.text!,
                                      DictKeys.phone_number: self.txtPhone.text!,
                                      DictKeys.Store_Id: Global.shared.user.storeID,
-                                     DictKeys.User_Id: Global.shared.user.id, DictKeys.login_type: Global.shared.user.loginType ]
+                                     DictKeys.User_Id: Global.shared.user.id, DictKeys.login_type: Global.shared.user.loginType , DictKeys.is_payable: Global.shared.user.is_payable]
            
             if let profileImg = self.imgProfile.image {
                 imageData = [DictKeys.image: profileImg.jpegData(compressionQuality: 0.50)!]
