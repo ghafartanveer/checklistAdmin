@@ -70,7 +70,12 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     @IBAction func actionOpenCategoryList(_ sender: UIButton){
-        self.viewTabelHeight.constant = 200
+        if self.categoryObj.categoryList.count != 0 && self.categoryObj.categoryList.count < 5{
+            self.viewTabelHeight.constant = CGFloat(self.categoryObj.categoryList.count * 30)
+        }
+        else{
+            self.viewTabelHeight.constant = 200
+        }
     }
     
     @IBAction func actionSubmit(_ sender: UIButton){
@@ -97,19 +102,23 @@ class CreateCategoryViewController: BaseViewController, TopBarDelegate {
     }
     
     func setupDropDown() {
-        self.txtTitle.text = self.categoryObj.categoryList[Global.shared.indexOfCategory].name
+        if self.categoryObj.categoryList.count > 0{
+            self.viewTabelList.setNoDataMessage("")
+            self.txtTitle.text = self.categoryObj.categoryList[Global.shared.indexOfCategory].name
+            self.viewTxtShadow.dropShadow(radius: 4, opacity: 0.3)
+            self.viewTabelHeight.constant = 0
+            self.selectedCatieModel = self.categoryObj.categoryList[Global.shared.indexOfCategory]
+            Global.shared.subCategoryList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
+            viewTabelList.reloadData()
+            viewTabel.reloadData()
+        }else{
+            self.viewTabelList.setNoDataMessage("Category not found")
+            self.txtTitle.placeholder = "Select Category"
+        }
         //indexToAdit = 0
         ///self.subCatList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
         
-        self.viewTxtShadow.dropShadow(radius: 4, opacity: 0.3)
-        self.viewTabelHeight.constant = 0
-        
-   
-        self.selectedCatieModel = self.categoryObj.categoryList[Global.shared.indexOfCategory]
-       
-        Global.shared.subCategoryList = self.categoryObj.categoryList[Global.shared.indexOfCategory].subCategoryList
-        viewTabelList.reloadData()
-        viewTabel.reloadData()
+      
 
             
     }

@@ -442,7 +442,7 @@ public class BaseViewController : UIViewController,SWRevealViewControllerDelegat
         
     }
     func getUrl(lat: Double, lng : Double) -> String{
-        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(lng)&key=\(APIKeys.googleApiKey)"
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(lng)&key=\(kGoogleApiKey)"
         return url
     }
     

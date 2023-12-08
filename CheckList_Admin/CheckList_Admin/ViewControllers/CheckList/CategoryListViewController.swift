@@ -229,6 +229,12 @@ extension CategoryListViewController{
                     if success{
                         if let category = catInfo{
                             self.categoryObject = category
+                            if self.categoryObject.categoryList.count == 0{
+                                self.viewTabel.setNoDataMessage("CheckList Categories not found yet")
+                            }
+                            else{
+                                self.viewTabel.setNoDataMessage("")
+                            }
                             self.viewTabel.reloadData()
                         }
                         

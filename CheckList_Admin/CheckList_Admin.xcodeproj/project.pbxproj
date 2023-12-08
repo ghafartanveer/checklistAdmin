@@ -16,6 +16,7 @@
 		04D1C71B2677663D008720CB /* BarChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1C7192677663D008720CB /* BarChartTableViewCell.xib */; };
 		04D1C71D26777A1C008720CB /* BarChartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1C71C26777A1C008720CB /* BarChartCollectionViewCell.swift */; };
 		04D8CE3B26779F3800441C53 /* BarChartCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D8CE3A26779F3800441C53 /* BarChartCollectionViewCell.xib */; };
+		189636132AAB515900FEC753 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 189636122AAB515900FEC753 /* GoogleService-Info.plist */; };
 		2CA2BC3CCC293D2F4B433869 /* Pods_CheckList_Admin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02FF64A558166E36C3EEFAC9 /* Pods_CheckList_Admin.framework */; };
 		35453D8E2643DE610080521B /* TechnicianListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35453D8D2643DE610080521B /* TechnicianListViewController.swift */; };
 		35453D932643E0CA0080521B /* TechnicianListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35453D922643E0CA0080521B /* TechnicianListTableViewCell.swift */; };
@@ -163,7 +164,6 @@
 		35C778652642855B00FDEEC1 /* AdminTechnicianService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */; };
 		35C7786A2642861300FDEEC1 /* AdminListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C778692642861300FDEEC1 /* AdminListViewModel.swift */; };
 		35C7786F2642862500FDEEC1 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7786E2642862500FDEEC1 /* AdminViewModel.swift */; };
-		7CCFE2FB27DB399A009F681A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */; };
 		DA0FA58027B5190200F47F70 /* NearByEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57D27B5190000F47F70 /* NearByEnum.swift */; };
 		DA0FA58127B5190200F47F70 /* GoogleApiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */; };
 		DA0FA58227B5190200F47F70 /* GoogleApiHelper+Nearby.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */; };
@@ -222,6 +222,8 @@
 		04D1C7192677663D008720CB /* BarChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarChartTableViewCell.xib; sourceTree = "<group>"; };
 		04D1C71C26777A1C008720CB /* BarChartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarChartCollectionViewCell.swift; sourceTree = "<group>"; };
 		04D8CE3A26779F3800441C53 /* BarChartCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarChartCollectionViewCell.xib; sourceTree = "<group>"; };
+		181321D22A9C8686005B777A /* CheckList_AdminRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CheckList_AdminRelease.entitlements; sourceTree = "<group>"; };
+		189636122AAB515900FEC753 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		18F8960F94D3DEDA930DB7C3 /* Pods-CheckList_Admin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CheckList_Admin.release.xcconfig"; path = "Target Support Files/Pods-CheckList_Admin/Pods-CheckList_Admin.release.xcconfig"; sourceTree = "<group>"; };
 		35453D8D2643DE610080521B /* TechnicianListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianListViewController.swift; sourceTree = "<group>"; };
 		35453D922643E0CA0080521B /* TechnicianListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicianListTableViewCell.swift; sourceTree = "<group>"; };
@@ -387,7 +389,6 @@
 		35C778642642855B00FDEEC1 /* AdminTechnicianService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminTechnicianService.swift; sourceTree = "<group>"; };
 		35C778692642861300FDEEC1 /* AdminListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminListViewModel.swift; sourceTree = "<group>"; };
 		35C7786E2642862500FDEEC1 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
-		7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DA0FA57D27B5190000F47F70 /* NearByEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearByEnum.swift; sourceTree = "<group>"; };
 		DA0FA57E27B5190100F47F70 /* GoogleApiHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleApiHelper.swift; sourceTree = "<group>"; };
 		DA0FA57F27B5190200F47F70 /* GoogleApiHelper+Nearby.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GoogleApiHelper+Nearby.swift"; sourceTree = "<group>"; };
@@ -540,9 +541,10 @@
 		3593C89826382067007B6660 /* CheckList_Admin */ = {
 			isa = PBXGroup;
 			children = (
-				7CCFE2FA27DB399A009F681A /* GoogleService-Info.plist */,
+				181321D22A9C8686005B777A /* CheckList_AdminRelease.entitlements */,
 				DE95C14E2695AB98000E6F87 /* CheckList_Admin.entitlements */,
 				3593C89926382067007B6660 /* AppDelegate.swift */,
+				189636122AAB515900FEC753 /* GoogleService-Info.plist */,
 				3593C89B26382067007B6660 /* SceneDelegate.swift */,
 				3593C91A26382123007B6660 /* Base Classes */,
 				DEC3209C2693129F0051B46C /* Popups */,
@@ -1255,7 +1257,6 @@
 			files = (
 				3593CA0F26382FFA007B6660 /* OFL.txt in Resources */,
 				3593CA0526382FFA007B6660 /* Poppins-ExtraLight.ttf in Resources */,
-				7CCFE2FB27DB399A009F681A /* GoogleService-Info.plist in Resources */,
 				3593C96826382123007B6660 /* GOTHICB_0.TTF in Resources */,
 				3593C96726382123007B6660 /* GOTHIC_0.TTF in Resources */,
 				3593CA1626382FFA007B6660 /* Poppins-Italic.ttf in Resources */,
@@ -1273,6 +1274,7 @@
 				3593C97426382123007B6660 /* open_sans_regular.ttf in Resources */,
 				3593C96626382123007B6660 /* GOTHICBI_0.TTF in Resources */,
 				3593C96526382123007B6660 /* GOTHICI_0.TTF in Resources */,
+				189636132AAB515900FEC753 /* GoogleService-Info.plist in Resources */,
 				3593C8A926382067007B6660 /* LaunchScreen.storyboard in Resources */,
 				3593CA1326382FFA007B6660 /* Poppins-Black.ttf in Resources */,
 				3593C8A626382067007B6660 /* Assets.xcassets in Resources */,
@@ -1695,17 +1697,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = CheckList_Admin/CheckList_Admin.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MVY25HYQD;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3.0;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W32H86W5R4;
 				INFOPLIST_FILE = CheckList_Admin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Rapidzz.CheckList-Admin";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.checklistadmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = admindevelopmentprofile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = admindevelopmentprofile;
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList_Admin/CheckList-bridging_header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1718,19 +1725,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CheckList_Admin/CheckList_Admin.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CheckList_Admin/CheckList_AdminRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5MVY25HYQD;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3.0;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = W32H86W5R4;
 				INFOPLIST_FILE = CheckList_Admin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Rapidzz.CheckList-Admin";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.checklistadmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = admindevelopmentprofile;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = admindevelopmentprofile;
 				SWIFT_OBJC_BRIDGING_HEADER = "CheckList_Admin/CheckList-bridging_header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

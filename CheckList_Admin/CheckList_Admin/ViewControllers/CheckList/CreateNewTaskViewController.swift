@@ -65,7 +65,7 @@ class CreateNewTaskViewController: BaseViewController, TopBarDelegate{
             } else {
                 //Add new task
                 saveBtn.setTitle(LocalStrings.Save, for: .normal)
-                container.setMenuButton(true, title: TitleNames.CreateCheckList)
+                container.setMenuButton(true, title: "Create Task")
             }
             
         }

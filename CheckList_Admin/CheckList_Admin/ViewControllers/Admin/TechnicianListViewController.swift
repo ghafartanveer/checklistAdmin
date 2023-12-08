@@ -315,6 +315,12 @@ extension TechnicianListViewController{
                     if success{
                         if let admin = adminInfo{
                             self.technicianObject = admin
+                            if self.technicianObject.adminList.count == 0{
+                                self.viewTabel.setNoDataMessage("Technicians not found yet")
+                            }
+                            else{
+                                self.viewTabel.setNoDataMessage("")
+                            }
                             self.viewTabel.reloadData()
                         }
                         

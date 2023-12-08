@@ -67,8 +67,8 @@ struct DictKeys {
 }
 
 struct EndPoints {
-    static let PAYMENT_URL = "http://mashghol.com/checklist_app/public/pricing_plans/"
-    static let BASE_URL = "http://mashghol.com/checklist_app/public/api/"
+    static let PAYMENT_URL = "http://12voltqc.com/pricing_plans/"//"http://mashghol.com/checklist_app/public/pricing_plans/"
+    static let BASE_URL = "http://12voltqc.com/api/"//"http://mashghol.com/checklist_app/public/api/"
     static let login = "login"
     static let admins_List = "admins_list"
     static let categories_List = "categories_list"
@@ -119,7 +119,7 @@ let kImageFileName = "file.png"
 let kMimeTypePDF = "application/pdf"
 let kPDFFileName = "document.pdf"
 
-let kGoogleApiKey = "AIzaSyBTfypSbx_zNMhWSBXMTA2BJBMQO7_9_T8"
+let kGoogleApiKey = "AIzaSyBSkxWfplDOp616q8aVOTWWacn0P8erFVI"
 
 
 
